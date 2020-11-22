@@ -7,9 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class FirstFragment extends Fragment {
+
+    private ActivityViewModel activityViewModel;
 
     @Override
     public View onCreateView(
@@ -23,11 +31,16 @@ public class FirstFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.button_first).setOnClickListener(new View.OnClickListener() {
+        RecyclerView recyclerView= view.findViewById(R.id.recyclerView);
+        final ActivityListAdapter adapter = new ActivityListAdapter(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        activityViewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
+        activityViewModel.getAllActivity().observe(getViewLifecycleOwner(), new Observer<List<Activity>>() {
             @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+            public void onChanged(List<Activity> activities) {
+                adapter.setActivityList(activities);
             }
         });
     }
