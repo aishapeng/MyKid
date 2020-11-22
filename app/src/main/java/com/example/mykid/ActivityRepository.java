@@ -1,5 +1,6 @@
 package com.example.mykid;
 
+import android.app.Activity;
 import android.app.Application;
 import android.os.AsyncTask;
 

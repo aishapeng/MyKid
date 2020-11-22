@@ -1,5 +1,6 @@
 package com.example.mykid;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
