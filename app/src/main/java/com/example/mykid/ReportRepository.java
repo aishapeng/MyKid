@@ -1,6 +1,5 @@
 package com.example.mykid;
 
-import android.app.Activity;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
@@ -12,7 +11,7 @@ public class ReportRepository {
     private LiveData<List<Report>> getAllReport;
 
     ReportRepository(Application application){
-        ActivityRoomDatabase db= ActivityRoomDatabase.getInstance(application);
+        ReportRoomDatabase db= ReportRoomDatabase.getInstance(application);
         reportDao = db.activityDao();
         getAllReport= reportDao.getAllReport();
     }
