@@ -12,16 +12,16 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ActivityDao {
+public interface ReportDao {
     @Insert
-    void insert(Activity activity);
+    void insert(Report report);
 
     @Delete
-    void delete(Activity activity);
+    void delete(Report report);
 
     @Update
-    void update(Activity activity);
+    void update(Report report);
 
-    @Query("SELECT * from activity_table ORDER BY activityDate DESC")
-    LiveData<List<Activity>> getAllActivity();
+    @Query("SELECT * from Report ORDER BY reportDate DESC")
+    LiveData<List<Report>> getAllReport();
 }

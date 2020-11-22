@@ -9,9 +9,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Activity.class}, version = 1, exportSchema = false)
+@Database(entities = {Report.class}, version = 1, exportSchema = false)
 public abstract class ActivityRoomDatabase extends RoomDatabase {
-    public abstract ActivityDao activityDao();
+    public abstract ReportDao activityDao();
 
     private static ActivityRoomDatabase INSTANCE;
 
@@ -32,7 +32,7 @@ public abstract class ActivityRoomDatabase extends RoomDatabase {
                     //create database
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             ActivityRoomDatabase.class,
-                            "activity_database")
+                            "report_database")
                             .addCallback(callback)
                             .fallbackToDestructiveMigration()
                             .build();

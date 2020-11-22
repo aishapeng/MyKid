@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RecyclerViewFragment extends Fragment {
 
-    private ActivityViewModel activityViewModel;
+    private ReportViewModel reportViewModel;
     private RecyclerView recyclerView;
 
     public RecyclerViewFragment() {
@@ -47,14 +47,14 @@ public class RecyclerViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         recyclerView = container.findViewById(R.id.recyclerview);
-        final ActivityListAdapter adapter = new ActivityListAdapter(getContext());
+        final ReportListAdapter adapter = new ReportListAdapter(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        activityViewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
-        activityViewModel.getAllActivity().observe(getViewLifecycleOwner(), new Observer<List<Activity>>() {
+        reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
+        reportViewModel.getAllReport().observe(getViewLifecycleOwner(), new Observer<List<Report>>() {
             @Override
-            public void onChanged(List<Activity> activities) {
+            public void onChanged(List<Report> reportList) {
 
             }
         });
