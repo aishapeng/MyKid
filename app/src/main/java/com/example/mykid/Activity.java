@@ -3,12 +3,14 @@ package com.example.mykid;
 import android.location.Location;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+@Entity(tableName = "activity_table")
 public class Activity {
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     @NonNull
     private int activityId;
     private String activityName;
