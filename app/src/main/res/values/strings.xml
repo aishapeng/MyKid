@@ -11,4 +11,16 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_activity_name">Enter activity name</string>
+    <string name="asterisk">*</string>
+    <string name="activity_name">Activity Name :</string>
+    <string name="location">Location :</string>
+    <string name="add_location">Add location</string>
+    <string name="date">Date:</string>
+    <string name="add_date">Add date</string>
+    <string name="time">Time :</string>
+    <string name="enter_name">Enter name</string>
+    <string name="complete">Complete</string>
+    <string name="reporter_name">Reporter Name :</string>
+    <string name="add_time">Add time</string>
 </resources>
