@@ -35,8 +35,9 @@ RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
-        transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
-        transaction.addToBackStack(null);
+        //transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
+        transaction.add(R.id.fragment_main,recyclerViewFragment).commit();
+//        transaction.addToBackStack(null);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
