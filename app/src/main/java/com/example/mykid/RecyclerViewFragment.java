@@ -38,8 +38,6 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         if (getArguments() != null) {
 
         }
@@ -64,7 +62,7 @@ public class RecyclerViewFragment extends Fragment {
         reportViewModel.getAllReport().observe(getViewLifecycleOwner(), new Observer<List<Report>>() {
             @Override
             public void onChanged(List<Report> reportList) {
-
+                adapter.setReportList(reportList);
             }
         });
     }

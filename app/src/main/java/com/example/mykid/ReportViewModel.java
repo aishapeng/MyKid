@@ -19,19 +19,23 @@ public class ReportViewModel extends AndroidViewModel {
         allReport = reportRepository.getAllReport();
     }
 
-    public LiveData<List<Report>> getAllReport(){
+    public LiveData<List<Report>> getAllReport() {
         return allReport;
     }
 
-    public void insert(Report report){
+    public void insert(Report report) {
         reportRepository.insert(report);
     }
 
-    public void delete(Report report){
+    public void delete(Report report) {
         reportRepository.delete(report);
     }
 
-    public void update(Report report){
+    public void update(Report report) {
         reportRepository.update(report);
+    }
+
+    public void deleteAll() {
+        reportRepository.deleteAll();
     }
 }

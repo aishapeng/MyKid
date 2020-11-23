@@ -22,6 +22,9 @@ public interface ReportDao {
     @Update
     void update(Report report);
 
+    @Query("DELETE FROM Report")
+    void deleteAll();
+
     @Query("SELECT * from Report ORDER BY reportDate DESC")
     LiveData<List<Report>> getAllReport();
 }
