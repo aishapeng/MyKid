@@ -28,8 +28,9 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public void onDateSet(DatePicker datePicker,
                           int year, int month, int day) {
-        AddReportFrag addFrag = (AddReportFrag) getTargetFragment();
-        assert addFrag != null;
+//        AddReportFrag addFrag = (AddReportFrag) getTargetFragment();
+//        assert addFrag != null;
+        AddReportFrag addFrag=(AddReportFrag)getParentFragment();
         addFrag.processDatePickerResult(year, month, day);
     }
 }

@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -18,6 +20,8 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class AddReportFrag extends Fragment {
+
+    private TextView dateInputTxtView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +57,7 @@ public class AddReportFrag extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -64,6 +69,7 @@ public class AddReportFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_add_report, container, false);
+        dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
         addDateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +78,7 @@ public class AddReportFrag extends Fragment {
                 newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
             }
         });
+
         return view;
     }
 
@@ -79,22 +86,15 @@ public class AddReportFrag extends Fragment {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
 
-        //FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack
-        //transaction.replace(R.id.fragment_container, newFragment);
-        //transaction.addToBackStack(null);
-
-// Commit the transaction
-        //transaction.commit();
     }
 
     public void processDatePickerResult(int year, int month, int day){
         String month_string = Integer.toString(month+1); // bc start from 0
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String dateMessage = (month_string +"/" + day_string + "/" + year_string);
+        String date = ( day_string+"/"  +month_string+ "/" + year_string);
+
+        dateInputTxtView.setText(date);
     }
 
 }
