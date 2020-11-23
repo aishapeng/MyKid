@@ -2,19 +2,16 @@ package com.example.mykid;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AddReportFrag extends Fragment implements View.OnClickListener {
 
@@ -30,13 +27,16 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
+        Button locatioBtn = view.findViewById(R.id.locationBtn);
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
+        locatioBtn.setOnClickListener(this);
         return view;
     }
 
     public void onClick(View view) {
         DialogFragment newFragment;
+        Fragment frag;
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
@@ -46,6 +46,15 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
                 newFragment = new TimePickerFragment();
                 newFragment.show(getChildFragmentManager(),"timePicker");
                 break;
+            case R.id.locationBtn:
+//                frag = new GoogleMapFragment();
+////                FragmentManager manager=getChildFragmentManager();
+////                FragmentTransaction transaction=manager.beginTransaction();
+////                transaction.add(R.id.fragment_main,frag).commit();
+////                //transaction.addToBackStack(null);
+                ((MainActivity)getActivity()).openMap();
+                break;
+
             default:
                 break;
         }

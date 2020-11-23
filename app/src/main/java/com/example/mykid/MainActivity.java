@@ -74,4 +74,12 @@ AddReportFrag addReportFrag = new AddReportFrag();
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void openMap (){
+        Fragment frag = new GoogleMapFragment();
+        FragmentManager manager=getSupportFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
+        transaction.add(R.id.fragment_main,frag).commit();
+        //transaction.addToBackStack(null);
+    }
 }
