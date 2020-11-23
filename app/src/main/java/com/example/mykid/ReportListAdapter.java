@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -32,6 +33,15 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         if (reportList != null) {
             Report current = reportList.get(position);
             holder.reportName.setText(current.getReportName());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AppCompatActivity activity= (AppCompatActivity)view.getContext();
+                    DetailFragment detailFragment= new DetailFragment();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+                }
+            });
         }
     }
 
@@ -49,12 +59,13 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         notifyDataSetChanged();
     }
 
-    class ReportViewHolder extends RecyclerView.ViewHolder {
+    class ReportViewHolder extends RecyclerView.ViewHolder  {
         private final TextView reportName;
 
         private ReportViewHolder(View view) {
             super(view);
             reportName = view.findViewById(R.id.activityNameTextView);
         }
+
     }
 }

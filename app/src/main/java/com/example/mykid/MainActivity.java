@@ -26,6 +26,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity  {
 
 RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
+AddReportFrag addReportFrag = new AddReportFrag();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +44,10 @@ RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                FragmentManager manager=getSupportFragmentManager();
+                FragmentTransaction transaction=manager.beginTransaction();
+                transaction.replace(R.id.fragment_main,addReportFrag).commit();
+                transaction.addToBackStack(null);
             }
         });
     }
