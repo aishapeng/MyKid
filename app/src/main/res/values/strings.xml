@@ -23,4 +23,7 @@
     <string name="complete">Complete</string>
     <string name="reporter_name">Reporter Name :</string>
     <string name="add_time">Add time</string>
+    <string name="click_button_to_add_time">Click button to add time</string>
+    <string name="click_button_to_add_date">Click button to add date</string>
+    <string name="click_button_to_add_location">Click button to add location</string>
 </resources>
