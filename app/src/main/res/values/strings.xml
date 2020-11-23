@@ -27,4 +27,6 @@
     <string name="click_button_to_add_date">Click button to add date</string>
     <string name="click_button_to_add_location">Click button to add location</string>
     <string name="show_location_in_map">Show Location in Map</string>
+
+    <string name="map_key" translatable="false">AIzaSyBvCp2gr6SrB9TAfZhrAVlLMbpb81fKrNg</string>
 </resources>
