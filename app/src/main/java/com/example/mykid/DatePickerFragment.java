@@ -32,5 +32,4 @@ public class DatePickerFragment extends DialogFragment
         assert addFrag != null;
         addFrag.processDatePickerResult(year, month, day);
     }
-
 }
