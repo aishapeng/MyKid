@@ -6,126 +6,161 @@
     android:layout_height="match_parent"
     tools:context=".DetailFragment">
 
+    <EditText
+        android:id="@+id/actNameEditTxt"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/enter_activity_name"
+        android:inputType="none"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.622"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actNameTxtView" />
+
+    <EditText
+        android:id="@+id/reporterNameEditTxt"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/enter_name"
+        android:inputType="none"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView" />
+
     <TextView
-        android:id="@+id/detailActivityTextView"
+        android:id="@+id/reporterNameTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="240dp"
+        android:text="@string/reporter_name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+
+    <TextView
+        android:id="@+id/timeTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/time"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+
+    <TextView
+        android:id="@+id/actDateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/date"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+
+    <TextView
+        android:id="@+id/actNameTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="252dp"
         android:text="@string/activity_name"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detailActivityName"
+        android:id="@+id/locationTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="@string/enter_activity_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
-        app:layout_constraintStart_toEndOf="@+id/detailActivityTextView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/detailLocationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/location"
         android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/locationBtn"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailActivityTextView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
     <Button
-        android:id="@+id/detailLocationBtn"
+        android:id="@+id/locationBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/add_location"
-        app:layout_constraintStart_toEndOf="@+id/detailLocationTextView"
-        app:layout_constraintTop_toBottomOf="@+id/detailActivityName" />
-
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="72dp"
+        android:backgroundTint="@color/lightYellow"
+        android:text="@string/show_location_in_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
     <TextView
-        android:id="@+id/detailDateTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/date"
-        android:textColor="@color/black"
+        android:id="@+id/locationInputTxtView"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="@string/click_button_to_add_location"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
         android:textSize="18sp"
+        android:inputType="none"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailLocationTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
 
     <TextView
-        android:id="@+id/detailDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/date"
-        android:textColor="@color/black"
+        android:id="@+id/dateInputTxtView"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="@string/click_button_to_add_date"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/detailDateTxtView"
-        app:layout_constraintTop_toBottomOf="@+id/detailLocationBtn" />
-
-    <TextView
-        android:id="@+id/detailTimeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/time"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:inputType="none"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailDateTxtView" />
+        app:layout_constraintTop_toBottomOf="@+id/actDateTxtView" />
 
     <TextView
-        android:id="@+id/detailTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/time"
-        android:textColor="@color/black"
+        android:id="@+id/timeInputTxtView"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/editTextBackground"
+        android:gravity="center_vertical"
+        android:hint="@string/click_button_to_add_time"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
+        android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/detailTimeTextView"
-        app:layout_constraintTop_toBottomOf="@+id/detailDate" />
-
-    <TextView
-        android:id="@+id/detailReporterNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/reporter_name"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:inputType="none"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailTimeTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/timeTxtView" />
 
-    <TextView
-        android:id="@+id/detailReporterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/reporter_name"
-        android:textColor="@color/black"
-
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/detailReporterNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/detailTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>
