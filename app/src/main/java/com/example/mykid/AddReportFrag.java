@@ -16,37 +16,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddReportFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AddReportFrag extends Fragment implements View.OnClickListener {
 
     private TextView dateInputTxtView;
+    private TextView timeInputTxtView;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     public AddReportFrag() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment add_acttivity_frag.
-     */
-    // TODO: Rename and change types and number of parameters
+    
     public static AddReportFrag newInstance(String param1, String param2) {
         AddReportFrag fragment = new AddReportFrag();
         Bundle args = new Bundle();
@@ -72,23 +56,28 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_add_report, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
+        timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
+        Button addTimeBtn = view.findViewById(R.id.timeBtn);
         addDateBtn.setOnClickListener(this);
+        addTimeBtn.setOnClickListener(this);
         return view;
     }
 
     public void onClick(View view) {
+        DialogFragment newFragment;
         switch (view.getId()){
             case R.id.dateBtn:
-                DialogFragment newFragment = new DatePickerFragment();
+                newFragment = new DatePickerFragment();
                 newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
+                break;
+            case R.id.timeBtn:
+                newFragment = new TimePickerFragment();
+                newFragment.show(getChildFragmentManager(),"timePicker");
+                break;
+            default:
+                break;
         }
-    }
-
-    public void showDatePicker(View view) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
-
     }
 
     public void processDatePickerResult(int year, int month, int day){
@@ -98,6 +87,14 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         String date = ( day_string+"/"  +month_string+ "/" + year_string);
 
         dateInputTxtView.setText(date);
+    }
+
+    public void processTimePickerResult(int hourOfDay, int minute) {
+        String hour_string = Integer.toString(hourOfDay);
+        String minute_string = Integer.toString(minute);
+        String timeMessage = (hour_string + ":" + minute_string);
+
+        timeInputTxtView.setText(timeMessage);
     }
 
 }
