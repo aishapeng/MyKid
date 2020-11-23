@@ -2,11 +2,13 @@ package com.example.mykid;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,7 +21,7 @@ import android.widget.Toast;
  * Use the {@link AddReportFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddReportFrag extends Fragment {
+public class AddReportFrag extends Fragment implements View.OnClickListener {
 
     private TextView dateInputTxtView;
 
@@ -71,15 +73,16 @@ public class AddReportFrag extends Fragment {
         View view  = inflater.inflate(R.layout.fragment_add_report, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
-        addDateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        addDateBtn.setOnClickListener(this);
+        return view;
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.dateBtn:
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
-            }
-        });
-
-        return view;
+        }
     }
 
     public void showDatePicker(View view) {
