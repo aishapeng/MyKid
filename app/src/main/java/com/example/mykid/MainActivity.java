@@ -44,12 +44,10 @@ AddReportFrag addReportFrag = new AddReportFrag();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.fragment_main, addReportFrag);
+                FragmentManager manager=getSupportFragmentManager();
+                FragmentTransaction transaction=manager.beginTransaction();
+                transaction.replace(R.id.fragment_main,addReportFrag).commit();
                 transaction.addToBackStack(null);
-                transaction.commit();
             }
         });
     }
