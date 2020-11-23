@@ -1,5 +1,6 @@
 package com.example.mykid;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,10 +24,12 @@ import android.view.MenuItem;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
-RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-AddReportFrag addReportFrag = new AddReportFrag();
+public class MainActivity extends AppCompatActivity  {
+    public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
+    RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +47,13 @@ AddReportFrag addReportFrag = new AddReportFrag();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager manager=getSupportFragmentManager();
-                FragmentTransaction transaction=manager.beginTransaction();
-                transaction.replace(R.id.fragment_main,addReportFrag).commit();
-                transaction.addToBackStack(null);
+                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+                intent.putExtra(EXTRA_MESSAGE,"add");
+                startActivity(intent);
+//                FragmentManager manager=getSupportFragmentManager();
+//                FragmentTransaction transaction=manager.beginTransaction();
+//                transaction.replace(R.id.fragment_main,addReportFrag).commit();
+//                transaction.addToBackStack(null);
             }
         });
     }
@@ -75,11 +81,5 @@ AddReportFrag addReportFrag = new AddReportFrag();
         return super.onOptionsItemSelected(item);
     }
 
-    public void openMap (){
-        Fragment frag = new GoogleMapFragment();
-        FragmentManager manager=getSupportFragmentManager();
-        FragmentTransaction transaction=manager.beginTransaction();
-        transaction.add(R.id.fragment_main,frag).commit();
-        //transaction.addToBackStack(null);
-    }
+
 }

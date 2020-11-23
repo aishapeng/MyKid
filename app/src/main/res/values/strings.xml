@@ -29,4 +29,8 @@
     <string name="show_location_in_map">Show Location in Map</string>
 
     <string name="map_key" translatable="false">AIzaSyBvCp2gr6SrB9TAfZhrAVlLMbpb81fKrNg</string>
+    <string name="please_enter_activity_name">Please enter activity name</string>
+    <string name="please_pick_a_date">Please pick a date</string>
+    <string name="please_pick_a_time">Please pick a time</string>
+    <string name="please_enter_reporter_name">Please enter reporter name</string>
 </resources>

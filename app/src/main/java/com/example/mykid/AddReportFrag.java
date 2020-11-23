@@ -11,13 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class AddReportFrag extends Fragment implements View.OnClickListener {
 
-    private TextView dateInputTxtView;
-    private TextView timeInputTxtView;
-
+    private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
+    private EditText actNameEditTxt,reporterNameEditTxt;
+    ReportViewModel reportViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,12 +26,21 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         View view  = inflater.inflate(R.layout.fragment_add_report, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
+        actNameEditTxt= view.findViewById(R.id.actNameEditTxt);
+        reporterNameEditTxt=view.findViewById(R.id.reporterNameEditTxt);
+        locationInputTxtView=view.findViewById(R.id.locationInputTxtView);
+        actErrorMsg=view.findViewById(R.id.actErrorMsg);
+        dateErrorMsg=view.findViewById(R.id.dateErrorMsg);
+        timeErrorMsg=view.findViewById(R.id.timeErrorMsg);
+        reporterErrorMsg=view.findViewById(R.id.reporterErrorMsg);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
-        Button locatioBtn = view.findViewById(R.id.locationBtn);
+        Button locationBtn = view.findViewById(R.id.locationBtn);
+        Button completeBtn=view.findViewById(R.id.completeBtn);
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
-        locatioBtn.setOnClickListener(this);
+        locationBtn.setOnClickListener(this);
+        completeBtn.setOnClickListener(this);
         return view;
     }
 
@@ -47,13 +57,43 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
                 newFragment.show(getChildFragmentManager(),"timePicker");
                 break;
             case R.id.locationBtn:
-//                frag = new GoogleMapFragment();
-////                FragmentManager manager=getChildFragmentManager();
-////                FragmentTransaction transaction=manager.beginTransaction();
-////                transaction.add(R.id.fragment_main,frag).commit();
-////                //transaction.addToBackStack(null);
-                ((MainActivity)getActivity()).openMap();
+                ((SecondActivity)getActivity()).openMap();
                 break;
+            case R.id.completeBtn:
+                String activityName,location,date,time,reporter;
+                activityName=actNameEditTxt.getText().toString();
+                location=locationInputTxtView.getText().toString();
+                date=dateInputTxtView.getText().toString();
+                time=timeInputTxtView.getText().toString();
+                reporter=reporterNameEditTxt.getText().toString();
+                if(activityName.isEmpty()){
+                    actErrorMsg.setVisibility(View.VISIBLE);
+                }
+                else {
+                    actErrorMsg.setVisibility(View.INVISIBLE);
+                }
+                if(date.isEmpty()){
+                    dateErrorMsg.setVisibility(View.VISIBLE);
+                }
+                else {
+                    dateErrorMsg.setVisibility(View.INVISIBLE);
+                }
+                if(time.isEmpty()){
+                    timeErrorMsg.setVisibility(View.VISIBLE);
+                }
+                else {
+                    timeErrorMsg.setVisibility(View.INVISIBLE);
+                }
+                if(reporter.isEmpty()){
+                    reporterErrorMsg.setVisibility(View.VISIBLE);
+                }
+                else {
+                    reporterErrorMsg.setVisibility(View.INVISIBLE);
+                }
+//                Report report= new Report(activityName,location,date,time,reporter);
+//                if(report!=null){
+//                    reportViewModel.insert(report);
+//                }
 
             default:
                 break;
