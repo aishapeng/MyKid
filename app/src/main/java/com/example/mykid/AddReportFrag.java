@@ -1,8 +1,13 @@
 package com.example.mykid;
 
 import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,12 +22,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class AddReportFrag extends Fragment implements View.OnClickListener {
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCompleted, View.OnClickListener {
 
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
+
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private FusedLocationProviderClient mFusedLocationClient;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +60,11 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
+
+        /////
+        // Initialize the FusedLocationClient.
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity()); //error?
+
         return view;
     }
 
@@ -62,7 +81,7 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
                 newFragment.show(getChildFragmentManager(),"timePicker");
                 break;
             case R.id.locationBtn:
-                ((SecondActivity)getActivity()).openMap();
+                getLocation(); //get user current location
                 break;
             case R.id.completeBtn:
                 String activityName,location,date,time,reporter;
@@ -122,6 +141,53 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         String timeMessage = (hour_string + ":" + minute_string);
 
         timeInputTxtView.setText(timeMessage);
+    }
+
+    //standard code
+    private void getLocation() { //check for the ACCESS_FINE_LOCATION permission.
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] // [] can pass more than one permission at the same time//??
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        } else {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(
+                    new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                new FetchAddressTask(getActivity(), AddReportFrag.this).execute((location));
+                            }
+                        }
+                    });
+        }
+    }
+
+    //standard code
+    @Override
+    //request permission, then now chk permission result with this function
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION:
+                // If the permission is granted, get the location,
+                // otherwise, show a Toast
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation(); // permit le can get location le
+                } else {
+                    Toast.makeText(getActivity(),
+                            R.string.location_permission_denied,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onTaskCompleted(String result) {
+        ((SecondActivity)getActivity()).openMap(result); //open google map
     }
 
 }

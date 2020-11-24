@@ -28,8 +28,12 @@ public class SecondActivity extends AppCompatActivity {
             //transaction.addToBackStack(null);
         }
     }
-    public void openMap (){
+
+    public void openMap (String currentLocation){
         Fragment frag = new GoogleMapFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("currentLocation", currentLocation);
+        frag.setArguments(bundle);
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
         transaction.add(R.id.fragment_sec,frag).commit();
