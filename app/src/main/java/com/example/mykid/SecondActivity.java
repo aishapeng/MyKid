@@ -1,13 +1,17 @@
 package com.example.mykid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import static com.example.mykid.R.color.darkYellow;
 
 
 public class SecondActivity extends AppCompatActivity {
@@ -17,9 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-
-        Toolbar toolbar = findViewById(R.id.toolbar_sec);
-        setSupportActionBar(toolbar);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), darkYellow)));
 
         Intent intent=getIntent();
         String message=intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
