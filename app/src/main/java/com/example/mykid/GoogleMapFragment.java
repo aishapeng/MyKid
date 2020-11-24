@@ -112,7 +112,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             Log.d(TAG, "Entered Address Latlng: "+ latLng);
                     map.addMarker(new MarkerOptions().position(latLng).title(address));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-        }else if(resultCode == AutocompleteActivity.RESULT_ERROR){ //0
+        }
+        else if(resultCode == AutocompleteActivity.RESULT_ERROR){ //0
             //when error
             //Initiaslize status
             Status status = Autocomplete.getStatusFromIntent(data);
@@ -120,8 +121,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             //Display toast
             Toast.makeText(getContext(), status.getStatusMessage(), Toast.LENGTH_SHORT).show();
         }
-        Log.d(TAG, "sinisinisini " + resultCode);
-        Log.d(TAG, "Intent Data " + data);
+        Log.d(TAG, "Result Code " + resultCode);
     }
 
     @Override
