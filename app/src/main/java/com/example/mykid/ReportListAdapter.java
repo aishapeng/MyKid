@@ -39,7 +39,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                 public void onClick(View view) {
                     AppCompatActivity activity= (AppCompatActivity)view.getContext();
                     DetailFragment detailFragment= new DetailFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_sec,detailFragment).commit();
                 }
             });
         }

@@ -25,7 +25,7 @@ public class SecondActivity extends AppCompatActivity {
             FragmentManager manager=getSupportFragmentManager();
             FragmentTransaction transaction=manager.beginTransaction();
             transaction.replace(R.id.fragment_sec,addReportFrag).commit();
-            transaction.addToBackStack(null);
+            //transaction.addToBackStack(null);
         }
     }
     public void openMap (){

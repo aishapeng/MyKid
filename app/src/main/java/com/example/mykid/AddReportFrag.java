@@ -1,12 +1,16 @@
 package com.example.mykid;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +37,7 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
         dateErrorMsg=view.findViewById(R.id.dateErrorMsg);
         timeErrorMsg=view.findViewById(R.id.timeErrorMsg);
         reporterErrorMsg=view.findViewById(R.id.reporterErrorMsg);
+        reportViewModel= new ViewModelProvider(this).get(ReportViewModel.class);
         Button addDateBtn = view.findViewById(R.id.dateBtn);
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
         Button locationBtn = view.findViewById(R.id.locationBtn);
@@ -90,11 +95,13 @@ public class AddReportFrag extends Fragment implements View.OnClickListener {
                 else {
                     reporterErrorMsg.setVisibility(View.INVISIBLE);
                 }
-//                Report report= new Report(activityName,location,date,time,reporter);
-//                if(report!=null){
-//                    reportViewModel.insert(report);
-//                }
-
+                if(location.isEmpty()){
+                    location=null;
+                }
+                if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
+                    Report report= new Report(activityName,location,date,time,reporter);
+                    reportViewModel.insert(report);
+                }
             default:
                 break;
         }

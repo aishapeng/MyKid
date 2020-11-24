@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actNameTxtView" />
+        app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/dateBtn"
@@ -65,13 +66,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView" />
+        app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
+        tools:ignore="Autofill"/>
 
     <Button
         android:id="@+id/completeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/lightYellow"
         android:text="@string/complete"
         android:textColor="@color/black"
