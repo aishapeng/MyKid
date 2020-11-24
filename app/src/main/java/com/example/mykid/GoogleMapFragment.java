@@ -31,6 +31,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
@@ -51,6 +52,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
     //SearchView searchView;
     EditText editText;
+    Marker marker;
     private static final String TAG = "GoogleMap Fragment - ";
 
     public GoogleMapFragment() {
@@ -98,7 +100,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             Place place = Autocomplete.getPlaceFromIntent(data);
             //Set address on edit text
             String address = place.getAddress();
-            editText.setText(address);
+            editText.setText(address); //WANT PASS THIS BK TO PREVIOUS FRAGMENT
             List<Address> addresses = null;
             Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
             try{
@@ -110,8 +112,13 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             Log.d(TAG, "Entered Address location: "+ location);
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
             Log.d(TAG, "Entered Address Latlng: "+ latLng);
-                    map.addMarker(new MarkerOptions().position(latLng).title(address));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+
+            if(marker!=null){
+                marker.remove();
+            }
+
+            marker = map.addMarker(new MarkerOptions().position(latLng).title(location.getAddressLine(0)));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
         }
         else if(resultCode == AutocompleteActivity.RESULT_ERROR){ //0
             //when error
@@ -137,7 +144,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             addresses = geocoder.getFromLocationName(currentLocation,1);
             Address location = addresses.get(0);
             LatLng latLng =  new LatLng(location.getLatitude(),location.getLongitude());
-            map.addMarker(new MarkerOptions().position(latLng).title("You are here!"));
+            marker = map.addMarker(new MarkerOptions().position(latLng).title("You are here!"));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
         }catch (IOException ex){
             ex.printStackTrace();
