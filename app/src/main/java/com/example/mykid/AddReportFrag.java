@@ -1,6 +1,5 @@
 package com.example.mykid;
 
-import android.content.Intent;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,12 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +116,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     Report report= new Report(activityName,location,date,time,reporter);
                     reportViewModel.insert(report);
+                    getChildFragmentManager().popBackStackImmediate();
                 }
             default:
                 break;
