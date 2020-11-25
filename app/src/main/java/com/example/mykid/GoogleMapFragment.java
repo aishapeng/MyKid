@@ -109,7 +109,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             try{
                 addresses = geocoder.getFromLocationName(address,1);
             }catch(IOException e){
-                        e.printStackTrace();
+                e.printStackTrace();
             }
             Address location = addresses.get(0);
             Log.d(TAG, "Entered Address location: "+ location);

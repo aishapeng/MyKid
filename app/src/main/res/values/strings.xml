@@ -40,4 +40,5 @@
     <string name="location_permission_denied">Location permissions denied,
         please enable the permissions to use this app.</string>
     <string name="search_for_location">Search for location</string>
+    <string name="select">Select</string>
 </resources>
