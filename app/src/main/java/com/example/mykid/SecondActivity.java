@@ -25,12 +25,14 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         String message=intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+
         if(message.equals("add")){
             FragmentManager manager=getSupportFragmentManager();
             FragmentTransaction transaction=manager.beginTransaction();
             transaction.replace(R.id.fragment_sec,addReportFrag).commit();
             //transaction.addToBackStack(null);
         }
+
     }
 
     public void openMap (String currentLocation){

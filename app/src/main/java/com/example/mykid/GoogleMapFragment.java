@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
     //SearchView searchView;
     EditText editText;
+    Button selectBtn;
     Marker marker;
     private static final String TAG = "GoogleMap Fragment - ";
 
@@ -69,6 +71,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_google_map, container, false);
         //searchView = view.findViewById(R.id.sv_location);
         editText = view.findViewById(R.id.edit_txt);
+        selectBtn=view.findViewById(R.id.selectBtn);
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
         //return view;
 
@@ -88,6 +91,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
                 //Start activity result
                 startActivityForResult(intent, 100);
+            }
+        });
+        selectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle result = new Bundle();
+                result.putString("location", editText.getText().toString());
+                getParentFragmentManager().setFragmentResult("location", result);
+                getParentFragmentManager().popBackStack();
             }
         });
         mapFragment.getMapAsync(this);
