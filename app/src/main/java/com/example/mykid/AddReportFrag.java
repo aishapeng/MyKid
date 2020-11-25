@@ -1,6 +1,7 @@
 package com.example.mykid;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -116,7 +117,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     Report report= new Report(activityName,location,date,time,reporter);
                     reportViewModel.insert(report);
-                    getChildFragmentManager().popBackStackImmediate();
+                    Intent intent = new Intent (getActivity(), MainActivity.class);
+                    startActivity (intent);
                 }
             default:
                 break;
