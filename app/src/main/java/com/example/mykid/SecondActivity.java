@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -34,14 +35,14 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    public void openMap (String currentLocation){
+    public void openMap (String currentLocation) {
         Fragment frag = new GoogleMapFragment();
         Bundle bundle = new Bundle();
         bundle.putString("currentLocation", currentLocation);
         frag.setArguments(bundle);
-        FragmentManager manager=getSupportFragmentManager();
-        FragmentTransaction transaction=manager.beginTransaction();
-        transaction.add(R.id.fragment_sec,frag).commit();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_sec, frag).commit();
         transaction.addToBackStack(null);
     }
 }
