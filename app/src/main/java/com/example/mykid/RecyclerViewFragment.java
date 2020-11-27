@@ -30,6 +30,7 @@ import android.widget.Filterable;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -81,6 +82,7 @@ public class RecyclerViewFragment extends Fragment {
         reportViewModel.getAllReport().observe(getViewLifecycleOwner(), new Observer<List<Report>>() {
             @Override
             public void onChanged(List<Report> reportList) {
+                Collections.sort(reportList, Report.name);
                 adapter = new ReportListAdapter(getContext(),reportList);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

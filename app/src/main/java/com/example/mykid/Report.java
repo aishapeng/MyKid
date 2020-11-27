@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Comparator;
+
 @Entity
-public class Report {
+public class Report{
     @PrimaryKey (autoGenerate = true)
     private int reportId;
     private String reportName;
@@ -72,4 +74,11 @@ public class Report {
     public void setReporterName(String reporterName) {
         this.reporterName = reporterName;
     }
+
+    public static Comparator<Report> name = new Comparator<Report>() {
+        @Override
+        public int compare(Report report, Report t1) {
+            return report.getReportName().compareTo(t1.getReportName());
+        }
+    };
 }
