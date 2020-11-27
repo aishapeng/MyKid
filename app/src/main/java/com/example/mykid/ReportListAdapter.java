@@ -1,6 +1,7 @@
 package com.example.mykid;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             Log.d(TAG, "reportlist size: " + reportList.size());
             reportListAll = new ArrayList<>();
             reportListAll.addAll(reportList);
-            Report current = reportList.get(position);
+            //Report current = reportList.get(position);
+            final Report current = reportList.get(position);
             holder.reportName.setText(current.getReportName());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -48,9 +50,18 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                 public void onClick(View view) {
                     AppCompatActivity activity= (AppCompatActivity)view.getContext();
                     DetailFragment detailFragment= new DetailFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt("ReportID", current.getReportId());
+                    arguments.putString("activityName",current.getReportName());
+                    arguments.putString("location",current.getReportLocation());
+                    arguments.putString("date",current.getReportDate());
+                    arguments.putString("time",current.getReportTime());
+                    arguments.putString("reporter",current.getReporterName());
+                    detailFragment.setArguments(arguments);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
                 }
             });
+
         }
     }
 
@@ -66,6 +77,10 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
     void setReportList(List<Report> activities) {
         reportList = activities;
         notifyDataSetChanged();
+    }
+
+    public Report getReportAt(int position){
+        return reportList.get(position);
     }
 
     @Override
@@ -99,8 +114,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         //runs on a ui thread
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            reportList.clear();
+
             if(filterResults.values!= null) {
+                reportList.clear();
                 reportList.addAll((Collection<? extends Report>) filterResults.values);
             }
             notifyDataSetChanged();
@@ -116,4 +132,5 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         }
 
     }
+
 }

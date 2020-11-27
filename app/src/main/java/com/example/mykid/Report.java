@@ -14,6 +14,9 @@ public class Report {
     private String reportTime;
     private String reporterName;
 
+    public Report(){
+
+    }
     public Report(@NonNull String reportName, String reportLocation, @NonNull String reportDate, @NonNull String reportTime, @NonNull String reporterName) {
         this.reportName = reportName;
         this.reportLocation = reportLocation;

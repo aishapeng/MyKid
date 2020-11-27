@@ -9,11 +9,10 @@
     <TextView
         android:id="@+id/activityNameTextView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
-        android:hint="@string/enter_activity_name"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
@@ -24,14 +23,13 @@
     <TextView
         android:id="@+id/reporterNameTextView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
-        android:hint="@string/enter_name"
-        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView" />
@@ -115,11 +113,10 @@
     <TextView
         android:id="@+id/locationInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
-        android:hint="@string/click_button_to_add_location"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
@@ -130,11 +127,10 @@
     <TextView
         android:id="@+id/dateInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
-        android:hint="@string/click_button_to_add_date"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
@@ -145,16 +141,39 @@
     <TextView
         android:id="@+id/timeInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
-        android:hint="@string/click_button_to_add_time"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeTxtView" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/edit"
+        android:backgroundTint="@color/lightYellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reporterNameTextView" />
+
+    <Button
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/lightYellow"
+        android:text="@string/delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reporterNameTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

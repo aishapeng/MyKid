@@ -21,6 +21,10 @@ public class ReportRepository {
         return getAllReport;
     }
 
+//    public Report getReport(int id){
+//        return reportDao.loadReport(id);
+//    }
+
     public void insert(Report report) {
         new insertAsyncTask(reportDao).execute(report);
     }

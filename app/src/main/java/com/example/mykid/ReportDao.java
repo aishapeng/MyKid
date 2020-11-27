@@ -1,7 +1,5 @@
 package com.example.mykid;
 
-import android.app.Activity;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -27,4 +25,8 @@ public interface ReportDao {
 
     @Query("SELECT * from Report ORDER BY reportDate DESC")
     LiveData<List<Report>> getAllReport();
+
+//    @Query("SELECT * FROM Report WHERE reportId = :id")
+//    Report loadReport(int id);
+
 }
