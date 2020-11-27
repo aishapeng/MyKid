@@ -32,6 +32,9 @@ public class SecondActivity extends AppCompatActivity {
             transaction.replace(R.id.fragment_sec,addReportFrag).commit();
             //transaction.addToBackStack(null);
         }
+//        else if(message.equals("detail")){
+//
+//        }
 
     }
 

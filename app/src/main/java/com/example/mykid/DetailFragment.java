@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -91,8 +93,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                         .setNegativeButton("Cancel",null)
                         .show();
                 break;
-//            case R.id.editBtn:
-//                break;
+            case R.id.editBtn:
+//                FragmentManager manager=getParentFragmentManager();
+//                FragmentTransaction transaction=manager.beginTransaction();
+//                transaction.replace(R.id.fragment_main,addReportFrag).commit();
+//                transaction.addToBackStack(null);
+                break;
             default:
                 break;
         }

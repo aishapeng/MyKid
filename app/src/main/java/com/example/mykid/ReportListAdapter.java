@@ -1,6 +1,7 @@
 package com.example.mykid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +50,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                 @Override
                 public void onClick(View view) {
                     AppCompatActivity activity= (AppCompatActivity)view.getContext();
+//                    Intent intent = new Intent (activity, SecondActivity.class);
+//                    activity.startActivity(intent);
                     DetailFragment detailFragment= new DetailFragment();
                     Bundle arguments = new Bundle();
                     arguments.putInt("ReportID", current.getReportId());
