@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -77,9 +75,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
             }
         });
 
-
-
-
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity()); //error?
 
@@ -88,7 +83,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     public void onClick(View view) {
         DialogFragment newFragment;
-        Fragment frag;
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
@@ -146,13 +140,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         }
     }
 
-    public void processDatePickerResult(int year, int month, int day){
-        String month_string = Integer.toString(month+1); // bc start from 0
-        String day_string = Integer.toString(day);
-        String year_string = Integer.toString(year);
-        String date = ( day_string+"/"  +month_string+ "/" + year_string);
-
-        dateInputTxtView.setText(date);
+    public void setDate(String s){
+        dateInputTxtView.setText(s);
     }
 
     public void processTimePickerResult(int hourOfDay, int minute) {
@@ -164,7 +153,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     }
 
     //standard code
-    private void getLocation() { //check for the ACCESS_FINE_LOCATION permission.
+    public void getLocation() { //check for the ACCESS_FINE_LOCATION permission.
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {

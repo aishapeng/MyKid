@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 public class DetailFragment extends Fragment implements View.OnClickListener {
@@ -98,6 +100,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 //                FragmentTransaction transaction=manager.beginTransaction();
 //                transaction.replace(R.id.fragment_main,addReportFrag).commit();
 //                transaction.addToBackStack(null);
+                ((MainActivity)getActivity()).openEditFragment();
                 break;
             default:
                 break;

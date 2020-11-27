@@ -81,5 +81,14 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+    public void openEditFragment (){
+        Fragment frag = new EditFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fragment_main, frag).commit();
+        transaction.addToBackStack(null);
+
+    }
+
 
 }

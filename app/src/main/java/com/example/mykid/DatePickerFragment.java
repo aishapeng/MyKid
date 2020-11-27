@@ -3,6 +3,7 @@ package com.example.mykid;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
+    private static final String TAG = "DatePicker Fragment - ";
 
     @NonNull
     @Override
@@ -28,7 +30,22 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public void onDateSet(DatePicker datePicker,
                           int year, int month, int day) {
+        processDatePickerResult(year, month, day);
+    }
+
+    public void processDatePickerResult(int year, int month, int day){
+        String month_string = Integer.toString(month+1); // bc start from 0
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String date = ( day_string+"/"  +month_string+ "/" + year_string);
+
         AddReportFrag addFrag=(AddReportFrag)getParentFragment();
-        addFrag.processDatePickerResult(year, month, day);
+        EditFragment editFrag=(EditFragment)getParentFragment();
+        if(addFrag.isAdded()) {
+            addFrag.setDate(date);
+        }
+        if(editFrag.isAdded()){
+            editFrag.setDate(date);
+        }
     }
 }
