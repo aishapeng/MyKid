@@ -104,5 +104,4 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
 }

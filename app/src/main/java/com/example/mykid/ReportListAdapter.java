@@ -21,13 +21,16 @@ import java.util.List;
 
 public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.ReportViewHolder> implements Filterable {
 
-    private final LayoutInflater layoutInflater;
+    private  LayoutInflater layoutInflater;
     private List<Report> reportList, reportListAll;
     private static final String TAG = "ReportListAdapter - ";
 
-    ReportListAdapter(Context context) {
+    public ReportListAdapter(Context context,List<Report>reportList) {
         layoutInflater = LayoutInflater.from(context);
+        this.reportList=reportList;
+        this.reportListAll=new ArrayList<>(reportList);
     }
+
 
     @NonNull
     @Override
@@ -39,10 +42,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
     @Override
     public void onBindViewHolder(@NonNull ReportListAdapter.ReportViewHolder holder, int position) {
         if (reportList != null) {
-            Log.d(TAG, "reportlist size: " + reportList.size());
-            reportListAll = new ArrayList<>();
-            reportListAll.addAll(reportList);
-            //Report current = reportList.get(position);
             final Report current = reportList.get(position);
             holder.reportName.setText(current.getReportName());
 
@@ -50,8 +49,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                 @Override
                 public void onClick(View view) {
                     AppCompatActivity activity= (AppCompatActivity)view.getContext();
-//                    Intent intent = new Intent (activity, SecondActivity.class);
-//                    activity.startActivity(intent);
                     DetailFragment detailFragment= new DetailFragment();
                     Bundle arguments = new Bundle();
                     arguments.putInt("ReportID", current.getReportId());
@@ -98,7 +95,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             List<Report> filteredList = new ArrayList<>();
 
             if(reportListAll != null) {
-                Log.d(TAG, "reportlistall not empty");
                 if (charSequence.toString().isEmpty()) {
                     filteredList.addAll(reportListAll);
                 } else {
@@ -111,7 +107,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             }
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredList;
-                Log.d(TAG, "filterResults.value: " + filterResults.values);
                 return filterResults;
         }
         //runs on a ui thread

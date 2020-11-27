@@ -75,15 +75,15 @@ public class RecyclerViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
-        adapter = new ReportListAdapter(getContext());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
         reportViewModel.getAllReport().observe(getViewLifecycleOwner(), new Observer<List<Report>>() {
             @Override
             public void onChanged(List<Report> reportList) {
+                adapter = new ReportListAdapter(getContext(),reportList);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 adapter.setReportList(reportList);
             }
         });
@@ -136,18 +136,15 @@ public class RecyclerViewFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         MenuItem item = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) item.getActionView();
-        Log.d(TAG, "got run here? ");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.d(TAG, "got run heree? ");
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
-                Log.d(TAG, "newTxt: "+ newText);
                 return false;
             }
         });
