@@ -85,10 +85,19 @@ public class MainActivity extends AppCompatActivity  {
         Fragment frag = new EditFragment();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_main, frag).commit();
-        transaction.addToBackStack(null);
-
+        transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
+        transaction.addToBackStack("EditFrag");
     }
 
-
+    public void openMap (String selectedLocation) {
+        Fragment frag = new GoogleMapFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("selectedLocation", selectedLocation);
+        bundle.putString("EditBtnVisibility", "false");
+        frag.setArguments(bundle);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_main, frag).commit();
+        transaction.addToBackStack(null);
+    }
 }

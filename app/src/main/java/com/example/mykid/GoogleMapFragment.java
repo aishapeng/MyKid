@@ -139,18 +139,34 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         List<Address> addresses;
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         Bundle bundle = getArguments();
-        String currentLocation = bundle.getString("currentLocation");
-        Log.d(TAG, "current location passed here!: "+ currentLocation);
+        String mlocation = bundle.getString("currentLocation"); //for add and edit fragment
+        String title = "Current Location";
+
+        if (mlocation == null){
+            mlocation = bundle.getString("selectedLocation"); //for details fragment
+            title = mlocation;
+            editText.setText(mlocation);
+            String editable = bundle.getString("EditBtnVisibility");
+            if(editable != null){
+                setVisibility();
+            }
+        }
+        Log.d(TAG, "current location passed here!: "+ mlocation);
 
         try{
-            addresses = geocoder.getFromLocationName(currentLocation,1);
+            addresses = geocoder.getFromLocationName(mlocation,1);
             Address location = addresses.get(0);
             LatLng latLng =  new LatLng(location.getLatitude(),location.getLongitude());
-            marker = map.addMarker(new MarkerOptions().position(latLng).title("You are here!"));
+            marker = map.addMarker(new MarkerOptions().position(latLng).title(title));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
         }catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    public void setVisibility() {
+        editText.setVisibility(View.GONE);
+        selectBtn.setVisibility(View.GONE);
     }
 
 

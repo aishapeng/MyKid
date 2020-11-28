@@ -72,8 +72,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-//            case R.id.locationBtn:
-//                break;
+            case R.id.locationBtn:
+                ((MainActivity)getActivity()).openMap(location);
+                break;
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Delete?")
