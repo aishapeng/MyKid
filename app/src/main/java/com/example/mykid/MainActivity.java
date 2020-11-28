@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity  {
         Bundle bundle = new Bundle();
         bundle.putString("currentLocation", currentLocation);
         bundle.putString("selectedLocation", selectedLocation);
-        bundle.putString("editable", editable); //for details fragment
+        bundle.putString("editable", editable);
         frag.setArguments(bundle);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

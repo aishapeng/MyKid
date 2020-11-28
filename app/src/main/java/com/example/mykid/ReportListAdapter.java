@@ -44,6 +44,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         if (reportList != null) {
             final Report current = reportList.get(position);
             holder.reportName.setText(current.getReportName());
+            holder.reportDate.setText(current.getReportDate());
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +100,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                     filteredList.addAll(reportListAll);
                 } else {
                     for (Report report : reportListAll) {
-                        if (report.getReportName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                        if (report.getReportName().toLowerCase().contains(charSequence.toString().toLowerCase()) || report.getReportDate().contains(charSequence.toString())) {
                             filteredList.add(report);
                         }
                     }
@@ -123,10 +124,12 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
 
     class ReportViewHolder extends RecyclerView.ViewHolder  {
         private final TextView reportName;
+        private final TextView reportDate;
 
         private ReportViewHolder(View view) {
             super(view);
             reportName = view.findViewById(R.id.activityNameTextView);
+            reportDate = view.findViewById(R.id.dateTextView);
         }
 
     }
