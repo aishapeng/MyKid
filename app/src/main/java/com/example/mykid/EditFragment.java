@@ -1,6 +1,8 @@
 package com.example.mykid;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -33,6 +35,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     ReportViewModel reportViewModel;
     private String activityName,location,date,time,reporter, selectedlocation;
     private int reportID;
+    private String newactivityName,newlocation,newdate,newtime,newreporter;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -50,7 +53,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_edit, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
@@ -123,50 +125,64 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 }
                 break;
             case R.id.completeBtn:
-                String activityName,location,date,time,reporter;
-                activityName=actNameEditTxt.getText().toString();
-                location=locationInputTxtView.getText().toString();
-                date=dateInputTxtView.getText().toString();
-                time=timeInputTxtView.getText().toString();
-                reporter=reporterNameEditTxt.getText().toString();
-                if(activityName.isEmpty()){
+                newactivityName=actNameEditTxt.getText().toString();
+                newlocation=locationInputTxtView.getText().toString();
+                newdate=dateInputTxtView.getText().toString();
+                newtime=timeInputTxtView.getText().toString();
+                newreporter=reporterNameEditTxt.getText().toString();
+                if(newactivityName.isEmpty()){
                     actErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     actErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(date.isEmpty()){
+                if(newdate.isEmpty()){
                     dateErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     dateErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(time.isEmpty()){
+                if(newtime.isEmpty()){
                     timeErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     timeErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(reporter.isEmpty()){
+                if(newreporter.isEmpty()){
                     reporterErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     reporterErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(location.isEmpty()){
-                    location=null;
+                if(newlocation.isEmpty()){
+                    newlocation=null;
                 }
-                if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
-                    Report report= new Report();//here also
-                    report.setReportId(reportID);
-                    report.setReportName(activityName);
-                    report.setReportLocation(location);
-                    report.setReportDate(date);
-                    report.setReportTime(time);
-                    report.setReporterName(reporter);
-                    reportViewModel.update(report);//here got problem
-                    Intent intent = new Intent (getActivity(), MainActivity.class);
-                    startActivity (intent);
+                if(!newactivityName.isEmpty() && !newdate.isEmpty() &&!newtime.isEmpty() && !newreporter.isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Confirmation")
+                            .setMessage("Are you sure you want to add an activity with these details?\n" +
+                                    "Activity Name: " + newactivityName + "\n" +
+                                    "Location: " + newlocation + "\n" +
+                                    "Date: " + newdate + "\n" +
+                                    "Time: " + newtime + "\n" +
+                                    "Reporter: " + newreporter)
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Report report= new Report();
+                                    report.setReportId(reportID);
+                                    report.setReportName(newactivityName);
+                                    report.setReportLocation(newlocation);
+                                    report.setReportDate(newdate);
+                                    report.setReportTime(newtime);
+                                    report.setReporterName(newreporter);
+                                    reportViewModel.update(report);
+                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+                                    startActivity (intent);
+                                }
+                            })
+                            .setNegativeButton("Cancel",null)
+                            .show();
                 }
             default:
                 break;

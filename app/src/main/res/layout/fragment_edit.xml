@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".AddReportFrag">
 
     <EditText
         android:id="@+id/actNameEditTxt"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/enter_activity_name"
@@ -27,7 +32,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="188dp"
         android:backgroundTint="@color/lightYellow"
-        android:text="Change date"
+        android:text="@string/change_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
@@ -38,7 +43,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="184dp"
         android:backgroundTint="@color/lightYellow"
-        android:text="change time"
+        android:text="@string/change_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
@@ -58,7 +63,7 @@
     <EditText
         android:id="@+id/reporterNameEditTxt"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_name"
@@ -67,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
-        tools:ignore="Autofill"/>
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/completeBtn"
@@ -75,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/lightYellow"
-        android:text="Save"
+        android:text="@string/save"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -190,14 +195,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
         android:backgroundTint="@color/lightYellow"
-        android:text="Change location"
+        android:text="@string/change_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
     <TextView
         android:id="@+id/locationInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -213,7 +218,7 @@
     <TextView
         android:id="@+id/dateInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -229,7 +234,7 @@
     <TextView
         android:id="@+id/timeInputTxtView"
         android:layout_width="350dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -287,3 +292,4 @@
         app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

@@ -44,4 +44,8 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="search">Search</string>
+    <string name="change_date">Change date</string>
+    <string name="change_time">change time</string>
+    <string name="save">Save</string>
+    <string name="change_location">Change location</string>
 </resources>

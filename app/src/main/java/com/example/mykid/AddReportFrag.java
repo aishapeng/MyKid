@@ -1,6 +1,8 @@
 package com.example.mykid;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -32,6 +34,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
+    private String activityName,location,date,time,reporter;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -96,7 +99,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 getLocation(); //get user current location
                 break;
             case R.id.completeBtn:
-                String activityName,location,date,time,reporter;
                 activityName=actNameEditTxt.getText().toString();
                 location=locationInputTxtView.getText().toString();
                 date=dateInputTxtView.getText().toString();
@@ -130,10 +132,25 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                     location=null;
                 }
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
-                    Report report= new Report(activityName,location,date,time,reporter);
-                    reportViewModel.insert(report);
-                    Intent intent = new Intent (getActivity(), MainActivity.class);
-                    startActivity (intent);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Confirmation")
+                            .setMessage("Are you sure you want to add an activity with these details?\n" +
+                                        "Activity Name: " + activityName + "\n" +
+                                        "Location: " + location + "\n" +
+                                        "Date: " + date + "\n" +
+                                        "Time: " + time + "\n" +
+                                        "Reporter: " + reporter)
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Report report= new Report(activityName,location,date,time,reporter);
+                                    reportViewModel.insert(report);
+                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+                                    startActivity (intent);
+                                }
+                            })
+                            .setNegativeButton("Cancel",null)
+                            .show();
                 }
             default:
                 break;
