@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -20,7 +20,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
-        <item name="android:background">@color/lightYellow</item>
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@color/black</item>

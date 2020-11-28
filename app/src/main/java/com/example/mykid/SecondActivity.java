@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import static com.example.mykid.R.color.darkYellow;
+import static com.example.mykid.R.color.colorPrimaryDark;
 
 
 public class SecondActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), darkYellow)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), colorPrimaryDark)));
 
         Intent intent=getIntent();
         String message=intent.getStringExtra(MainActivity.EXTRA_MESSAGE);

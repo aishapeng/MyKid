@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="188dp"
-        android:backgroundTint="@color/lightYellow"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/change_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="184dp"
-        android:backgroundTint="@color/lightYellow"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/change_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:backgroundTint="@color/lightYellow"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/save"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="120dp"
-        android:backgroundTint="@color/lightYellow"
+        android:backgroundTint="@color/colorAccent"
         android:text="@string/change_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />

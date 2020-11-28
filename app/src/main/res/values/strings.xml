@@ -48,4 +48,5 @@
     <string name="change_time">change time</string>
     <string name="save">Save</string>
     <string name="change_location">Change location</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

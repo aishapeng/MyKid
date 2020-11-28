@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AddReportFrag">
 
     <EditText
@@ -24,27 +25,29 @@
             app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
             tools:ignore="Autofill" />
 
-        <Button
-            android:id="@+id/dateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="216dp"
-            android:backgroundTint="@color/lightYellow"
-            android:text="@string/add_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+    <Button
+        android:id="@+id/dateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="216dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/add_date"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-        <Button
-            android:id="@+id/timeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="208dp"
-            android:backgroundTint="@color/lightYellow"
-            android:text="@string/add_time"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+    <Button
+        android:id="@+id/timeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="208dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/add_time"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
         <TextView
             android:id="@+id/asterisk3"
@@ -73,42 +76,42 @@
             app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
             tools:ignore="Autofill" />
 
-        <Button
-            android:id="@+id/completeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/lightYellow"
-            android:text="@string/complete"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+    <Button
+        android:id="@+id/completeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/complete"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
-        <TextView
-            android:id="@+id/reporterNameTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="232dp"
-            android:text="@string/reporter_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+    <TextView
+        android:id="@+id/reporterNameTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="232dp"
+        android:text="@string/reporter_name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
-        <TextView
-            android:id="@+id/timeTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/time"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/timeBtn"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+    <TextView
+        android:id="@+id/timeTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/time"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/timeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
         <TextView
             android:id="@+id/asterisk4"
@@ -136,43 +139,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-        <TextView
-            android:id="@+id/actDateTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/dateBtn"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+    <TextView
+        android:id="@+id/actDateTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/date"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/dateBtn"
+        app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-        <TextView
-            android:id="@+id/actNameTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="244dp"
-            android:text="@string/activity_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/actNameTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="244dp"
+        android:text="@string/activity_name"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/locationTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/location"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/locationBtn"
-            app:layout_constraintHorizontal_bias="0.872"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+    <TextView
+        android:id="@+id/locationTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/location"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/locationBtn"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
         <TextView
             android:id="@+id/asterisk1"
@@ -187,16 +190,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/locationBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="140dp"
-            android:backgroundTint="@color/lightYellow"
-            android:text="@string/add_location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+    <Button
+        android:id="@+id/locationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="140dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/add_location"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
         <TextView
             android:id="@+id/locationInputTxtView"
