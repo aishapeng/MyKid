@@ -2,33 +2,46 @@ package com.example.mykid;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
 public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCompleted, View.OnClickListener {
 
@@ -40,6 +53,13 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
     String result;
+
+    private UUID id;
+    private ImageButton imageBtn;
+    private ImageView imageView;
+    private File photoFile;
+    private Intent captureImageIntent;
+    private static final int REQUEST_PHOTO = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +100,23 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         });
 
         // Initialize the FusedLocationClient.
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity()); //error?
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        imageView = view.findViewById(R.id.imageView);
+        imageBtn = view.findViewById(R.id.imageBtn);
+
+        //create the instance of file object
+        photoFile = getPhotoFile();
+        PackageManager pm = getActivity().getPackageManager();
+
+        //create the camera services
+        captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = photoFile != null &&
+                captureImageIntent.resolveActivity(pm) != null;
+
+        imageBtn.setEnabled(canTakePhoto);
+        imageBtn.setOnClickListener(this);
 
         return view;
     }
@@ -153,6 +189,34 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                             .setNegativeButton("Cancel",null)
                             .show();
                 }
+
+                //We start capture the image
+                if (view.getId() == R.id.imageBtn) {
+                    Uri uri = FileProvider.getUriForFile(getContext(),
+                            "com.example.camerademo.fileprovider",
+                            photoFile);
+
+                    //check the file location
+                    Log.d("FILE-URI", uri.toString());
+
+                    //start launch the camera service with file path
+                    captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                    //We have to settle the permission problem
+                    //Check the return value from captureImageIntent
+
+                    List<ResolveInfo> cameraActivities =
+                            getActivity().getPackageManager().queryIntentActivities(captureImageIntent,
+                                    PackageManager.MATCH_DEFAULT_ONLY);
+                    //solve each activity
+                    for (ResolveInfo activity : cameraActivities) {
+                        getActivity().grantUriPermission(activity.activityInfo.packageName,
+                                uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    }
+
+                    //start the camera services
+                    startActivityForResult(captureImageIntent, REQUEST_PHOTO);
+                }
             default:
                 break;
         }
@@ -169,7 +233,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     public void processTimePickerResult(int hourOfDay, int minute) {
         String timeMessage = (String.format("%02d:%02d",hourOfDay , minute));
-
         timeInputTxtView.setText(timeMessage);
     }
 
@@ -219,5 +282,53 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     public void onTaskCompleted(String result) {
         ((SecondActivity)getActivity()).openMap(result); //open google map
     }
+
+    //setup methods to get file name and file location
+    public String getPhotoFileName() {
+        String fileName="";
+        id = UUID.randomUUID();
+
+        fileName = "IMG_" + id.toString() + ".jpg";
+        Log.d("FILE", fileName);
+        return fileName;
+    }
+
+    //get the file path
+    public File getPhotoFile() {
+        //construct the file object
+        File fileDir = getActivity().getFilesDir();
+        return new File(fileDir, getPhotoFileName());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        //other implementation
+
+        if (resultCode != Activity.RESULT_OK)
+            return;
+
+        if (requestCode == REQUEST_PHOTO) {
+            //retrieve back the file from file system
+            Uri uri = FileProvider.getUriForFile(getContext(),
+                    "com.example.camerademo.fileprovider", photoFile);
+
+            getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            updatePhotoView();
+        }
+    }
+
+    private void updatePhotoView() {
+        if (photoFile == null || !photoFile.exists())
+            imageBtn.setImageDrawable(null);
+        else
+        {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
+                    getActivity());
+            imageView.setImageBitmap(bitmap);
+        }
+
+    }
+
 
 }

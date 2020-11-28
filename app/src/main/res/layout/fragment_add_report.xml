@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".AddReportFrag">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".AddReportFrag">
 
-    <EditText
+        <EditText
             android:id="@+id/actNameEditTxt"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -25,29 +25,41 @@
             app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
             tools:ignore="Autofill" />
 
-    <Button
-        android:id="@+id/dateBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="216dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/add_date"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+        <Button
+            android:id="@+id/dateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="216dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/add_date"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-    <Button
-        android:id="@+id/timeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="208dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/add_time"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+        <Button
+            android:id="@+id/timeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="208dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/add_time"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+
+        <Button
+            android:id="@+id/imageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="184dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Add Image"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
         <TextView
             android:id="@+id/asterisk3"
@@ -76,42 +88,42 @@
             app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
             tools:ignore="Autofill" />
 
-    <Button
-        android:id="@+id/completeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/complete"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+        <Button
+            android:id="@+id/completeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/complete"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/reporterNameTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="232dp"
-        android:text="@string/reporter_name"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+        <TextView
+            android:id="@+id/reporterNameTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="232dp"
+            android:text="@string/reporter_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
-    <TextView
-        android:id="@+id/timeTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/time"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/timeBtn"
-        app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+        <TextView
+            android:id="@+id/timeTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/time"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/timeBtn"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
         <TextView
             android:id="@+id/asterisk4"
@@ -139,17 +151,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-    <TextView
-        android:id="@+id/actDateTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/date"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/dateBtn"
-        app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+        <TextView
+            android:id="@+id/actDateTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/date"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/dateBtn"
+            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
     <TextView
         android:id="@+id/actNameTxtView"
@@ -163,19 +175,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
 
-    <TextView
-        android:id="@+id/locationTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/location"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/locationBtn"
-        app:layout_constraintHorizontal_bias="0.872"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+
+        <TextView
+            android:id="@+id/locationTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/location"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/locationBtn"
+            app:layout_constraintHorizontal_bias="0.872"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
     <TextView
         android:id="@+id/asterisk1"
@@ -190,17 +203,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
 
-    <Button
-        android:id="@+id/locationBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="140dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/add_location"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+        <Button
+            android:id="@+id/locationBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="140dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/add_location"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
         <TextView
             android:id="@+id/locationInputTxtView"
@@ -248,8 +261,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.622"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeBtn"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/timeBtn" />
 
         <TextView
             android:id="@+id/actErrorMsg"
@@ -295,6 +307,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ImageTxtView"
+            app:layout_constraintVertical_bias="0.276"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/ImageTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            android:text="Image : "
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageBtn"
+            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+
     <TextView
         android:id="@+id/AddTextView"
         android:layout_width="wrap_content"
@@ -310,5 +348,5 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
