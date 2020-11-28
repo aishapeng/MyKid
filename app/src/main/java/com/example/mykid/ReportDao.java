@@ -17,9 +17,6 @@ public interface ReportDao {
     @Delete
     void delete(Report report);
 
-//    @Update
-//    void update(Report report);
-
     @Query("UPDATE Report SET reportName = :reportName, reportLocation = :reportLocation,reportDate = :reportDate, reportTime = :reportTime, reporterName = :reporterName " +
             "WHERE reportId = :reportId")
     void update(String reportName, String reportLocation, String reportDate, String reportTime, String reporterName,int reportId);
@@ -29,7 +26,6 @@ public interface ReportDao {
 
     @Query("SELECT * from Report ORDER BY reportDate DESC")
     LiveData<List<Report>> getAllReport();
-
 
 //    @Query("SELECT * FROM Report WHERE reportId = :id")
 //    Report loadReport(int id);

@@ -102,7 +102,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             Place place = Autocomplete.getPlaceFromIntent(data);
             //Set address on edit text
             String address = place.getAddress();
-            editText.setText(address); //WANT PASS THIS BK TO PREVIOUS FRAGMENT
+            editText.setText(address);
             List<Address> addresses = null;
             Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
             try{
@@ -142,16 +142,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         String mlocation = bundle.getString("currentLocation"); //for add and edit fragment
         String title = "Current Location";
 
-        if (mlocation == null){
-            mlocation = bundle.getString("selectedLocation"); //for details fragment
+        if (mlocation == null){ // if current location is not available
+            mlocation = bundle.getString("selectedLocation"); //for details fragment, edit
             title = mlocation;
             editText.setText(mlocation);
-            String editable = bundle.getString("EditBtnVisibility");
-            if(editable != null){
+            String editable = bundle.getString("editable");
+            if(editable == "false"){ // for details fragment
                 setVisibility();
             }
         }
-        Log.d(TAG, "current location passed here!: "+ mlocation);
 
         try{
             addresses = geocoder.getFromLocationName(mlocation,1);
@@ -168,8 +167,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         editText.setVisibility(View.GONE);
         selectBtn.setVisibility(View.GONE);
     }
-
-
 
 
 }

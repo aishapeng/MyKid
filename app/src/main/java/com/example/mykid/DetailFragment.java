@@ -73,7 +73,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.locationBtn:
-                ((MainActivity)getActivity()).openMap(location);
+                ((MainActivity)getActivity()).openMap(location, null, "false");
                 break;
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -101,7 +101,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 //                FragmentTransaction transaction=manager.beginTransaction();
 //                transaction.replace(R.id.fragment_main,addReportFrag).commit();
 //                transaction.addToBackStack(null);
-                ((MainActivity)getActivity()).openEditFragment();
+                ((MainActivity)getActivity()).openEditFragment(reportID, activityName, location, date, time, reporter);
                 break;
             default:
                 break;

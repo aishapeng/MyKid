@@ -1,11 +1,17 @@
 package com.example.mykid;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -14,14 +20,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
-public class EditFragment extends Fragment implements View.OnClickListener{
+public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCompleted, View.OnClickListener{
 
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
+    private String activityName,location,date,time,reporter, selectedlocation;
+    private int reportID;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -56,10 +67,39 @@ public class EditFragment extends Fragment implements View.OnClickListener{
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
         Button locationBtn = view.findViewById(R.id.locationBtn);
         Button completeBtn=view.findViewById(R.id.completeBtn);
+
+        Bundle bundle = this.getArguments();
+        reportID = bundle.getInt("ReportID");
+        activityName= bundle.getString("activityName");
+        location=bundle.getString("location");
+        date=bundle.getString("date");
+        time=bundle.getString("time");
+        reporter=bundle.getString("reporter");
+
+        actNameEditTxt.setText(activityName);
+        locationInputTxtView.setText(location);
+        dateInputTxtView.setText(date);
+        timeInputTxtView.setText(time);
+        reporterNameEditTxt.setText(reporter);
+
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
+
+        // Initialize the FusedLocationClient.
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+        getParentFragmentManager().setFragmentResultListener("location", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                // We use a String here, but any type that can be put in a Bundle is supported
+                selectedlocation = bundle.getString("location");
+                locationInputTxtView.setText(selectedlocation);
+                // Do something with the result
+            }
+        });
+
         return view;
     }
 
@@ -76,7 +116,11 @@ public class EditFragment extends Fragment implements View.OnClickListener{
                 newFragment.show(getChildFragmentManager(),"timePicker");
                 break;
             case R.id.locationBtn:
-                //getLocation(); //get user current location
+                if (location == null){
+                    getLocation(); //get user current location
+                }else{
+                    ((MainActivity)getActivity()).openMap(location, null, "true");
+                }
                 break;
             case R.id.completeBtn:
                 String activityName,location,date,time,reporter,id=null;
@@ -113,8 +157,8 @@ public class EditFragment extends Fragment implements View.OnClickListener{
                     location=null;
                 }
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
-                    Report report= new Report(activityName,location,date,time,reporter);
-                    reportViewModel.insert(report);
+                    Report report= new Report(activityName,location,date,time,reporter);//here also
+                    reportViewModel.update(report);//here got problem
                     Intent intent = new Intent (getActivity(), MainActivity.class);
                     startActivity (intent);
                 }
@@ -143,4 +187,52 @@ public class EditFragment extends Fragment implements View.OnClickListener{
 //
 //        timeInputTxtView.setText(timeMessage);
 //    }
+
+
+    //standard code
+    public void getLocation() { //check for the ACCESS_FINE_LOCATION permission.
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] // [] can pass more than one permission at the same time//??
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        } else {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(
+                    new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if (location != null) {
+                                new FetchAddressTask(getActivity(), EditFragment.this).execute((location));
+                            }
+                        }
+                    });
+        }
+    }
+
+    //standard code
+    @Override
+    //request permission, then now chk permission result with this function
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION:
+                // If the permission is granted, get the location,
+                // otherwise, show a Toast
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation(); // permit le can get location le
+                } else {
+                    Toast.makeText(getActivity(),
+                            R.string.location_permission_denied,
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onTaskCompleted(String result) {
+        ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
+    }
 }

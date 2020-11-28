@@ -48,13 +48,4 @@ public class SecondActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_sec, frag).commit();
         transaction.addToBackStack(null);
     }
-
-//    public void openEditFragment (){
-//        Fragment frag = new EditFragment();
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.add(R.id.fragment_sec, frag).commit();
-//        transaction.addToBackStack(null);
-//
-//    }
 }

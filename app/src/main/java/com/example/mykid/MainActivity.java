@@ -81,19 +81,28 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-    public void openEditFragment (){
+    public void openEditFragment (int reportID, String activityName, String location, String date, String time, String reporter){
         Fragment frag = new EditFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt("ReportID", reportID);
+        arguments.putString("activityName", activityName);
+        arguments.putString("location",location);
+        arguments.putString("date",date);
+        arguments.putString("time",time);
+        arguments.putString("reporter",reporter);
+        frag.setArguments(arguments);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
         transaction.addToBackStack("EditFrag");
     }
 
-    public void openMap (String selectedLocation) {
+    public void openMap (String selectedLocation, String currentLocation, String editable) {
         Fragment frag = new GoogleMapFragment();
         Bundle bundle = new Bundle();
+        bundle.putString("currentLocation", currentLocation);
         bundle.putString("selectedLocation", selectedLocation);
-        bundle.putString("EditBtnVisibility", "false");
+        bundle.putString("editable", editable); //for details fragment
         frag.setArguments(bundle);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
