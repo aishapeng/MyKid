@@ -140,10 +140,18 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         }
     }
 
-    public void setDate(String s){
-        dateInputTxtView.setText(s);
-    }
+//    public void setDate(String s){
+//        dateInputTxtView.setText(s);
+//    }
 
+    public void processDatePickerResult(int year, int month, int day){
+        String month_string = Integer.toString(month+1); // bc start from 0
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String date = ( day_string+"/"  +month_string+ "/" + year_string);
+
+        dateInputTxtView.setText(date);
+    }
     public void processTimePickerResult(int hourOfDay, int minute) {
         String hour_string = Integer.toString(hourOfDay);
         String minute_string = Integer.toString(minute);

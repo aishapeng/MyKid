@@ -21,9 +21,6 @@ public class ReportRepository {
         return getAllReport;
     }
 
-//    public Report getReport(int id){
-//        return reportDao.loadReport(id);
-//    }
 
     public void insert(Report report) {
         new insertAsyncTask(reportDao).execute(report);
@@ -36,6 +33,17 @@ public class ReportRepository {
     public void update(Report report) {
         new updateAsyncTask(reportDao).execute(report);
     }
+//     public void update(String reportName, String location,String date, String time, String reporterName,int id){
+//        Report report= new Report();
+//        report.setReportId(id);
+//        report.setReportName(reportName);
+//        report.setReportLocation(location);
+//        report.setReportDate(date);
+//        report.setReportTime(time);
+//        report.setReporterName(reporterName);
+//
+//        new updateAsyncTask(reportDao).execute(report);
+//     }
 
     public void deleteAll() {
         new deleteAllAsyncTask(reportDao).execute();
@@ -78,10 +86,12 @@ public class ReportRepository {
 
         @Override
         protected Void doInBackground(Report... reports) {
-            asyncTaskDao.update(reports[0]);
+            asyncTaskDao.update(reports[0].getReportName(),reports[0].getReportLocation(),reports[0].getReportDate(),reports[0].getReportTime()
+                    ,reports[0].getReporterName(),reports[0].getReportId());
             return null;
         }
     }
+
 
     private static class deleteAllAsyncTask extends android.os.AsyncTask<Report, Void, Void> {
         private ReportDao asyncTaskDao;
