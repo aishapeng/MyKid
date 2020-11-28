@@ -133,7 +133,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                     location=null;
                 }
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
                             .setMessage("Are you sure you want to add an activity with these details?\n" +
                                         "Activity Name: " + activityName + "\n" +
