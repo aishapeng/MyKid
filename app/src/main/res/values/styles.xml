@@ -25,4 +25,7 @@
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">@color/black</item>
+    </style>
 </resources>

@@ -98,7 +98,7 @@ public class RecyclerViewFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                 builder.setTitle("Delete?")
                         .setMessage("Are you sure you want to delete this report?")
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {

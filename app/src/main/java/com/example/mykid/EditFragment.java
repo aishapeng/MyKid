@@ -10,10 +10,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -177,7 +180,19 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReportTime(newtime);
                                     report.setReporterName(newreporter);
                                     reportViewModel.update(report);
-                                    getActivity().getSupportFragmentManager().popBackStack();
+
+                                    AppCompatActivity activity= (AppCompatActivity)getContext();
+                                    DetailFragment detailFragment= new DetailFragment();
+                                    Bundle arguments = new Bundle();
+                                    arguments.putInt("ReportID", report.getReportId());
+                                    arguments.putString("activityName",report.getReportName());
+                                    arguments.putString("location",report.getReportLocation());
+                                    arguments.putString("date",report.getReportDate());
+                                    arguments.putString("time",report.getReportTime());
+                                    arguments.putString("reporter",report.getReporterName());
+                                    detailFragment.setArguments(arguments);
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+
 //                                    Intent intent = new Intent (getActivity(), MainActivity.class);
 //                                    startActivity (intent);
 

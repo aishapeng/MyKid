@@ -48,5 +48,8 @@
     <string name="change_time">change time</string>
     <string name="save">Save</string>
     <string name="change_location">Change location</string>
+    <string name="add_report">Add Report</string>
+    <string name="report_details">Report Details</string>
+    <string name="edit_report">Edit Report</string>
     <string name="dark_mode">Dark Mode</string>
 </resources>
