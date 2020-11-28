@@ -66,6 +66,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
 
+
         return view;
     }
 
@@ -85,6 +86,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                                 reportViewModel= new ViewModelProvider(getActivity()).get(ReportViewModel.class);
                                 Report report= new Report();
                                 report.setReportId(reportID);
+                                report.setReportName(activityName);
                                 report.setReportLocation(location);
                                 report.setReportDate(date);
                                 report.setReportTime(time);

@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity  {
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
         //transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
-        transaction.add(R.id.fragment_main,recyclerViewFragment).commit();
-//        transaction.addToBackStack(null);
+        transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
+        //transaction.addToBackStack(null);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity  {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
-        transaction.addToBackStack("EditFrag");
+        transaction.addToBackStack(null);
     }
 
     public void openMap (String selectedLocation, String currentLocation, String editable) {
@@ -109,4 +109,6 @@ public class MainActivity extends AppCompatActivity  {
         transaction.add(R.id.fragment_main, frag).commit();
         transaction.addToBackStack(null);
     }
+
+
 }

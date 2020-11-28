@@ -1,6 +1,7 @@
 package com.example.mykid;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,11 +90,11 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
-                newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
+                newFragment.show(getChildFragmentManager(), "datePickerAddFrag"); //getsupportmanager to show, tag is identifier
                 break;
             case R.id.timeBtn:
                 newFragment = new TimePickerFragment();
-                newFragment.show(getChildFragmentManager(),"timePicker");
+                newFragment.show(getChildFragmentManager(),"timePickerAddFrag");
                 break;
             case R.id.locationBtn:
                 getLocation(); //get user current location
@@ -167,9 +168,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     }
 
     public void processTimePickerResult(int hourOfDay, int minute) {
-        String hour_string = Integer.toString(hourOfDay);
-        String minute_string = Integer.toString(minute);
-        String timeMessage = (hour_string + ":" + minute_string);
+        String timeMessage = (String.format("%02d:%02d",hourOfDay , minute));
 
         timeInputTxtView.setText(timeMessage);
     }

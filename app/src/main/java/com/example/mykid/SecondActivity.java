@@ -29,7 +29,7 @@ public class SecondActivity extends AppCompatActivity {
         if(message.equals("add")){
             FragmentManager manager=getSupportFragmentManager();
             FragmentTransaction transaction=manager.beginTransaction();
-            transaction.replace(R.id.fragment_sec,addReportFrag).commit();
+            transaction.replace(R.id.fragment_sec,addReportFrag,"AddFrag").commit();
             //transaction.addToBackStack(null);
         }
 //        else if(message.equals("detail")){

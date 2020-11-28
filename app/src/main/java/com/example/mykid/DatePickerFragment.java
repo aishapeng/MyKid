@@ -14,7 +14,6 @@ import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
-    private static final String TAG = "DatePicker Fragment - ";
 
     @NonNull
     @Override
@@ -30,23 +29,16 @@ public class DatePickerFragment extends DialogFragment
     @Override
     public void onDateSet(DatePicker datePicker,
                           int year, int month, int day) {
-        AddReportFrag addfrag = (AddReportFrag)getParentFragment();
-        addfrag.processDatePickerResult(year, month, day);
-        //processDatePickerResult(year, month, day);
+
+        if (getTag().equals("datePickerAddFrag")) {
+            AddReportFrag addReportFrag = (AddReportFrag)getParentFragment();
+            addReportFrag.processDatePickerResult(year, month, day);
+        }
+        else if(getTag().equals("datePickerEditFrag")){
+            EditFragment editFragment = (EditFragment)getParentFragment();
+            editFragment.processDatePickerResult(year, month, day);
+        }
 
     }
 
-//    public void processDatePickerResult(int year, int month, int day){
-//        String month_string = Integer.toString(month+1); // bc start from 0
-//        String day_string = Integer.toString(day);
-//        String year_string = Integer.toString(year);
-//        String date = ( day_string+"/"  +month_string+ "/" + year_string);
-//
-//        EditFragment editfrag = (EditFragment) getParentFragmentManager().findFragmentByTag("EditFrag");
-//
-//        Log.d(TAG, "editFrag.isAdded(): " + editfrag.isVisible());
-//        if(editfrag!=null && editfrag.isVisible()){
-//            editfrag.setDate(date);
-//        }
-//    }
 }

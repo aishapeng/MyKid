@@ -111,11 +111,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
-                newFragment.show(getChildFragmentManager(), "datePicker"); //getsupportmanager to show, tag is identifier
+                newFragment.show(getChildFragmentManager(), "datePickerEditFrag"); //getsupportmanager to show, tag is identifier
                 break;
             case R.id.timeBtn:
                 newFragment = new TimePickerFragment();
-                newFragment.show(getChildFragmentManager(),"timePicker");
+                newFragment.show(getChildFragmentManager(),"timePickerEditFrag");
                 break;
             case R.id.locationBtn:
                 if (location == null){
@@ -177,8 +177,10 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReportTime(newtime);
                                     report.setReporterName(newreporter);
                                     reportViewModel.update(report);
-                                    Intent intent = new Intent (getActivity(), MainActivity.class);
-                                    startActivity (intent);
+                                    getActivity().getSupportFragmentManager().popBackStack();
+//                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+//                                    startActivity (intent);
+
                                 }
                             })
                             .setNegativeButton("Cancel",null)
@@ -189,10 +191,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         }
     }
 
-//    public void setDate(String s){
-//        dateInputTxtView.setText(s);
-//    }
-
     public void processDatePickerResult(int year, int month, int day){
         String month_string = Integer.toString(month+1); // bc start from 0
         String day_string = Integer.toString(day);
@@ -201,14 +199,12 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
         dateInputTxtView.setText(date);
     }
-//
-//    public void processTimePickerResult(int hourOfDay, int minute) {
-//        String hour_string = Integer.toString(hourOfDay);
-//        String minute_string = Integer.toString(minute);
-//        String timeMessage = (hour_string + ":" + minute_string);
-//
-//        timeInputTxtView.setText(timeMessage);
-//    }
+
+    public void processTimePickerResult(int hourOfDay, int minute) {
+        String timeMessage = (String.format("%02d:%02d",hourOfDay , minute));
+
+        timeInputTxtView.setText(timeMessage);
+    }
 
 
     //standard code
@@ -257,4 +253,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     public void onTaskCompleted(String result) {
         ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
     }
+
+
 }

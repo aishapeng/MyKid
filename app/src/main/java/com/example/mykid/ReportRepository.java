@@ -33,17 +33,6 @@ public class ReportRepository {
     public void update(Report report) {
         new updateAsyncTask(reportDao).execute(report);
     }
-//     public void update(String reportName, String location,String date, String time, String reporterName,int id){
-//        Report report= new Report();
-//        report.setReportId(id);
-//        report.setReportName(reportName);
-//        report.setReportLocation(location);
-//        report.setReportDate(date);
-//        report.setReportTime(time);
-//        report.setReporterName(reporterName);
-//
-//        new updateAsyncTask(reportDao).execute(report);
-//     }
 
     public void deleteAll() {
         new deleteAllAsyncTask(reportDao).execute();
