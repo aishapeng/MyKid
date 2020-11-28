@@ -123,7 +123,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 }
                 break;
             case R.id.completeBtn:
-                String activityName,location,date,time,reporter,id=null;
+                String activityName,location,date,time,reporter;
                 activityName=actNameEditTxt.getText().toString();
                 location=locationInputTxtView.getText().toString();
                 date=dateInputTxtView.getText().toString();
@@ -157,7 +157,13 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     location=null;
                 }
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
-                    Report report= new Report(activityName,location,date,time,reporter);//here also
+                    Report report= new Report();//here also
+                    report.setReportId(reportID);
+                    report.setReportName(activityName);
+                    report.setReportLocation(location);
+                    report.setReportDate(date);
+                    report.setReportTime(time);
+                    report.setReporterName(reporter);
                     reportViewModel.update(report);//here got problem
                     Intent intent = new Intent (getActivity(), MainActivity.class);
                     startActivity (intent);

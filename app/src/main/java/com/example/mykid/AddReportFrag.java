@@ -96,7 +96,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 getLocation(); //get user current location
                 break;
             case R.id.completeBtn:
-                String activityName,location,date,time,reporter,id=null;
+                String activityName,location,date,time,reporter;
                 activityName=actNameEditTxt.getText().toString();
                 location=locationInputTxtView.getText().toString();
                 date=dateInputTxtView.getText().toString();
