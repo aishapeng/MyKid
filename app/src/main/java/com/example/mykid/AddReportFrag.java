@@ -60,6 +60,9 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     private File photoFile;
     private Intent captureImageIntent;
     private static final int REQUEST_PHOTO = 1;
+    private Uri uri;
+    String uriStr;
+    Button removeImgBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +88,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
         Button locationBtn = view.findViewById(R.id.locationBtn);
         Button completeBtn=view.findViewById(R.id.completeBtn);
+        removeImgBtn=view.findViewById(R.id.removeImgBtn);
+        removeImgBtn.setOnClickListener(this);
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
@@ -107,7 +112,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
         //create the instance of file object
         photoFile = getPhotoFile();
-        PackageManager pm = getActivity().getPackageManager();
+        PackageManager pm = getContext().getPackageManager();
 
         //create the camera services
         captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -117,6 +122,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
         imageBtn.setEnabled(canTakePhoto);
         imageBtn.setOnClickListener(this);
+
+        removeImgBtn.setVisibility(View.GONE);
 
         return view;
     }
@@ -135,6 +142,40 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
             case R.id.locationBtn:
                 getLocation(); //get user current location
                 break;
+
+            case R.id.imageBtn:
+                    uri = FileProvider.getUriForFile(getActivity(),
+                            "com.example.mykid.fileprovider",
+                            photoFile);
+
+                    //check the file location
+                    Log.d("FILE-URI", uri.toString());
+
+                    //start launch the camera service with file path
+                    captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                    //We have to settle the permission problem
+                    //Check the return value from captureImageIntent
+
+                    List<ResolveInfo> cameraActivities =
+                            getActivity().getPackageManager().queryIntentActivities(captureImageIntent,
+                                    PackageManager.MATCH_DEFAULT_ONLY);
+                    //solve each activity
+                    for (ResolveInfo activity : cameraActivities) {
+                        getActivity().grantUriPermission(activity.activityInfo.packageName,
+                                uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    }
+
+                    //start the camera services
+                    startActivityForResult(captureImageIntent, REQUEST_PHOTO);
+                break;
+
+            case R.id.removeImgBtn:
+                imageView.setImageBitmap(null);
+                uri=null;
+                removeImgBtn.setVisibility(View.GONE);
+                break;
+
             case R.id.completeBtn:
                 activityName=actNameEditTxt.getText().toString();
                 location=locationInputTxtView.getText().toString();
@@ -168,19 +209,26 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 if(location.isEmpty()){
                     location=null;
                 }
+
+                if(uri==null){
+                    uriStr=null;
+                }else{
+                    uriStr=uri.toString();
+                }
+
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
                             .setMessage("Are you sure you want to add an activity with these details?\n" +
-                                        "Activity Name: " + activityName + "\n" +
-                                        "Location: " + location + "\n" +
-                                        "Date: " + date + "\n" +
-                                        "Time: " + time + "\n" +
-                                        "Reporter: " + reporter)
+                                    "Activity Name: " + activityName + "\n" +
+                                    "Location: " + location + "\n" +
+                                    "Date: " + date + "\n" +
+                                    "Time: " + time + "\n" +
+                                    "Reporter: " + reporter)
                             .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    Report report= new Report(activityName,location,date,time,reporter);
+                                    Report report= new Report(activityName,location,date,time,reporter, uriStr);
                                     reportViewModel.insert(report);
                                     Intent intent = new Intent (getActivity(), MainActivity.class);
                                     startActivity (intent);
@@ -190,37 +238,12 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                             .show();
                 }
 
-                //We start capture the image
-                if (view.getId() == R.id.imageBtn) {
-                    Uri uri = FileProvider.getUriForFile(getContext(),
-                            "com.example.camerademo.fileprovider",
-                            photoFile);
-
-                    //check the file location
-                    Log.d("FILE-URI", uri.toString());
-
-                    //start launch the camera service with file path
-                    captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-                    //We have to settle the permission problem
-                    //Check the return value from captureImageIntent
-
-                    List<ResolveInfo> cameraActivities =
-                            getActivity().getPackageManager().queryIntentActivities(captureImageIntent,
-                                    PackageManager.MATCH_DEFAULT_ONLY);
-                    //solve each activity
-                    for (ResolveInfo activity : cameraActivities) {
-                        getActivity().grantUriPermission(activity.activityInfo.packageName,
-                                uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                    }
-
-                    //start the camera services
-                    startActivityForResult(captureImageIntent, REQUEST_PHOTO);
-                }
             default:
                 break;
         }
     }
+
+
 
     public void processDatePickerResult(int year, int month, int day) {
         String month_string = Integer.toString(month + 1); // bc start from 0
@@ -299,7 +322,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         File fileDir = getActivity().getFilesDir();
         return new File(fileDir, getPhotoFileName());
     }
-
+//
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
@@ -310,10 +333,10 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
         if (requestCode == REQUEST_PHOTO) {
             //retrieve back the file from file system
-            Uri uri = FileProvider.getUriForFile(getContext(),
-                    "com.example.camerademo.fileprovider", photoFile);
+            uri = FileProvider.getUriForFile(getContext(),
+                    "com.example.mykid.fileprovider", photoFile);
 
-            getActivity().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            getContext().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             updatePhotoView();
         }
     }
@@ -326,6 +349,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
             Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
                     getActivity());
             imageView.setImageBitmap(bitmap);
+            removeImgBtn.setVisibility(View.VISIBLE);
         }
 
     }

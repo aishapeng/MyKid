@@ -58,6 +58,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                     arguments.putString("date",current.getReportDate());
                     arguments.putString("time",current.getReportTime());
                     arguments.putString("reporter",current.getReporterName());
+                    arguments.putString("image", current.getReportImage());
                     detailFragment.setArguments(arguments);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
                 }

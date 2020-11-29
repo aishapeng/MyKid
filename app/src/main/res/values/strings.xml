@@ -52,4 +52,6 @@
     <string name="report_details">Report Details</string>
     <string name="edit_report">Edit Report</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="image">Image :</string>
+    <string name="remove_current_image">Remove Current Image</string>
 </resources>

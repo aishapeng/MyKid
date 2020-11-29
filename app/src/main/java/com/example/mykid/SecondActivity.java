@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import static com.example.mykid.R.color.colorPrimaryDark;
+import static com.example.mykid.R.color.colorPrimary;
 
 
 public class SecondActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), colorPrimaryDark)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), colorPrimary)));
 
         Intent intent=getIntent();
         String message=intent.getStringExtra(MainActivity.EXTRA_MESSAGE);

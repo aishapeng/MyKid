@@ -1,6 +1,7 @@
 package com.example.mykid;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -15,16 +16,17 @@ public class Report{
     private String reportDate;
     private String reportTime;
     private String reporterName;
+    private String reportImage;
 
-    public Report(){
+    public Report(){ }
 
-    }
-    public Report(@NonNull String reportName, String reportLocation, @NonNull String reportDate, @NonNull String reportTime, @NonNull String reporterName) {
+    public Report(@NonNull String reportName, String reportLocation, @NonNull String reportDate, @NonNull String reportTime, @NonNull String reporterName, String reportImage) {
         this.reportName = reportName;
         this.reportLocation = reportLocation;
         this.reportDate = reportDate;
         this.reportTime = reportTime;
         this.reporterName = reporterName;
+        this.reportImage = reportImage;
     }
 
     public int getReportId() {
@@ -74,6 +76,10 @@ public class Report{
     public void setReporterName(String reporterName) {
         this.reporterName = reporterName;
     }
+
+    public String getReportImage() { return reportImage; }
+
+    public void setReportImage(String reportImage) { this.reportImage = reportImage; }
 
     public static Comparator<Report> name = new Comparator<Report>() {
         @Override

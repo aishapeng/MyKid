@@ -17,9 +17,9 @@ public interface ReportDao {
     @Delete
     void delete(Report report);
 
-    @Query("UPDATE Report SET reportName = :reportName, reportLocation = :reportLocation,reportDate = :reportDate, reportTime = :reportTime, reporterName = :reporterName " +
+    @Query("UPDATE Report SET reportName = :reportName, reportLocation = :reportLocation,reportDate = :reportDate, reportTime = :reportTime, reporterName = :reporterName , reportImage = :reportImage " +
             "WHERE reportId = :reportId")
-    void update(String reportName, String reportLocation, String reportDate, String reportTime, String reporterName,int reportId);
+    void update(String reportName, String reportLocation, String reportDate, String reportTime, String reporterName, String reportImage, int reportId);
 
     @Query("DELETE FROM Report")
     void deleteAll();

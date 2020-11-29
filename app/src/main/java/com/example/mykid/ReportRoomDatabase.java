@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Report.class}, version = 1, exportSchema = false)
+@Database(entities = {Report.class}, version = 2, exportSchema = false)
 public abstract class ReportRoomDatabase extends RoomDatabase {
     public abstract ReportDao activityDao();
 

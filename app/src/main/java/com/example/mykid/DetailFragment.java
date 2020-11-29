@@ -15,18 +15,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class DetailFragment extends Fragment implements View.OnClickListener {
 
-    private TextView activityNameTextView,locationInputTxtView,dateInputTxtView,timeInputTxtView,reporterNameTextView;
+    private TextView activityNameTextView,locationInputTxtView,dateInputTxtView,timeInputTxtView,reporterNameTextView,imageTxtView;
     private Button locationBtn,editBtn,deleteBtn;
     private ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter;
+    private String activityName,location,date,time,reporter,reportImage;
+    private ImageView imageView;
     private int reportID;
 
     @Override
@@ -42,6 +45,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         locationBtn = view.findViewById(R.id.locationBtn);
         deleteBtn=view.findViewById(R.id.deleteBtn);
         editBtn=view.findViewById(R.id.editBtn);
+        imageView = view.findViewById(R.id.imageView);
+        imageTxtView = view.findViewById(R.id.imageTxtView);
 
         Bundle bundle = this.getArguments();
         reportID = bundle.getInt("ReportID");
@@ -50,6 +55,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         date=bundle.getString("date");
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
+        reportImage = bundle.getString("image");
 
         activityNameTextView.setText(activityName);
         locationInputTxtView.setText(location);
@@ -59,9 +65,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
         if(location==null){
             locationBtn.setEnabled(false);
-        }
-        else{
+        } else{
             locationBtn.setOnClickListener(this);
+        }
+
+        if(reportImage==null){
+            imageTxtView.setVisibility(view.GONE);
+        }else{
+            Picasso.get().load(reportImage).into(imageView);
         }
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);

@@ -29,7 +29,7 @@
             android:id="@+id/dateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="216dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_date"
@@ -41,25 +41,13 @@
             android:id="@+id/timeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="208dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_time"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
-
-        <Button
-            android:id="@+id/imageBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="184dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Add Image"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
         <TextView
             android:id="@+id/asterisk3"
@@ -117,7 +105,7 @@
             android:id="@+id/timeTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="@string/time"
             android:textColor="@color/black"
@@ -155,7 +143,7 @@
             android:id="@+id/actDateTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="@string/date"
             android:textColor="@color/black"
@@ -180,7 +168,7 @@
             android:id="@+id/locationTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="@string/location"
             android:textColor="@color/black"
@@ -207,7 +195,7 @@
             android:id="@+id/locationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="140dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_location"
@@ -311,29 +299,30 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ImageTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/imageTxtView"
             app:layout_constraintVertical_bias="0.276"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/ImageTxtView"
+            android:id="@+id/imageTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            android:text="Image : "
+            android:text="@string/image"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/imageBtn"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
-    <TextView
+        <TextView
         android:id="@+id/AddTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -346,6 +335,29 @@
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="244dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            tools:ignore="ContentDescription" />
+
+        <Button
+            android:id="@+id/removeImgBtn"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="50dp"
+            android:background="@color/colorAccent"
+            android:text="@string/remove_current_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
