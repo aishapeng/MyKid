@@ -230,6 +230,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                                     reportViewModel.insert(report);
                                     Intent intent = new Intent (getActivity(), MainActivity.class);
                                     startActivity (intent);
+                                    getActivity().onBackPressed();
                                 }
                             })
                             .setNegativeButton("Cancel",null)

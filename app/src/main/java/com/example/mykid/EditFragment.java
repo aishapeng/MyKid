@@ -45,7 +45,7 @@ import java.util.UUID;
 
 public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCompleted, View.OnClickListener{
 
-    private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg,imageTxtView;;
+    private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg,imageTxtView;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
     private String activityName,location,date,time,reporter, selectedlocation;
@@ -289,9 +289,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 //                                    detailFragment.setArguments(arguments);
 //                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
 
-                                    Intent intent = new Intent (getActivity(), MainActivity.class);
-                                    //startActivity (intent);
-                                    getActivity().startActivity(intent);
+//                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+//                                    startActivity (intent);
+
+                                    //getActivity().startActivity(intent);
+                                    getActivity().onBackPressed();
 
                                 }
                             })

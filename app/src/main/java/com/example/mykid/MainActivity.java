@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         final AddReportFrag addReportFrag= new AddReportFrag();
-        final FrameLayout frameSec= findViewById(R.id.fragment_sec);
+
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
@@ -40,17 +40,19 @@ public class MainActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (frameSec.getVisibility()==View.VISIBLE){
-//                    FragmentManager manager=getSupportFragmentManager();
-//                    FragmentTransaction transaction=manager.beginTransaction();
-//                    transaction.replace(R.id.fragment_sec,addReportFrag).commit();
-//                    transaction.addToBackStack(null);
-//                }
-//                else{
+                FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
+
+                if (frameSec!=null && frameSec.getVisibility()==View.VISIBLE  ){
+                    FragmentManager manager=getSupportFragmentManager();
+                    FragmentTransaction transaction=manager.beginTransaction();
+                    transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
+                    //transaction.addToBackStack(null);
+                }
+                else{
                     Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
                     intent.putExtra("EXTRA_MESSAGE","add");
                     startActivity(intent);
-               //}
+               }
             }
         });
     }
