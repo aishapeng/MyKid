@@ -27,7 +27,7 @@ import java.util.List;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity  {
-    public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
+   // public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
 
     @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
-                intent.putExtra(EXTRA_MESSAGE,"add");
+                intent.putExtra("EXTRA_MESSAGE","add");
                 startActivity(intent);
 //                FragmentManager manager=getSupportFragmentManager();
 //                FragmentTransaction transaction=manager.beginTransaction();
@@ -82,34 +82,21 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-    public void openEditFragment (int reportID, String activityName, String location, String date, String time, String reporter){
-        Fragment frag = new EditFragment();
-        Bundle arguments = new Bundle();
-        arguments.putInt("ReportID", reportID);
-        arguments.putString("activityName", activityName);
-        arguments.putString("location",location);
-        arguments.putString("date",date);
-        arguments.putString("time",time);
-        arguments.putString("reporter",reporter);
-        frag.setArguments(arguments);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
-        transaction.addToBackStack(null);
-    }
-
-    public void openMap (String selectedLocation, String currentLocation, String editable) {
-        Fragment frag = new GoogleMapFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("currentLocation", currentLocation);
-        bundle.putString("selectedLocation", selectedLocation);
-        bundle.putString("editable", editable);
-        frag.setArguments(bundle);
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.fragment_main, frag).commit();
-        transaction.addToBackStack(null);
-    }
+//    public void openEditFragment (int reportID, String activityName, String location, String date, String time, String reporter){
+//        Fragment frag = new EditFragment();
+//        Bundle arguments = new Bundle();
+//        arguments.putInt("ReportID", reportID);
+//        arguments.putString("activityName", activityName);
+//        arguments.putString("location",location);
+//        arguments.putString("date",date);
+//        arguments.putString("time",time);
+//        arguments.putString("reporter",reporter);
+//        frag.setArguments(arguments);
+//        FragmentManager manager = getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
+//        transaction.addToBackStack(null);
+//    }
 
 
 }

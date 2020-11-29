@@ -321,7 +321,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         File fileDir = getActivity().getFilesDir();
         return new File(fileDir, getPhotoFileName());
     }
-//
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);

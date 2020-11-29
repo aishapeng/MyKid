@@ -32,6 +32,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     private ImageView imageView;
     private int reportID;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,7 +86,19 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.locationBtn:
-                ((MainActivity)getActivity()).openMap(location, null, "false");
+                FragmentManager manager = getParentFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+//                ((MainActivity)getActivity()).openMap(location, null, "false");
+//                public void openMap (String selectedLocation, String currentLocation, String editable) {
+                Fragment frag = new GoogleMapFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("currentLocation", location);
+                bundle.putString("selectedLocation", null);
+                bundle.putString("editable", "false");
+                frag.setArguments(bundle);
+                transaction.add(R.id.fragment_sec, frag).commit();
+                transaction.addToBackStack(null);
+            //}
                 break;
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
@@ -110,11 +123,20 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                         .show();
                 break;
             case R.id.editBtn:
+                EditFragment editFragment = new EditFragment();
 //                FragmentManager manager=getParentFragmentManager();
 //                FragmentTransaction transaction=manager.beginTransaction();
-//                transaction.replace(R.id.fragment_main,addReportFrag).commit();
-//                transaction.addToBackStack(null);
-                ((MainActivity)getActivity()).openEditFragment(reportID, activityName, location, date, time, reporter);
+                Bundle arguments = new Bundle();
+                arguments.putInt("ReportID", reportID);
+                arguments.putString("activityName", activityName);
+                arguments.putString("location",location);
+                arguments.putString("date",date);
+                arguments.putString("time",time);
+                arguments.putString("reporter",reporter);
+                editFragment.setArguments(arguments);
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).addToBackStack(null).commit();
+                //transaction.addToBackStack(null);
+//                ((MainActivity)getActivity()).openEditFragment(reportID, activityName, location, date, time, reporter);
                 break;
             default:
                 break;

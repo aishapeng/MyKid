@@ -124,7 +124,15 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if (location == null){
                     getLocation(); //get user current location
                 }else{
-                    ((MainActivity)getActivity()).openMap(location, null, "true");
+//                    ((MainActivity)getActivity()).openMap(location, null, "true");
+                    Fragment frag = new GoogleMapFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("currentLocation", location);
+                    bundle.putString("selectedLocation", null);
+                    bundle.putString("editable", "false");
+                    frag.setArguments(bundle);
+                    getParentFragmentManager().beginTransaction().add(R.id.fragment_sec, frag).addToBackStack(null).commit();
+                    //transaction.addToBackStack(null);
                 }
                 break;
             case R.id.completeBtn:
@@ -266,7 +274,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
     @Override
     public void onTaskCompleted(String result) {
-        ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
+//        ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
     }
 
 

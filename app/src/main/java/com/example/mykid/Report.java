@@ -5,10 +5,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 @Entity
-public class Report{
+public class Report implements Serializable {
     @PrimaryKey (autoGenerate = true)
     private int reportId;
     private String reportName;

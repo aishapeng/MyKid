@@ -5,7 +5,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +16,7 @@ import static com.example.mykid.R.color.colorPrimary;
 public class SecondActivity extends AppCompatActivity {
 
     AddReportFrag addReportFrag = new AddReportFrag();
+    DetailFragment detailFragment= new DetailFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +25,29 @@ public class SecondActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), colorPrimary)));
 
+        FragmentManager manager=getSupportFragmentManager();
+        FragmentTransaction transaction=manager.beginTransaction();
         Intent intent=getIntent();
-        String message=intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String message=intent.getStringExtra("EXTRA_MESSAGE");
 
         if(message.equals("add")){
-            FragmentManager manager=getSupportFragmentManager();
-            FragmentTransaction transaction=manager.beginTransaction();
+
             transaction.replace(R.id.fragment_sec,addReportFrag,"AddFrag").commit();
             //transaction.addToBackStack(null);
         }
-//        else if(message.equals("detail")){
-//
-//        }
+        else if(message.equals("detail")){
+            Report current = new Report();
+            current= (Report) intent.getSerializableExtra("Report");
+            Bundle arguments = new Bundle();
+            arguments.putInt("ReportID", current.getReportId());
+            arguments.putString("activityName",current.getReportName());
+            arguments.putString("location",current.getReportLocation());
+            arguments.putString("date",current.getReportDate());
+            arguments.putString("time",current.getReportTime());
+            arguments.putString("reporter",current.getReporterName());
+            detailFragment.setArguments(arguments);
+            transaction.replace(R.id.fragment_sec,detailFragment).commit();
+        }
 
     }
 
@@ -50,4 +61,5 @@ public class SecondActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_sec, frag).commit();
         transaction.addToBackStack(null);
     }
+
 }

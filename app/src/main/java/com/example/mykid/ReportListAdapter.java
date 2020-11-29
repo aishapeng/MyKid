@@ -3,6 +3,7 @@ package com.example.mykid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,18 +50,23 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppCompatActivity activity= (AppCompatActivity)view.getContext();
-                    DetailFragment detailFragment= new DetailFragment();
-                    Bundle arguments = new Bundle();
-                    arguments.putInt("ReportID", current.getReportId());
-                    arguments.putString("activityName",current.getReportName());
-                    arguments.putString("location",current.getReportLocation());
-                    arguments.putString("date",current.getReportDate());
-                    arguments.putString("time",current.getReportTime());
-                    arguments.putString("reporter",current.getReporterName());
-                    arguments.putString("image", current.getReportImage());
-                    detailFragment.setArguments(arguments);
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+//                    AppCompatActivity activity= (AppCompatActivity)view.getContext();
+//                    DetailFragment detailFragment= new DetailFragment();
+//                    Bundle arguments = new Bundle();
+//                    arguments.putInt("ReportID", current.getReportId());
+//                    arguments.putString("activityName",current.getReportName());
+//                    arguments.putString("location",current.getReportLocation());
+//                    arguments.putString("date",current.getReportDate());
+//                    arguments.putString("time",current.getReportTime());
+//                    arguments.putString("reporter",current.getReporterName());
+//                    arguments.putString("image", current.getReportImage());
+//                    detailFragment.setArguments(arguments);
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+                    Intent intent = new Intent(view.getContext(),SecondActivity.class);
+                    intent.putExtra("Report",  current);
+                    intent.putExtra("EXTRA_MESSAGE","detail");
+                    view.getContext().startActivity(intent);
+
                 }
             });
 
