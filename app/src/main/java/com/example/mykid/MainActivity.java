@@ -14,11 +14,13 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 
 public class MainActivity extends AppCompatActivity  {
    // public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity  {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final AddReportFrag addReportFrag= new AddReportFrag();
+        final FrameLayout frameSec= findViewById(R.id.fragment_sec);
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
@@ -36,13 +40,17 @@ public class MainActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
-                intent.putExtra("EXTRA_MESSAGE","add");
-                startActivity(intent);
-//                FragmentManager manager=getSupportFragmentManager();
-//                FragmentTransaction transaction=manager.beginTransaction();
-//                transaction.replace(R.id.fragment_main,addReportFrag).commit();
-//                transaction.addToBackStack(null);
+//                if (frameSec.getVisibility()==View.VISIBLE){
+//                    FragmentManager manager=getSupportFragmentManager();
+//                    FragmentTransaction transaction=manager.beginTransaction();
+//                    transaction.replace(R.id.fragment_sec,addReportFrag).commit();
+//                    transaction.addToBackStack(null);
+//                }
+//                else{
+                    Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+                    intent.putExtra("EXTRA_MESSAGE","add");
+                    startActivity(intent);
+               //}
             }
         });
     }

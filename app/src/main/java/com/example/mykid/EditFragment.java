@@ -3,6 +3,7 @@ package com.example.mykid;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -186,20 +187,21 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReporterName(newreporter);
                                     reportViewModel.update(report);
 
-                                    AppCompatActivity activity= (AppCompatActivity)getContext();
-                                    DetailFragment detailFragment= new DetailFragment();
-                                    Bundle arguments = new Bundle();
-                                    arguments.putInt("ReportID", report.getReportId());
-                                    arguments.putString("activityName",report.getReportName());
-                                    arguments.putString("location",report.getReportLocation());
-                                    arguments.putString("date",report.getReportDate());
-                                    arguments.putString("time",report.getReportTime());
-                                    arguments.putString("reporter",report.getReporterName());
-                                    detailFragment.setArguments(arguments);
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
+//                                    AppCompatActivity activity= (AppCompatActivity)getContext();
+//                                    DetailFragment detailFragment= new DetailFragment();
+//                                    Bundle arguments = new Bundle();
+//                                    arguments.putInt("ReportID", report.getReportId());
+//                                    arguments.putString("activityName",report.getReportName());
+//                                    arguments.putString("location",report.getReportLocation());
+//                                    arguments.putString("date",report.getReportDate());
+//                                    arguments.putString("time",report.getReportTime());
+//                                    arguments.putString("reporter",report.getReporterName());
+//                                    detailFragment.setArguments(arguments);
+//                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
 
-//                                    Intent intent = new Intent (getActivity(), MainActivity.class);
-//                                    startActivity (intent);
+                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+                                    //startActivity (intent);
+                                    getActivity().startActivity(intent);
 
                                 }
                             })

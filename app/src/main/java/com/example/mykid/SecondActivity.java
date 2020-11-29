@@ -30,6 +30,7 @@ public class SecondActivity extends AppCompatActivity {
         String message=intent.getStringExtra("EXTRA_MESSAGE");
 
         if(message.equals("add")){
+
             transaction.replace(R.id.fragment_sec,addReportFrag,"AddFrag").commit();
         }
         else if(message.equals("detail")){
@@ -43,6 +44,7 @@ public class SecondActivity extends AppCompatActivity {
             arguments.putString("time",current.getReportTime());
             arguments.putString("reporter",current.getReporterName());
             detailFragment.setArguments(arguments);
+
             transaction.replace(R.id.fragment_sec,detailFragment).commit();
         }
 
