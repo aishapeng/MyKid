@@ -295,7 +295,15 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 //                                    startActivity (intent);
 
                                     //getActivity().startActivity(intent);
-                                    getActivity().onBackPressed();
+                                    if(MainActivity.DUAL_FRAME){
+                                        Intent intent = new Intent (getActivity(), MainActivity.class);
+                                        startActivity (intent);
+                                        //getActivity().onBackPressed();
+                                    }
+                                    else{
+                                        getActivity().onBackPressed();
+                                    }
+
 
                                 }
                             })

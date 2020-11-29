@@ -120,10 +120,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                         .show();
                 break;
             case R.id.editBtn:
-
                 EditFragment editFragment = new EditFragment();
-//                FragmentManager fragmentManager=getParentFragmentManager();
-//                FragmentTransaction transaction=manager.beginTransaction();
                 Bundle arguments = new Bundle();
                 arguments.putInt("ReportID", reportID);
                 arguments.putString("activityName", activityName);
@@ -133,9 +130,13 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("reporter",reporter);
                 arguments.putString("image",reportImage);
                 editFragment.setArguments(arguments);
-//                fragmentManager.popBackStack();
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
-                //transaction.addToBackStack(null);
+
+                if(MainActivity.DUAL_FRAME){
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).addToBackStack(null).commit();
+                }
+                else {
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
+                }
 //                ((MainActivity)getActivity()).openEditFragment(reportID, activityName, location, date, time, reporter);
 
                 break;

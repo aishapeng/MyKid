@@ -65,7 +65,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                     arguments.putString("reporter",current.getReporterName());
                     arguments.putString("image", current.getReportImage());
                     detailFragment.setArguments(arguments);
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,detailFragment).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,detailFragment).commit();
                     }
                     else{
                         Intent intent = new Intent(view.getContext(),SecondActivity.class);
