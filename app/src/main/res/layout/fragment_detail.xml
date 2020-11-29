@@ -15,13 +15,13 @@
             android:id="@+id/activityNameTextView"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="12dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actNameTxtView" />
 
@@ -29,13 +29,13 @@
             android:id="@+id/reporterNameTextView"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView" />
 
@@ -43,12 +43,11 @@
             android:id="@+id/reporterNameTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="28dp"
             android:text="@string/reporter_name"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
@@ -56,12 +55,11 @@
             android:id="@+id/timeTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="24dp"
             android:text="@string/time"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
@@ -69,12 +67,11 @@
             android:id="@+id/actDateTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="28dp"
             android:text="@string/date"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
@@ -82,12 +79,11 @@
             android:id="@+id/actNameTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/activity_name"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -95,12 +91,11 @@
             android:id="@+id/locationTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="28dp"
             android:text="@string/location"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activityNameTextView" />
 
@@ -119,13 +114,13 @@
             android:id="@+id/locationInputTxtView"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
 
@@ -133,13 +128,13 @@
             android:id="@+id/dateInputTxtView"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="16dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/actDateTxtView" />
 
@@ -147,13 +142,13 @@
             android:id="@+id/timeInputTxtView"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="16dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeTxtView" />
 
@@ -191,7 +186,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintHorizontal_bias="0.21"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,12 +207,11 @@
             android:id="@+id/imageTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="47dp"
             android:layout_marginTop="28dp"
             android:text="@string/image"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.096"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameTextView" />
 

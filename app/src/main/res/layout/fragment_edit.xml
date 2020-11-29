@@ -13,14 +13,13 @@
 
     <EditText
         android:id="@+id/actNameEditTxt"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/enter_activity_name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
         tools:ignore="Autofill" />
@@ -29,47 +28,45 @@
         android:id="@+id/dateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="188dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/change_date"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/actDateTxtView"
         app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
     <Button
         android:id="@+id/timeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="184dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/change_time"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/timeTxtView"
         app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
     <TextView
         android:id="@+id/asterisk3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="28dp"
         android:text="@string/asterisk"
         android:textColor="@color/design_default_color_error"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/timeTxtView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
     <EditText
         android:id="@+id/reporterNameEditTxt"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.655"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
         tools:ignore="Autofill" />
@@ -92,11 +89,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="232dp"
         android:text="@string/reporter_name"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/asterisk4"
         app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
     <TextView
@@ -104,23 +100,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/time"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/timeBtn"
+        app:layout_constraintStart_toEndOf="@+id/asterisk3"
         app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
 
     <TextView
         android:id="@+id/asterisk4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="28dp"
         android:text="@string/asterisk"
         android:textColor="@color/design_default_color_error"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/reporterNameTxtView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
@@ -128,12 +122,11 @@
         android:id="@+id/asterisk2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="28dp"
         android:text="@string/asterisk"
         android:textColor="@color/design_default_color_error"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/actDateTxtView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
@@ -142,11 +135,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/date"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/dateBtn"
+        app:layout_constraintStart_toEndOf="@+id/asterisk2"
         app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
     <TextView
@@ -154,24 +146,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="244dp"
         android:text="@string/activity_name"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/asterisk1"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/locationTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/location"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/locationBtn"
-        app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
@@ -179,12 +168,11 @@
         android:id="@+id/asterisk1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="16dp"
         android:text="@string/asterisk"
         android:textColor="@color/design_default_color_error"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/actNameTxtView"
-        app:layout_constraintHorizontal_bias="0.974"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -192,17 +180,18 @@
         android:id="@+id/locationBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="120dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/change_location"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/locationTxtView"
         app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
     <TextView
         android:id="@+id/locationInputTxtView"
-        android:layout_width="350dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -210,15 +199,14 @@
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
 
     <TextView
         android:id="@+id/dateInputTxtView"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -226,15 +214,14 @@
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
 
     <TextView
         android:id="@+id/timeInputTxtView"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="8dp"
         android:background="?attr/editTextBackground"
         android:gravity="center_vertical"
@@ -242,8 +229,6 @@
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeBtn" />
 
@@ -251,7 +236,7 @@
         android:id="@+id/actErrorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="55dp"
         android:text="@string/please_enter_activity_name"
         android:textColor="@color/design_default_color_error"
         android:visibility="invisible"
@@ -262,7 +247,7 @@
         android:id="@+id/dateErrorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="55dp"
         android:text="@string/please_pick_a_date"
         android:textColor="@color/design_default_color_error"
         android:visibility="invisible"
@@ -273,7 +258,7 @@
         android:id="@+id/timeErrorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="55dp"
         android:text="@string/please_pick_a_time"
         android:textColor="@color/design_default_color_error"
         android:visibility="invisible"
@@ -284,10 +269,10 @@
         android:id="@+id/reporterErrorMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="55dp"
         android:text="@string/please_enter_reporter_name"
-        android:visibility="invisible"
         android:textColor="@color/design_default_color_error"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
@@ -301,7 +286,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -326,7 +311,7 @@
         android:id="@+id/imageTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="55dp"
         android:layout_marginTop="32dp"
         android:text="@string/image"
         android:textColor="@color/black"
@@ -356,6 +341,15 @@
         android:text="@string/remove_current_image"
         app:layout_constraintStart_toEndOf="@+id/imageBtn"
         app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="29dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/material_on_surface_stroke"
+        app:layout_constraintStart_toEndOf="@+id/locationInputTxtView"
+        app:layout_constraintTop_toBottomOf="@+id/locationBtn"
+        app:srcCompat="@drawable/ic_baseline_cancel_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
