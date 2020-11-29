@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/activityNameTextView"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="?attr/editTextBackground"
@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/reporterNameTextView"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
@@ -117,7 +117,7 @@
 
         <TextView
             android:id="@+id/locationInputTxtView"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
@@ -131,7 +131,7 @@
 
         <TextView
             android:id="@+id/dateInputTxtView"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="?attr/editTextBackground"
@@ -145,7 +145,7 @@
 
         <TextView
             android:id="@+id/timeInputTxtView"
-            android:layout_width="350dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="?attr/editTextBackground"

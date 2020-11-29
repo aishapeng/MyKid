@@ -21,7 +21,7 @@ import android.widget.FrameLayout;
 public class MainActivity extends AppCompatActivity  {
    // public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-
+    public static boolean DUAL_FRAME=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         final AddReportFrag addReportFrag= new AddReportFrag();
-
+        FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
+        DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
@@ -41,9 +42,8 @@ public class MainActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
 
-                if (frameSec!=null && frameSec.getVisibility()==View.VISIBLE  ){
+                if (DUAL_FRAME){
                     FragmentManager manager=getSupportFragmentManager();
                     FragmentTransaction transaction=manager.beginTransaction();
                     transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();

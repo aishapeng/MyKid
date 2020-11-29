@@ -48,9 +48,10 @@
 
     <FrameLayout
         android:id="@+id/fragment_mainSec"
-        android:layout_width="385dp"
-        android:layout_height="359dp"
+        android:layout_width="376dp"
+        android:layout_height="361dp"
         android:layout_marginTop="2dp"
+        android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,22 +51,30 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    AppCompatActivity activity= (AppCompatActivity)view.getContext();
-//                    DetailFragment detailFragment= new DetailFragment();
-//                    Bundle arguments = new Bundle();
-//                    arguments.putInt("ReportID", current.getReportId());
-//                    arguments.putString("activityName",current.getReportName());
-//                    arguments.putString("location",current.getReportLocation());
-//                    arguments.putString("date",current.getReportDate());
-//                    arguments.putString("time",current.getReportTime());
-//                    arguments.putString("reporter",current.getReporterName());
-//                    arguments.putString("image", current.getReportImage());
-//                    detailFragment.setArguments(arguments);
-//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
-                    Intent intent = new Intent(view.getContext(),SecondActivity.class);
-                    intent.putExtra("Report",  current);
-                    intent.putExtra("EXTRA_MESSAGE","detail");
-                    view.getContext().startActivity(intent);
+
+
+                    if(MainActivity.DUAL_FRAME){
+                        AppCompatActivity activity= (AppCompatActivity)view.getContext();
+                    DetailFragment detailFragment= new DetailFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt("ReportID", current.getReportId());
+                    arguments.putString("activityName",current.getReportName());
+                    arguments.putString("location",current.getReportLocation());
+                    arguments.putString("date",current.getReportDate());
+                    arguments.putString("time",current.getReportTime());
+                    arguments.putString("reporter",current.getReporterName());
+                    arguments.putString("image", current.getReportImage());
+                    detailFragment.setArguments(arguments);
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,detailFragment).addToBackStack(null).commit();
+                    }
+                    else{
+                        Intent intent = new Intent(view.getContext(),SecondActivity.class);
+                        intent.putExtra("Report",  current);
+                        intent.putExtra("EXTRA_MESSAGE","detail");
+                        view.getContext().startActivity(intent);
+
+                    }
+
 
                 }
             });
