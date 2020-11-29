@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.View;
 
@@ -74,7 +75,9 @@ public class MainActivity extends AppCompatActivity  {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_darkMode) {
+        if (id == R.id.action_DeleteAll) {
+            ReportViewModel reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
+            reportViewModel.deleteAll();
             return true;
         }
 

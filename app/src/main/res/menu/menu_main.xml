@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mykid.MainActivity">
     <item
-        android:id="@+id/action_darkMode"
+        android:id="@+id/action_DeleteAll"
         android:orderInCategory="100"
-        android:title="@string/dark_mode"
+        android:title="@string/deleteall"
         app:showAsAction="never" />
 
     <item
