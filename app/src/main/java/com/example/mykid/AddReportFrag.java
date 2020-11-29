@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -46,11 +47,10 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter;
+    private String activityName,location,date,time,reporter,result;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
-    String result;
 
     private UUID id;
     private ImageButton imageBtn;
@@ -347,6 +347,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
             Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
                     getActivity());
             imageView.setImageBitmap(bitmap);
+
+            //Picasso.get().load(uri).into(imageView);
             removeImgBtn.setVisibility(View.VISIBLE);
         }
 

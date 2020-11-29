@@ -43,6 +43,7 @@ public class SecondActivity extends AppCompatActivity {
             arguments.putString("date",current.getReportDate());
             arguments.putString("time",current.getReportTime());
             arguments.putString("reporter",current.getReporterName());
+            arguments.putString("image", current.getReportImage());
             detailFragment.setArguments(arguments);
 
             transaction.replace(R.id.fragment_sec,detailFragment).commit();

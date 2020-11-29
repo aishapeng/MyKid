@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
         reportImage = bundle.getString("image");
+        Log.d("details image: ", "i"+ reportImage);
 
         activityNameTextView.setText(activityName);
         locationInputTxtView.setText(location);
@@ -70,6 +72,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         }else{
             Picasso.get().load(reportImage).into(imageView);
         }
+
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
 
@@ -128,6 +131,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("date",date);
                 arguments.putString("time",time);
                 arguments.putString("reporter",reporter);
+                arguments.putString("image",reportImage);
                 editFragment.setArguments(arguments);
                 getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).addToBackStack(null).commit();
                 //transaction.addToBackStack(null);

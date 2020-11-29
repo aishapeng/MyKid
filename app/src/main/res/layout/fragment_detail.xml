@@ -204,7 +204,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageTxtView"
             tools:srcCompat="@tools:sample/avatars"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            android:adjustViewBounds="true"
+            android:padding="15dp" />
 
         <TextView
             android:id="@+id/imageTxtView"

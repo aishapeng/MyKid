@@ -1,45 +1,69 @@
 package com.example.mykid;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
 public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCompleted, View.OnClickListener{
 
-    private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
+    private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg,imageTxtView;;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
     private String activityName,location,date,time,reporter, selectedlocation;
     private int reportID;
-    private String newactivityName,newlocation,newdate,newtime,newreporter;
+    private String newactivityName,newlocation,newdate,newtime,newreporter,reportImage;
+    private ImageView imageView;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
+
+    private UUID id;
+    private ImageButton imageBtn;
+    private File photoFile;
+    private Intent captureImageIntent;
+    private static final int REQUEST_PHOTO = 1;
+    private Uri uri;
+    String uriStr;
+    Button removeImgBtn;
 
     public EditFragment() {
         // Required empty public constructor
@@ -59,6 +83,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
         actNameEditTxt= view.findViewById(R.id.actNameEditTxt);
+        imageTxtView = view.findViewById(R.id.imageTxtView);
         reporterNameEditTxt=view.findViewById(R.id.reporterNameEditTxt);
         locationInputTxtView=view.findViewById(R.id.locationInputTxtView);
         actErrorMsg=view.findViewById(R.id.actErrorMsg);
@@ -70,6 +95,9 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         Button addTimeBtn = view.findViewById(R.id.timeBtn);
         Button locationBtn = view.findViewById(R.id.locationBtn);
         Button completeBtn=view.findViewById(R.id.completeBtn);
+        imageBtn = view.findViewById(R.id.imageBtn);
+        removeImgBtn=view.findViewById(R.id.removeImgBtn);
+        imageView = view.findViewById(R.id.imageView);
 
         Bundle bundle = this.getArguments();
         reportID = bundle.getInt("ReportID");
@@ -78,6 +106,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         date=bundle.getString("date");
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
+        reportImage = bundle.getString("image");
 
         actNameEditTxt.setText(activityName);
         locationInputTxtView.setText(location);
@@ -89,6 +118,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
+        removeImgBtn.setOnClickListener(this);
 
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -102,6 +132,25 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 // Do something with the result
             }
         });
+
+        //create the instance of file object
+        photoFile = getPhotoFile();
+        PackageManager pm = getContext().getPackageManager();
+
+        //create the camera services
+        captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = photoFile != null &&
+                captureImageIntent.resolveActivity(pm) != null;
+
+        imageBtn.setEnabled(canTakePhoto);
+        imageBtn.setOnClickListener(this);
+
+        if(reportImage == null) {
+            removeImgBtn.setVisibility(View.GONE);
+        }else{
+            Picasso.get().load(reportImage).into(imageView);
+        }
 
         return view;
     }
@@ -133,6 +182,41 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     //transaction.addToBackStack(null);
                 }
                 break;
+
+            case R.id.imageBtn:
+                uri = FileProvider.getUriForFile(getActivity(),
+                        "com.example.mykid.fileprovider",
+                        photoFile);
+
+                //check the file location
+                Log.d("FILE-URI", uri.toString());
+
+                //start launch the camera service with file path
+                captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+                //We have to settle the permission problem
+                //Check the return value from captureImageIntent
+
+                List<ResolveInfo> cameraActivities =
+                        getActivity().getPackageManager().queryIntentActivities(captureImageIntent,
+                                PackageManager.MATCH_DEFAULT_ONLY);
+                //solve each activity
+                for (ResolveInfo activity : cameraActivities) {
+                    getActivity().grantUriPermission(activity.activityInfo.packageName,
+                            uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                }
+
+                //start the camera services
+                startActivityForResult(captureImageIntent, REQUEST_PHOTO);
+                break;
+
+            case R.id.removeImgBtn:
+                imageView.setImageBitmap(null);
+                uri=null;
+                removeImgBtn.setVisibility(View.GONE);
+                break;
+
+
             case R.id.completeBtn:
                 newactivityName=actNameEditTxt.getText().toString();
                 newlocation=locationInputTxtView.getText().toString();
@@ -166,6 +250,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if(newlocation.isEmpty()){
                     newlocation=null;
                 }
+                if(uri==null){
+                    uriStr=null;
+                }else{
+                    uriStr=uri.toString();
+                }
                 if(!newactivityName.isEmpty() && !newdate.isEmpty() &&!newtime.isEmpty() && !newreporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
@@ -185,6 +274,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReportDate(newdate);
                                     report.setReportTime(newtime);
                                     report.setReporterName(newreporter);
+                                    report.setReportImage(uriStr);
                                     reportViewModel.update(report);
 
 //                                    AppCompatActivity activity= (AppCompatActivity)getContext();
@@ -274,6 +364,56 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     @Override
     public void onTaskCompleted(String result) {
 //        ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
+    }
+
+    //setup methods to get file name and file location
+    public String getPhotoFileName() {
+        String fileName="";
+        id = UUID.randomUUID();
+
+        fileName = "IMG_" + id.toString() + ".jpg";
+        Log.d("FILE", fileName);
+        return fileName;
+    }
+
+    //get the file path
+    public File getPhotoFile() {
+        //construct the file object
+        File fileDir = getActivity().getFilesDir();
+        return new File(fileDir, getPhotoFileName());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        //other implementation
+
+        if (resultCode != Activity.RESULT_OK)
+            return;
+
+        if (requestCode == REQUEST_PHOTO) {
+            //retrieve back the file from file system
+            uri = FileProvider.getUriForFile(getContext(),
+                    "com.example.mykid.fileprovider", photoFile);
+
+            getContext().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            updatePhotoView();
+        }
+    }
+
+    private void updatePhotoView() {
+        if (photoFile == null || !photoFile.exists())
+            imageBtn.setImageDrawable(null);
+        else
+        {
+            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
+                    getActivity());
+            imageView.setImageBitmap(bitmap);
+
+            //Picasso.get().load(uri).into(imageView);
+            removeImgBtn.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
