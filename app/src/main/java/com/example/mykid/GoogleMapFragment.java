@@ -40,7 +40,6 @@ import static android.app.Activity.RESULT_OK;
 public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     com.google.android.gms.maps.GoogleMap map;
     SupportMapFragment mapFragment;
-    //SearchView searchView;
     EditText editText;
     Button selectBtn;
     Marker marker;
@@ -56,11 +55,9 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_google_map, container, false);
-        //searchView = view.findViewById(R.id.sv_location);
         editText = view.findViewById(R.id.edit_txt);
         selectBtn=view.findViewById(R.id.selectBtn);
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
-        //return view;
 
         //Initialize places
         Places.initialize(getContext(), "AIzaSyBvCp2gr6SrB9TAfZhrAVlLMbpb81fKrNg");

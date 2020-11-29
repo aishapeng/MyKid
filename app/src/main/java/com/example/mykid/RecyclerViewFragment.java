@@ -1,8 +1,6 @@
 package com.example.mykid;
 
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -18,30 +16,25 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
-
 
 public class RecyclerViewFragment extends Fragment {
 
     private ReportViewModel reportViewModel;
     private RecyclerView recyclerView;
     private ReportListAdapter adapter;
-    private static final String TAG = "RecyclerView Fragment - ";
+
     public RecyclerViewFragment() {
 
         // Required empty public constructor

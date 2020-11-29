@@ -5,8 +5,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
-
 import java.util.List;
 
 @Dao
@@ -26,8 +24,5 @@ public interface ReportDao {
 
     @Query("SELECT * from Report ORDER BY reportDate DESC")
     LiveData<List<Report>> getAllReport();
-
-//    @Query("SELECT * FROM Report WHERE reportId = :id")
-//    Report loadReport(int id);
 
 }

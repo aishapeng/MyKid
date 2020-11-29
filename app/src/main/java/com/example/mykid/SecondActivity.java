@@ -22,7 +22,6 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), colorPrimary)));
 
         FragmentManager manager=getSupportFragmentManager();
@@ -31,12 +30,10 @@ public class SecondActivity extends AppCompatActivity {
         String message=intent.getStringExtra("EXTRA_MESSAGE");
 
         if(message.equals("add")){
-
             transaction.replace(R.id.fragment_sec,addReportFrag,"AddFrag").commit();
-            //transaction.addToBackStack(null);
         }
         else if(message.equals("detail")){
-            Report current = new Report();
+            Report current ;
             current= (Report) intent.getSerializableExtra("Report");
             Bundle arguments = new Bundle();
             arguments.putInt("ReportID", current.getReportId());

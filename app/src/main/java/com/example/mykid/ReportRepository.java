@@ -1,10 +1,7 @@
 package com.example.mykid;
 
 import android.app.Application;
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 public class ReportRepository {

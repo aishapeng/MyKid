@@ -4,27 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.List;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity  {
    // public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
@@ -40,9 +30,7 @@ public class MainActivity extends AppCompatActivity  {
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
-        //transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
         transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
-        //transaction.addToBackStack(null);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -81,22 +69,6 @@ public class MainActivity extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void openEditFragment (int reportID, String activityName, String location, String date, String time, String reporter){
-//        Fragment frag = new EditFragment();
-//        Bundle arguments = new Bundle();
-//        arguments.putInt("ReportID", reportID);
-//        arguments.putString("activityName", activityName);
-//        arguments.putString("location",location);
-//        arguments.putString("date",date);
-//        arguments.putString("time",time);
-//        arguments.putString("reporter",reporter);
-//        frag.setArguments(arguments);
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.replace(R.id.fragment_main, frag,"EditFrag").commit();
-//        transaction.addToBackStack(null);
-//    }
 
 
 }

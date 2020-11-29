@@ -1,7 +1,6 @@
 package com.example.mykid;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -352,6 +351,5 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         }
 
     }
-
 
 }
