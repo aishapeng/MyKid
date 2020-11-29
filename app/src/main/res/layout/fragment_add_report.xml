@@ -293,7 +293,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageTxtView"
             app:layout_constraintVertical_bias="0.276"
             tools:ignore="ContentDescription"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:padding="15dp"/>
 
         <TextView
             android:id="@+id/imageTxtView"
@@ -342,7 +343,6 @@
             android:text="@string/remove_current_image"
             app:layout_constraintStart_toEndOf="@+id/imageBtn"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

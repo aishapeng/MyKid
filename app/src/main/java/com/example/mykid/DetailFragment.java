@@ -85,16 +85,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             case R.id.locationBtn:
                 FragmentManager manager = getParentFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-//                ((MainActivity)getActivity()).openMap(location, null, "false");
+                ((SecondActivity)getActivity()).openMap(null, location, "false");
 //                public void openMap (String selectedLocation, String currentLocation, String editable) {
-                Fragment frag = new GoogleMapFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("currentLocation", location);
-                bundle.putString("selectedLocation", null);
-                bundle.putString("editable", "false");
-                frag.setArguments(bundle);
-                transaction.add(R.id.fragment_sec, frag).commit();
-                transaction.addToBackStack(null);
+//                Fragment frag = new GoogleMapFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("currentLocation", location);
+//                bundle.putString("selectedLocation", null);
+//                bundle.putString("editable", "false");
+//                frag.setArguments(bundle);
+//                transaction.add(R.id.fragment_sec, frag).commit();
+//                transaction.addToBackStack(null);
             //}
                 break;
             case R.id.deleteBtn:

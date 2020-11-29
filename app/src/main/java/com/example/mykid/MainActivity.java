@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -80,5 +81,16 @@ public class MainActivity extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void openMap (String currentLocation, String selectedLocation, String editable) {
+        Fragment frag = new GoogleMapFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("currentLocation", currentLocation);
+        bundle.putString("selectedLocation", selectedLocation);
+        bundle.putString("editable", editable);
+        frag.setArguments(bundle);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_sec, frag).commit();
+        transaction.addToBackStack(null);
+    }
 }

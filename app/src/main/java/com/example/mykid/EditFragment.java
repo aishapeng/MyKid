@@ -171,15 +171,15 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if (location == null){
                     getLocation(); //get user current location
                 }else{
-//                    ((MainActivity)getActivity()).openMap(location, null, "true");
-                    Fragment frag = new GoogleMapFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("currentLocation", location);
-                    bundle.putString("selectedLocation", null);
-                    bundle.putString("editable", "false");
-                    frag.setArguments(bundle);
-                    getParentFragmentManager().beginTransaction().add(R.id.fragment_sec, frag).addToBackStack(null).commit();
-                    //transaction.addToBackStack(null);
+                    ((SecondActivity)getActivity()).openMap(null, location, "true");
+//                    Fragment frag = new GoogleMapFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("currentLocation", location);
+//                    bundle.putString("selectedLocation", null);
+//                    bundle.putString("editable", "false");
+//                    frag.setArguments(bundle);
+//                    getParentFragmentManager().beginTransaction().add(R.id.fragment_sec, frag).addToBackStack(null).commit();
+//                    //transaction.addToBackStack(null);
                 }
                 break;
 
@@ -214,6 +214,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 imageView.setImageBitmap(null);
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
+                Log.d("removeImage: ", ""+ uri);
                 break;
 
 
@@ -255,6 +256,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 }else{
                     uriStr=uri.toString();
                 }
+                Log.d("removeImage: uristr ", ""+ uriStr);
                 if(!newactivityName.isEmpty() && !newdate.isEmpty() &&!newtime.isEmpty() && !newreporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
@@ -300,6 +302,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                             .setNegativeButton("Cancel",null)
                             .show();
                 }
+                break;
             default:
                 break;
         }
@@ -365,7 +368,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
     @Override
     public void onTaskCompleted(String result) {
-//        ((MainActivity)getActivity()).openMap(null, result,"true"); //open google map
+        ((SecondActivity)getActivity()).openMap(result, null,"true"); //open google map
     }
 
     //setup methods to get file name and file location

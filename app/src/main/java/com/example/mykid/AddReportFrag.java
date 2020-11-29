@@ -172,6 +172,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 imageView.setImageBitmap(null);
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
+                Log.d("removeImage_add: ", "Uri"+ uri);
                 break;
 
             case R.id.completeBtn:
@@ -213,7 +214,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 }else{
                     uriStr=uri.toString();
                 }
-
+                Log.d("removeImage_add: ", "UriStr"+ uriStr);
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
@@ -302,7 +303,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     @Override
     public void onTaskCompleted(String result) {
-        ((SecondActivity)getActivity()).openMap(result); //open google map
+        ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
     }
 
     //setup methods to get file name and file location
