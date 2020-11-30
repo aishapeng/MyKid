@@ -34,7 +34,6 @@ public class SecondActivity extends AppCompatActivity {
 
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
             finish();
             //onBackPressed();
 //            Log.d("check",message);

@@ -25,9 +25,7 @@
             android:text="@string/report_details"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-             />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/actNameTxtView"
