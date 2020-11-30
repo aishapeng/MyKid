@@ -216,22 +216,31 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 if(location.isEmpty()){
                     location=null;
                 }
-
+                String attached;
                 if(uri==null){
                     uriStr=null;
+                    attached = "No image taken";
                 }else{
                     uriStr=uri.toString();
+                    attached = "Attached";
                 }
                 Log.d("removeImage_add: ", "UriStr"+ uriStr);
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
                             .setMessage("Are you sure you want to add an activity with these details?\n" +
-                                    "Activity Name: " + activityName + "\n" +
-                                    "Location: " + location + "\n" +
-                                    "Date: " + date + "\n" +
-                                    "Time: " + time + "\n" +
-                                    "Reporter: " + reporter)
+                                    "\n" +
+                                    "Activity Name : " + activityName + "\n" +
+                                    "\n" +
+                                    "Location : " + location + "\n" +
+                                    "\n" +
+                                    "Date : " + date + "\n" +
+                                    "\n" +
+                                    "Time : " + time + "\n" +
+                                    "\n" +
+                                    "Reporter : " + reporter +"\n" +
+                                    "\n" +
+                                    "Image : " + attached)
                             .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

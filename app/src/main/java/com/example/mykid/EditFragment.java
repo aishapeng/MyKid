@@ -120,6 +120,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
         removeImgBtn.setOnClickListener(this);
+        clearLocationBtn.setOnClickListener(this);
 
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -151,6 +152,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
             removeImgBtn.setVisibility(View.GONE);
         }else{
             Picasso.get().load(reportImage).into(imageView);
+            uri = Uri.parse(reportImage);
         }
 
         return view;
@@ -188,6 +190,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
             case R.id.clearLocationBtn:
                 locationInputTxtView.setText("");
+                Log.d("ClrBtnClick: ", "Clicked");
                 break;
 
             case R.id.imageBtn:
@@ -258,21 +261,31 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if(newlocation.isEmpty()){
                     newlocation=null;
                 }
+                String attached;
                 if(uri==null){
                     uriStr=null;
+                    attached = "No image taken";
                 }else{
                     uriStr=uri.toString();
+                    attached = "Attached";
                 }
                 Log.d("removeImage: uristr ", ""+ uriStr);
                 if(!newactivityName.isEmpty() && !newdate.isEmpty() &&!newtime.isEmpty() && !newreporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
-                            .setMessage("Are you sure you want to add an activity with these details?\n" +
-                                    "Activity Name: " + newactivityName + "\n" +
-                                    "Location: " + newlocation + "\n" +
-                                    "Date: " + newdate + "\n" +
-                                    "Time: " + newtime + "\n" +
-                                    "Reporter: " + newreporter)
+                            .setMessage("Are you sure you want to edit an activity with these details?\n" +
+                                    "\n" +
+                                    "Activity Name : " + newactivityName + "\n" +
+                                    "\n" +
+                                    "Location : " + newlocation + "\n" +
+                                    "\n" +
+                                    "Date : " + newdate + "\n" +
+                                    "\n" +
+                                    "Time : " + newtime + "\n" +
+                                    "\n" +
+                                    "Reporter : " + newreporter + "\n" +
+                                    "\n" +
+                                    "Image : " + attached)
                             .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
