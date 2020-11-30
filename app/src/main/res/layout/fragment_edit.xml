@@ -102,7 +102,8 @@
         android:hint="@string/click_button_to_add_location"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
         android:textColor="?attr/editTextColor"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_weight="1.8"/>
 
     <ImageButton
         android:id="@+id/clearLocationBtn"
@@ -110,7 +111,8 @@
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:background="#00FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_cancel_24" />
+        app:srcCompat="@drawable/ic_baseline_cancel_24"
+        android:layout_weight="0.2"/>
 </LinearLayout>
 
 <LinearLayout

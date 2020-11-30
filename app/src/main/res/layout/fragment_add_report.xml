@@ -115,7 +115,8 @@
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
             android:background="#00FFFFFF"
-            android:layout_weight="0.2"/>
+            android:layout_weight="0.2"
+            app:srcCompat="@drawable/ic_baseline_cancel_24"/>
     </LinearLayout>
 
     <LinearLayout
