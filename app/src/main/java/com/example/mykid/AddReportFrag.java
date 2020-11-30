@@ -53,7 +53,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     private FusedLocationProviderClient mFusedLocationClient;
 
     private UUID id;
-    private ImageButton imageBtn;
+    private ImageButton imageBtn, clearLocationBtn;
     private ImageView imageView;
     private File photoFile;
     private Intent captureImageIntent;
@@ -87,7 +87,9 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         Button locationBtn = view.findViewById(R.id.locationBtn);
         Button completeBtn=view.findViewById(R.id.completeBtn);
         removeImgBtn=view.findViewById(R.id.removeImgBtn);
+        clearLocationBtn = view.findViewById(R.id.clearLocationBtn);
         removeImgBtn.setOnClickListener(this);
+        clearLocationBtn.setOnClickListener(this);
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
@@ -133,12 +135,18 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 newFragment = new DatePickerFragment();
                 newFragment.show(getChildFragmentManager(), "datePickerAddFrag"); //getsupportmanager to show, tag is identifier
                 break;
+
             case R.id.timeBtn:
                 newFragment = new TimePickerFragment();
                 newFragment.show(getChildFragmentManager(),"timePickerAddFrag");
                 break;
+
             case R.id.locationBtn:
                 getLocation(); //get user current location
+                break;
+
+            case R.id.clearLocationBtn:
+                locationInputTxtView.setText("");
                 break;
 
             case R.id.imageBtn:

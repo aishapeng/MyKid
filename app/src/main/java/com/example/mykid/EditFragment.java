@@ -57,7 +57,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     private FusedLocationProviderClient mFusedLocationClient;
 
     private UUID id;
-    private ImageButton imageBtn;
+    private ImageButton imageBtn, clearLocationBtn;
     private File photoFile;
     private Intent captureImageIntent;
     private static final int REQUEST_PHOTO = 1;
@@ -98,6 +98,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         imageBtn = view.findViewById(R.id.imageBtn);
         removeImgBtn=view.findViewById(R.id.removeImgBtn);
         imageView = view.findViewById(R.id.imageView);
+        clearLocationBtn = view.findViewById(R.id.clearLocationBtn);
 
         Bundle bundle = this.getArguments();
         reportID = bundle.getInt("ReportID");
@@ -163,10 +164,12 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 newFragment = new DatePickerFragment();
                 newFragment.show(getChildFragmentManager(), "datePickerEditFrag"); //getsupportmanager to show, tag is identifier
                 break;
+
             case R.id.timeBtn:
                 newFragment = new TimePickerFragment();
                 newFragment.show(getChildFragmentManager(),"timePickerEditFrag");
                 break;
+
             case R.id.locationBtn:
                 if (location == null){
                     getLocation(); //get user current location
@@ -181,6 +184,10 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 //                    getParentFragmentManager().beginTransaction().add(R.id.fragment_sec, frag).addToBackStack(null).commit();
 //                    //transaction.addToBackStack(null);
                 }
+                break;
+
+            case R.id.clearLocationBtn:
+                locationInputTxtView.setText("");
                 break;
 
             case R.id.imageBtn:
@@ -311,6 +318,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                             .show();
                 }
                 break;
+
             default:
                 break;
         }
