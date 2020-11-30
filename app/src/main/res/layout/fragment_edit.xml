@@ -288,7 +288,7 @@
         tools:ignore="ContentDescription"
         tools:srcCompat="@tools:sample/avatars"
         android:adjustViewBounds="true"
-        android:padding="15dp"
+        android:padding="10dp"
         android:layout_gravity="center"/>
 
     <Button
