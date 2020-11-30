@@ -51,8 +51,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-
                     if(MainActivity.DUAL_FRAME){
                         AppCompatActivity activity= (AppCompatActivity)view.getContext();
                     DetailFragment detailFragment= new DetailFragment();
@@ -72,13 +70,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                         intent.putExtra("Report",  current);
                         intent.putExtra("EXTRA_MESSAGE","detail");
                         view.getContext().startActivity(intent);
-
                     }
-
-
                 }
             });
-
         }
     }
 

@@ -1,180 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".DetailFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".DetailFragment">
-
-        <TextView
-            android:id="@+id/activityNameTextView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="12dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameTxtView" />
-
-        <TextView
-            android:id="@+id/reporterNameTextView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="8dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView" />
-
-        <TextView
-            android:id="@+id/reporterNameTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/reporter_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
-
-        <TextView
-            android:id="@+id/timeTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/time"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
-
-        <TextView
-            android:id="@+id/actDateTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
-
-        <TextView
-            android:id="@+id/actNameTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/activity_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <TextView
-            android:id="@+id/locationTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/location"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activityNameTextView" />
-
-        <Button
-            android:id="@+id/locationBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/show_location_in_map"
-            app:layout_constraintStart_toEndOf="@+id/locationTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/activityNameTextView" />
-
-        <TextView
-            android:id="@+id/locationInputTxtView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="8dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
-
-        <TextView
-            android:id="@+id/dateInputTxtView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actDateTxtView" />
-
-        <TextView
-            android:id="@+id/timeInputTxtView"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeTxtView" />
-
-        <Button
-            android:id="@+id/editBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <Button
-            android:id="@+id/deleteBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
@@ -185,35 +26,180 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.21"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+             />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/actNameTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageTxtView"
-            tools:srcCompat="@tools:sample/avatars"
-            tools:ignore="ContentDescription"
-            android:adjustViewBounds="true"
-            android:padding="15dp" />
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/activityNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            android:textSize="18sp"
+           />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="10dp">
+    <TextView
+        android:id="@+id/locationTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/locationBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/show_location_in_map"
+        />
+
+</LinearLayout>
+
+        <TextView
+            android:id="@+id/locationInputTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:id="@+id/actDateTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/date"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/dateInputTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            android:textSize="18sp"
+             />
+
+        <TextView
+            android:id="@+id/timeTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/time"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/timeInputTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:id="@+id/reporterNameTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/reporter_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+           />
+
+        <TextView
+            android:id="@+id/reporterNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
+            android:textSize="18sp"
+            />
+
 
         <TextView
             android:id="@+id/imageTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="47dp"
             android:layout_marginTop="28dp"
             android:text="@string/image"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameTextView" />
+            />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/editBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/edit"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/delete"
+                android:layout_weight="1"
+                 />
+        </LinearLayout>
+
+
+    </LinearLayout>
 </ScrollView>
+</LinearLayout>

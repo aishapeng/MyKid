@@ -26,8 +26,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+             />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,9 +40,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/asterisk"
             android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/actNameTxtView"
@@ -52,9 +49,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/activity_name"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk1"
-            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
+            android:textSize="18sp" />
         </LinearLayout>
 
         <EditText
@@ -64,8 +59,6 @@
             android:ems="10"
             android:hint="@string/enter_activity_name"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
             tools:ignore="Autofill" />
 
         <TextView
@@ -74,9 +67,7 @@
             android:layout_height="wrap_content"
             android:text="@string/please_enter_activity_name"
             android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+            android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,23 +78,18 @@
             android:id="@+id/locationTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/location"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/locationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_location"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/locationTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -121,8 +107,6 @@
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
             android:layout_weight="1.8"/>
 
         <ImageButton
@@ -131,9 +115,6 @@
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
             android:background="#00FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/locationInputTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
-            app:srcCompat="@drawable/ic_baseline_cancel_24"
             android:layout_weight="0.2"/>
     </LinearLayout>
 
@@ -146,35 +127,26 @@
             android:id="@+id/asterisk2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/asterisk"
             android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/actDateTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/date"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk2"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/dateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="10dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_date"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/actDateTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+            android:textColor="@color/black" />
     </LinearLayout>
 
         <TextView
@@ -187,9 +159,7 @@
             android:hint="@string/click_button_to_add_date"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/dateErrorMsg"
@@ -197,9 +167,7 @@
             android:layout_height="wrap_content"
             android:text="@string/please_pick_a_date"
             android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+            android:visibility="invisible" />
 
 
     <LinearLayout
@@ -211,35 +179,26 @@
             android:id="@+id/asterisk3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/asterisk"
             android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/timeTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/time"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk3"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/timeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/add_time"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/timeTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+            android:layout_marginStart="10dp"/>
     </LinearLayout>
 
         <TextView
@@ -252,9 +211,7 @@
             android:hint="@string/click_button_to_add_time"
             android:textAppearance="?android:attr/textAppearanceMediumInverse"
             android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeBtn" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/timeErrorMsg"
@@ -262,9 +219,7 @@
             android:layout_height="wrap_content"
             android:text="@string/please_pick_a_time"
             android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+            android:visibility="invisible" />
 
 
     <LinearLayout
@@ -279,9 +234,7 @@
             android:layout_marginTop="28dp"
             android:text="@string/asterisk"
             android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/reporterNameTxtView"
@@ -290,9 +243,7 @@
             android:layout_marginTop="28dp"
             android:text="@string/reporter_name"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk4"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+            android:textSize="18sp" />
     </LinearLayout>
 
         <EditText
@@ -303,8 +254,6 @@
             android:ems="10"
             android:hint="@string/enter_name"
             android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
             tools:ignore="Autofill" />
 
 
@@ -314,9 +263,7 @@
             android:layout_height="wrap_content"
             android:text="@string/please_enter_reporter_name"
             android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+            android:visibility="invisible" />
 
 
     <LinearLayout
@@ -328,22 +275,17 @@
             android:id="@+id/imageTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:text="@string/image"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+            android:textSize="18sp" />
 
         <ImageButton
             android:id="@+id/imageBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
             android:background="@color/colorAccent"
-            app:layout_constraintStart_toEndOf="@+id/imageTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt"
+            android:layout_gravity="center"
             app:srcCompat="@android:drawable/ic_menu_camera"
             tools:ignore="ContentDescription" />
 
@@ -352,11 +294,9 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
             android:background="@color/colorAccent"
             android:text="@string/remove_current_image"
-            app:layout_constraintStart_toEndOf="@+id/imageBtn"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+            />
     </LinearLayout>
 
         <ImageView
@@ -378,10 +318,6 @@
             android:backgroundTint="@color/colorAccent"
             android:text="@string/complete"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
             android:layout_gravity="center"/>
 
     </LinearLayout>

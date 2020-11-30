@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity  {
         frag.setArguments(bundle);
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.fragment_sec, frag).commit();
+        transaction.add(R.id.fragment_mainSec, frag).commit();
         transaction.addToBackStack(null);
     }
 }

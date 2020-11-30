@@ -320,7 +320,13 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     @Override
     public void onTaskCompleted(String result) {
-        ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
+        if(MainActivity.DUAL_FRAME){
+            ((MainActivity)getActivity()).openMap(result, null, "true"); //open google map
+        }
+        else{
+            ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
+        }
+
     }
 
     //setup methods to get file name and file location

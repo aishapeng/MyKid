@@ -14,7 +14,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
@@ -176,7 +175,13 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if (location == null){
                     getLocation(); //get user current location
                 }else{
-                    ((SecondActivity)getActivity()).openMap(null, location, "true");
+                    if(MainActivity.DUAL_FRAME){
+                        ((MainActivity)getActivity()).openMap(null, location, "true");
+                    }
+                    else {
+                        ((SecondActivity)getActivity()).openMap(null, location, "true");
+                    }
+
 //                    Fragment frag = new GoogleMapFragment();
 //                    Bundle bundle = new Bundle();
 //                    bundle.putString("currentLocation", location);
@@ -315,14 +320,16 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 //                                    startActivity (intent);
 
                                     //getActivity().startActivity(intent);
+
+
                                     if(MainActivity.DUAL_FRAME){
                                         Intent intent = new Intent (getActivity(), MainActivity.class);
                                         startActivity (intent);
                                         //getActivity().onBackPressed();
                                     }
-                                    else{
+//                                    else{
                                         getActivity().onBackPressed();
-                                    }
+                                    //}
 
 
                                 }

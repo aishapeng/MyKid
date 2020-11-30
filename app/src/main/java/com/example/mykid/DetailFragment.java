@@ -2,6 +2,8 @@ package com.example.mykid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -33,6 +35,17 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View view  = inflater.inflate(R.layout.fragment_detail, container, false);
+
+//        int orientation = getResources().getConfiguration().orientation;
+//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            // In landscape
+//            Intent intent = new Intent(getActivity(), MainActivity.class);
+//            startActivity(intent);
+//            getActivity().onBackPressed();
+//        }
+//        } else {
+//            // In portrait
+//        }
         activityNameTextView= view.findViewById(R.id.activityNameTextView);
         locationInputTxtView= view.findViewById(R.id.locationInputTxtView);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
@@ -85,7 +98,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             case R.id.locationBtn:
                 FragmentManager manager = getParentFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                ((SecondActivity)getActivity()).openMap(null, location, "false");
+
+                if(MainActivity.DUAL_FRAME){
+                    ((MainActivity)getActivity()).openMap(null, location, "false");
+                }
+                else {
+                    ((SecondActivity)getActivity()).openMap(null, location, "false");
+                }
+
 //                public void openMap (String selectedLocation, String currentLocation, String editable) {
 //                Fragment frag = new GoogleMapFragment();
 //                Bundle bundle = new Bundle();
@@ -132,7 +152,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 editFragment.setArguments(arguments);
 
                 if(MainActivity.DUAL_FRAME){
-                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).addToBackStack(null).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).commit();
                 }
                 else {
                     getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
