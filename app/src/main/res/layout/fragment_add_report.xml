@@ -1,22 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="30dp">
+
+<ScrollView
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:context=".AddReportFrag">
+
+        <TextView
+            android:id="@+id/AddTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_report"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/asterisk1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/asterisk"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
+
+        <TextView
+            android:id="@+id/actNameTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/asterisk1"
+            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/actNameEditTxt"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="12dp"
             android:ems="10"
             android:hint="@string/enter_activity_name"
             android:inputType="textPersonName"
@@ -24,107 +68,84 @@
             app:layout_constraintTop_toBottomOf="@+id/actNameTxtView"
             tools:ignore="Autofill" />
 
-        <Button
-            android:id="@+id/dateBtn"
+        <TextView
+            android:id="@+id/actErrorMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/add_date"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/actDateTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+            android:text="@string/please_enter_activity_name"
+            android:textColor="@color/design_default_color_error"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
-        <Button
-            android:id="@+id/timeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/add_time"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/timeTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/asterisk3"
+            android:id="@+id/locationTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/asterisk"
-            android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
-
-        <EditText
-            android:id="@+id/reporterNameEditTxt"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/enter_name"
-            android:inputType="textPersonName"
+            android:text="@string/location"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
-            tools:ignore="Autofill" />
+            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
 
         <Button
-            android:id="@+id/completeBtn"
+            android:id="@+id/locationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/complete"
+            android:text="@string/add_location"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintStart_toEndOf="@+id/locationTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <TextView
-            android:id="@+id/reporterNameTxtView"
-            android:layout_width="wrap_content"
+            android:id="@+id/locationInputTxtView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="@string/reporter_name"
-            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:background="?attr/editTextBackground"
+            android:gravity="center_vertical"
+            android:hint="@string/click_button_to_add_location"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:textColor="?attr/editTextColor"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk4"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
-
-        <TextView
-            android:id="@+id/timeTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/time"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk3"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
-
-        <TextView
-            android:id="@+id/asterisk4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/asterisk"
-            android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
+            android:layout_weight="1.8"/>
+
+        <ImageButton
+            android:id="@+id/clearLocationBtn"
+            android:layout_width="29dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toEndOf="@+id/locationInputTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
+            app:srcCompat="@drawable/ic_baseline_cancel_24"
+            android:layout_weight="0.2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/asterisk2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="32dp"
             android:text="@string/asterisk"
             android:textColor="@color/design_default_color_error"
@@ -143,74 +164,23 @@
             app:layout_constraintStart_toEndOf="@+id/asterisk2"
             app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
 
-        <TextView
-            android:id="@+id/actNameTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/activity_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/asterisk1"
-            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
-
-
-        <TextView
-            android:id="@+id/locationTxtView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/location"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
-
-        <TextView
-            android:id="@+id/asterisk1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/asterisk"
-            android:textColor="@color/design_default_color_error"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddTextView" />
-
         <Button
-            android:id="@+id/locationBtn"
+            android:id="@+id/dateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="44dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/add_location"
+            android:text="@string/add_date"
             android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@+id/locationTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
-
-        <TextView
-            android:id="@+id/locationInputTxtView"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="8dp"
-            android:background="?attr/editTextBackground"
-            android:gravity="center_vertical"
-            android:hint="@string/click_button_to_add_location"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse"
-            android:textColor="?attr/editTextColor"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn" />
+            app:layout_constraintStart_toEndOf="@+id/actDateTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/locationInputTxtView" />
+    </LinearLayout>
 
         <TextView
             android:id="@+id/dateInputTxtView"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
@@ -222,10 +192,60 @@
             app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
 
         <TextView
-            android:id="@+id/timeInputTxtView"
-            android:layout_width="320dp"
+            android:id="@+id/dateErrorMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_pick_a_date"
+            android:textColor="@color/design_default_color_error"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/asterisk3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/asterisk"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+
+        <TextView
+            android:id="@+id/timeTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/time"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/asterisk3"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+
+        <Button
+            android:id="@+id/timeBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/add_time"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/timeTxtView"
+            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/timeInputTxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="?attr/editTextBackground"
             android:gravity="center_vertical"
@@ -237,89 +257,83 @@
             app:layout_constraintTop_toBottomOf="@+id/timeBtn" />
 
         <TextView
-            android:id="@+id/actErrorMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:text="@string/please_enter_activity_name"
-            android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actNameEditTxt" />
-
-        <TextView
-            android:id="@+id/dateErrorMsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:text="@string/please_pick_a_date"
-            android:textColor="@color/design_default_color_error"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateInputTxtView" />
-
-        <TextView
             android:id="@+id/timeErrorMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:text="@string/please_pick_a_time"
             android:textColor="@color/design_default_color_error"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/asterisk4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/asterisk"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+
+        <TextView
+            android:id="@+id/reporterNameTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="@string/reporter_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/asterisk4"
+            app:layout_constraintTop_toBottomOf="@+id/timeInputTxtView" />
+    </LinearLayout>
+
+        <EditText
+            android:id="@+id/reporterNameEditTxt"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/enter_name"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reporterNameTxtView"
+            tools:ignore="Autofill" />
+
+
         <TextView
             android:id="@+id/reporterErrorMsg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:text="@string/please_enter_reporter_name"
             android:textColor="@color/design_default_color_error"
             android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageTxtView"
-            app:layout_constraintVertical_bias="0.276"
-            tools:ignore="ContentDescription"
-            tools:srcCompat="@tools:sample/avatars"
-            android:padding="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/imageTxtView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="32dp"
             android:text="@string/image"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
-
-        <TextView
-            android:id="@+id/AddTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/add_report"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/imageBtn"
@@ -343,16 +357,33 @@
             android:text="@string/remove_current_image"
             app:layout_constraintStart_toEndOf="@+id/imageBtn"
             app:layout_constraintTop_toBottomOf="@+id/reporterNameEditTxt" />
+    </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/clearLocationBtn"
-            android:layout_width="29dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="8dp"
-            android:background="#00FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/locationInputTxtView"
-            app:layout_constraintTop_toBottomOf="@+id/locationBtn"
-            app:srcCompat="@drawable/ic_baseline_cancel_24" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="15dp"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/completeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/complete"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 </ScrollView>
+</LinearLayout>
