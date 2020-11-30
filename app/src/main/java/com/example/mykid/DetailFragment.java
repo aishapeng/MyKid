@@ -2,8 +2,6 @@ package com.example.mykid;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,16 +33,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
         View view  = inflater.inflate(R.layout.fragment_detail, container, false);
 
-//        int orientation = getResources().getConfiguration().orientation;
-//        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            // In landscape
-//            Intent intent = new Intent(getActivity(), MainActivity.class);
-//            startActivity(intent);
-//            getActivity().onBackPressed();
-//        }
-//        } else {
-//            // In portrait
-//        }
         activityNameTextView= view.findViewById(R.id.activityNameTextView);
         locationInputTxtView= view.findViewById(R.id.locationInputTxtView);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
@@ -65,7 +52,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
         reportImage = bundle.getString("image");
-        Log.d("details image: ", "i"+ reportImage);
+
 
         activityNameTextView.setText(activityName);
         locationInputTxtView.setText(location);
@@ -134,6 +121,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                                 report.setReporterName(reporter);
                                 reportViewModel.delete(report);
                                 getParentFragmentManager().popBackStack();
+                                getActivity().onBackPressed();
                             }
                         })
                         .setNegativeButton("Cancel",null)

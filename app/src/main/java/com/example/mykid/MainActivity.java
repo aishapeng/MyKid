@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -20,7 +21,6 @@ import android.widget.FrameLayout;
 
 
 public class MainActivity extends AppCompatActivity  {
-   // public static final String EXTRA_MESSAGE="com.example.mykid.extra.MESSAGE";
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
     public static boolean DUAL_FRAME=false;
 
@@ -32,12 +32,18 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         final AddReportFrag addReportFrag= new AddReportFrag();
+        DetailFragment detailFragment = new DetailFragment();
         FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
         DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
+        final String frag=getIntent().getStringExtra("fragment");
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
         transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
+
+        if(frag!=null&&frag=="detail"){
+            transaction.replace(R.id.fragment_mainSec,detailFragment).commit();
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
                     FragmentTransaction transaction=manager.beginTransaction();
                     transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
                     //transaction.addToBackStack(null);
+
                 }
                 else{
                     Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
@@ -59,22 +66,16 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_DeleteAll) {
             ReportViewModel reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
             reportViewModel.deleteAll();

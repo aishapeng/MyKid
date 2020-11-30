@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 
 import static com.example.mykid.R.color.colorPrimary;
 
@@ -60,12 +59,9 @@ public class SecondActivity extends AppCompatActivity {
                 arguments.putString("reporter",current.getReporterName());
                 arguments.putString("image", current.getReportImage());
                 detailFragment.setArguments(arguments);
-
                 transaction.replace(R.id.fragment_sec,detailFragment).commit();
             }
         }
-
-
     }
 
     public void openMap (String currentLocation, String selectedLocation, String editable) {
@@ -80,5 +76,4 @@ public class SecondActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_sec, frag).commit();
         transaction.addToBackStack(null);
     }
-
 }
