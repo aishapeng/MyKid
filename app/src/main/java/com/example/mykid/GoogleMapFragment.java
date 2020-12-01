@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     Marker marker;
     LatLng mLatLng;
     Address mLocation;
+    String mAddress;
 
     public GoogleMapFragment() {
         // Required empty public constructor
@@ -59,14 +61,25 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         editText = view.findViewById(R.id.edit_txt);
         selectBtn=view.findViewById(R.id.selectBtn);
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
+        Log.d("starteditTxt", ""+editText.getText().toString());
 
         if(savedInstanceState!=null){
+            mAddress = savedInstanceState.getString("mAddress");
             mLatLng= new LatLng(savedInstanceState.getDouble("lat"),savedInstanceState.getDouble("lng"));
-            if(mLatLng!=null){
-                marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mLocation.getAddressLine(0)));
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
-            }
 
+            if(map==null){
+                mapFragment.getMapAsync(this);
+            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(map!=null && mAddress!=null){
+                            map.clear();
+                            marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mAddress));
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
+                        }
+                }
+            }, 300);
         }
         //Initialize places
         Places.initialize(getContext(), "AIzaSyBvCp2gr6SrB9TAfZhrAVlLMbpb81fKrNg");
@@ -107,12 +120,12 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             //Initialize place
             Place place = Autocomplete.getPlaceFromIntent(data);
             //Set address on edit text
-            String address = place.getAddress();
-            editText.setText(address);
+            mAddress = place.getAddress();
+            editText.setText(mAddress);
             List<Address> addresses = null;
             Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
             try{
-                addresses = geocoder.getFromLocationName(address,1);
+                addresses = geocoder.getFromLocationName(mAddress,1);
             }catch(IOException e){
                 e.printStackTrace();
             }
@@ -138,6 +151,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        Log.d("MAPREADY:", ""+map);
+
         List<Address> addresses;
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         Bundle bundle = getArguments();
@@ -173,10 +188,10 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(mLatLng!=null){
-            outState.putDouble("lat",mLatLng.latitude);
-            outState.putDouble("lng",mLatLng.longitude);
-            //outState.putString("latLng",mLatLng.toString());
-        }
+
+        outState.putDouble("lat",mLatLng.latitude);
+        outState.putDouble("lng",mLatLng.longitude);
+        outState.putString("mAddress", editText.getText().toString());
+
     }
 }
