@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -35,15 +34,10 @@ public class MainActivity extends AppCompatActivity  {
         DetailFragment detailFragment = new DetailFragment();
         FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
         DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
-        final String frag=getIntent().getStringExtra("fragment");
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
         transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
-
-        if(frag!=null&&frag=="detail"){
-            transaction.replace(R.id.fragment_mainSec,detailFragment).commit();
-        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +48,6 @@ public class MainActivity extends AppCompatActivity  {
                     FragmentManager manager=getSupportFragmentManager();
                     FragmentTransaction transaction=manager.beginTransaction();
                     transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
-                    //transaction.addToBackStack(null);
-
                 }
                 else{
                     Intent intent=new Intent(getApplicationContext(),SecondActivity.class);

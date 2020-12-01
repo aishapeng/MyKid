@@ -36,7 +36,6 @@ public class RecyclerViewFragment extends Fragment {
     private ReportListAdapter adapter;
 
     public RecyclerViewFragment() {
-
         // Required empty public constructor
     }
 
@@ -51,9 +50,6 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
         setHasOptionsMenu(true);
     }
 
@@ -69,8 +65,6 @@ public class RecyclerViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
-
-
         reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
         reportViewModel.getAllReport().observe(getViewLifecycleOwner(), new Observer<List<Report>>() {
             @Override
@@ -108,7 +102,6 @@ public class RecyclerViewFragment extends Fragment {
                             }
                         })
                         .show();
-
             }
 
             @Override
@@ -123,8 +116,6 @@ public class RecyclerViewFragment extends Fragment {
         }).attachToRecyclerView(recyclerView);
 
     }
-
-
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -144,6 +135,4 @@ public class RecyclerViewFragment extends Fragment {
             }
         });
     }
-
-
 }

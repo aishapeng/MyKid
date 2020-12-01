@@ -24,5 +24,4 @@ public interface ReportDao {
 
     @Query("SELECT * from Report ORDER BY reportDate DESC")
     LiveData<List<Report>> getAllReport();
-
 }

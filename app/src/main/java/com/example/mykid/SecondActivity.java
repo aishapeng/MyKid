@@ -13,7 +13,6 @@ import android.os.Bundle;
 
 import static com.example.mykid.R.color.colorPrimary;
 
-
 public class SecondActivity extends AppCompatActivity {
 
     AddReportFrag addReportFrag = new AddReportFrag();
@@ -34,14 +33,6 @@ public class SecondActivity extends AppCompatActivity {
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
-            //onBackPressed();
-//            Log.d("check",message);
-//            if(message.equals("add")){
-//                transaction.add(R.id.fragment_mainSec,addReportFrag).commit();
-//            }
-//            else if(message.equals("detail")){
-//                transaction.add(R.id.fragment_mainSec,detailFragment).commit();
-//            }
         } else {
             // In portrait
             if(message.equals("add")){

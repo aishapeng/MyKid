@@ -36,7 +36,6 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -97,10 +96,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         getParentFragmentManager().setFragmentResultListener("location", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                // We use a String here, but any type that can be put in a Bundle is supported
                 result = bundle.getString("location");
                 locationInputTxtView.setText(result);
-                // Do something with the result
             }
         });
 
@@ -154,13 +151,10 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                             "com.example.mykid.fileprovider",
                             photoFile);
 
-                    //check the file location
-                    Log.d("FILE-URI", uri.toString());
-
                     //start launch the camera service with file path
                     captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-                    //We have to settle the permission problem
+                    //permission
                     //Check the return value from captureImageIntent
 
                     List<ResolveInfo> cameraActivities =
@@ -180,7 +174,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 imageView.setImageBitmap(null);
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
-                Log.d("removeImage_add: ", "Uri"+ uri);
                 break;
 
             case R.id.completeBtn:
@@ -224,7 +217,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                     uriStr=uri.toString();
                     attached = "Attached";
                 }
-                Log.d("removeImage_add: ", "UriStr"+ uriStr);
+
                 if(!activityName.isEmpty() && !date.isEmpty() &&!time.isEmpty() && !reporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
@@ -373,7 +366,5 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
             imageView.setImageBitmap(bitmap);
             removeImgBtn.setVisibility(View.VISIBLE);
         }
-
     }
-
 }

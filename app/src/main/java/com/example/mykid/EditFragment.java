@@ -47,9 +47,9 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg,imageTxtView;
     private EditText actNameEditTxt,reporterNameEditTxt;
     ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter, selectedlocation;
+    private String activityName,location,date,time,reporter, selectedLocation;
     private int reportID;
-    private String newactivityName,newlocation,newdate,newtime,newreporter,reportImage;
+    private String newActivityName,newLocation,newDate,newTime,newReporter,reportImage;
     private ImageView imageView;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
@@ -128,8 +128,8 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
                 // We use a String here, but any type that can be put in a Bundle is supported
-                selectedlocation = bundle.getString("location");
-                locationInputTxtView.setText(selectedlocation);
+                selectedLocation = bundle.getString("location");
+                locationInputTxtView.setText(selectedLocation);
                 // Do something with the result
             }
         });
@@ -181,15 +181,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     else {
                         ((SecondActivity)getActivity()).openMap(null, location, "true");
                     }
-
-//                    Fragment frag = new GoogleMapFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("currentLocation", location);
-//                    bundle.putString("selectedLocation", null);
-//                    bundle.putString("editable", "false");
-//                    frag.setArguments(bundle);
-//                    getParentFragmentManager().beginTransaction().add(R.id.fragment_sec, frag).addToBackStack(null).commit();
-//                    //transaction.addToBackStack(null);
                 }
                 break;
 
@@ -202,9 +193,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 uri = FileProvider.getUriForFile(getActivity(),
                         "com.example.mykid.fileprovider",
                         photoFile);
-
-                //check the file location
-                Log.d("FILE-URI", uri.toString());
 
                 //start launch the camera service with file path
                 captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -229,42 +217,41 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 imageView.setImageBitmap(null);
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
-                Log.d("removeImage: ", ""+ uri);
                 break;
 
 
             case R.id.completeBtn:
-                newactivityName=actNameEditTxt.getText().toString();
-                newlocation=locationInputTxtView.getText().toString();
-                newdate=dateInputTxtView.getText().toString();
-                newtime=timeInputTxtView.getText().toString();
-                newreporter=reporterNameEditTxt.getText().toString();
-                if(newactivityName.isEmpty()){
+                newActivityName=actNameEditTxt.getText().toString();
+                newLocation=locationInputTxtView.getText().toString();
+                newDate=dateInputTxtView.getText().toString();
+                newTime=timeInputTxtView.getText().toString();
+                newReporter=reporterNameEditTxt.getText().toString();
+                if(newActivityName.isEmpty()){
                     actErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     actErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(newdate.isEmpty()){
+                if(newDate.isEmpty()){
                     dateErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     dateErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(newtime.isEmpty()){
+                if(newTime.isEmpty()){
                     timeErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     timeErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(newreporter.isEmpty()){
+                if(newReporter.isEmpty()){
                     reporterErrorMsg.setVisibility(View.VISIBLE);
                 }
                 else {
                     reporterErrorMsg.setVisibility(View.INVISIBLE);
                 }
-                if(newlocation.isEmpty()){
-                    newlocation=null;
+                if(newLocation.isEmpty()){
+                    newLocation=null;
                 }
                 String attached;
                 if(uri==null || imageView.getDrawable() == null){
@@ -275,20 +262,20 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     attached = "Attached";
                 }
                 Log.d("removeImage: uristr ", ""+ uriStr);
-                if(!newactivityName.isEmpty() && !newdate.isEmpty() &&!newtime.isEmpty() && !newreporter.isEmpty()){
+                if(!newActivityName.isEmpty() && !newDate.isEmpty() &&!newTime.isEmpty() && !newReporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
                             .setMessage("Are you sure you want to edit an activity with these details?\n" +
                                     "\n" +
-                                    "Activity Name : " + newactivityName + "\n" +
+                                    "Activity Name : " + newActivityName + "\n" +
                                     "\n" +
-                                    "Location : " + newlocation + "\n" +
+                                    "Location : " + newLocation + "\n" +
                                     "\n" +
-                                    "Date : " + newdate + "\n" +
+                                    "Date : " + newDate + "\n" +
                                     "\n" +
-                                    "Time : " + newtime + "\n" +
+                                    "Time : " + newTime + "\n" +
                                     "\n" +
-                                    "Reporter : " + newreporter + "\n" +
+                                    "Reporter : " + newReporter + "\n" +
                                     "\n" +
                                     "Image : " + attached)
                             .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -296,40 +283,19 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Report report= new Report();
                                     report.setReportId(reportID);
-                                    report.setReportName(newactivityName);
-                                    report.setReportLocation(newlocation);
-                                    report.setReportDate(newdate);
-                                    report.setReportTime(newtime);
-                                    report.setReporterName(newreporter);
+                                    report.setReportName(newActivityName);
+                                    report.setReportLocation(newLocation);
+                                    report.setReportDate(newDate);
+                                    report.setReportTime(newTime);
+                                    report.setReporterName(newReporter);
                                     report.setReportImage(uriStr);
                                     reportViewModel.update(report);
-
-//                                    AppCompatActivity activity= (AppCompatActivity)getContext();
-//                                    DetailFragment detailFragment= new DetailFragment();
-//                                    Bundle arguments = new Bundle();
-//                                    arguments.putInt("ReportID", report.getReportId());
-//                                    arguments.putString("activityName",report.getReportName());
-//                                    arguments.putString("location",report.getReportLocation());
-//                                    arguments.putString("date",report.getReportDate());
-//                                    arguments.putString("time",report.getReportTime());
-//                                    arguments.putString("reporter",report.getReporterName());
-//                                    detailFragment.setArguments(arguments);
-//                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main,detailFragment).addToBackStack(null).commit();
-
-//                                    Intent intent = new Intent (getActivity(), MainActivity.class);
-//                                    startActivity (intent);
-
-                                    //getActivity().startActivity(intent);
-
 
                                     if(MainActivity.DUAL_FRAME){
                                         Intent intent = new Intent (getActivity(), MainActivity.class);
                                         startActivity (intent);
-                                        //getActivity().onBackPressed();
                                     }
-//                                    else{
-                                        getActivity().onBackPressed();
-                                    //}
+                                    getActivity().onBackPressed();
 
 
                                 }
@@ -450,12 +416,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
             Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
                     getActivity());
             imageView.setImageBitmap(bitmap);
-
-            //Picasso.get().load(uri).into(imageView);
             removeImgBtn.setVisibility(View.VISIBLE);
         }
-
     }
-
-
 }

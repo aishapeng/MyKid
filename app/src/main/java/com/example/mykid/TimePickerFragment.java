@@ -27,7 +27,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     @Override
     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
 
-
         if (getTag().equals("timePickerAddFrag")) {
             AddReportFrag addReportFrag = (AddReportFrag)getParentFragment();
             addReportFrag.processTimePickerResult(hourOfDay,minute );

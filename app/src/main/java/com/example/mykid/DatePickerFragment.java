@@ -37,7 +37,5 @@ public class DatePickerFragment extends DialogFragment
             EditFragment editFragment = (EditFragment)getParentFragment();
             editFragment.processDatePickerResult(year, month, day);
         }
-
     }
-
 }

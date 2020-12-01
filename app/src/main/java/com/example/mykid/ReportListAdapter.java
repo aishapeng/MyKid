@@ -3,14 +3,11 @@ package com.example.mykid;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -141,7 +138,5 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             reportName = view.findViewById(R.id.activityNameTextView);
             reportDate = view.findViewById(R.id.dateTextView);
         }
-
     }
-
 }

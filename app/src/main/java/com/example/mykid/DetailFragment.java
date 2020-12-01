@@ -76,7 +76,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
 
-
         return view;
     }
 
@@ -84,26 +83,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.locationBtn:
-                FragmentManager manager = getParentFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
                 if(MainActivity.DUAL_FRAME){
                     ((MainActivity)getActivity()).openMap(null, location, "false");
                 }
                 else {
                     ((SecondActivity)getActivity()).openMap(null, location, "false");
                 }
-
-//                public void openMap (String selectedLocation, String currentLocation, String editable) {
-//                Fragment frag = new GoogleMapFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("currentLocation", location);
-//                bundle.putString("selectedLocation", null);
-//                bundle.putString("editable", "false");
-//                frag.setArguments(bundle);
-//                transaction.add(R.id.fragment_sec, frag).commit();
-//                transaction.addToBackStack(null);
-            //}
                 break;
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
@@ -146,12 +131,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 else {
                     getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
                 }
-//                ((MainActivity)getActivity()).openEditFragment(reportID, activityName, location, date, time, reporter);
-
                 break;
             default:
                 break;
         }
     }
-
 }

@@ -84,9 +84,6 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
     protected void onPostExecute(String address) { //the string, finally the result
         mListener.onTaskCompleted(address);
         super.onPostExecute(address);
-
-        //update the main activity
-
     }
 
     interface OnTaskCompleted {
