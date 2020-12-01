@@ -217,7 +217,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                     location=null;
                 }
                 String attached;
-                if(uri==null){
+                if(uri==null || imageView.getDrawable() == null){
                     uriStr=null;
                     attached = "No image taken";
                 }else{
@@ -259,8 +259,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 break;
         }
     }
-
-
 
     public void processDatePickerResult(int year, int month, int day) {
         String month_string = Integer.toString(month + 1); // bc start from 0
@@ -365,15 +363,14 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     }
 
     private void updatePhotoView() {
-        if (photoFile == null || !photoFile.exists())
+        if (photoFile == null || !photoFile.exists()) {
             imageBtn.setImageDrawable(null);
+        }
         else
         {
             Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
                     getActivity());
             imageView.setImageBitmap(bitmap);
-
-            //Picasso.get().load(uri).into(imageView);
             removeImgBtn.setVisibility(View.VISIBLE);
         }
 

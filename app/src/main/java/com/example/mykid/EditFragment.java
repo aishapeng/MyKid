@@ -267,7 +267,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     newlocation=null;
                 }
                 String attached;
-                if(uri==null){
+                if(uri==null || imageView.getDrawable() == null){
                     uriStr=null;
                     attached = "No image taken";
                 }else{

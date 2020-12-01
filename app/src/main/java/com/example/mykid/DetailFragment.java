@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
         reportImage = bundle.getString("image");
-
+        Log.d("DetailImage: ", ""+reportImage);
 
         activityNameTextView.setText(activityName);
         locationInputTxtView.setText(location);
@@ -107,7 +108,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                 builder.setTitle("Delete?")
-                        .setMessage("Are you sure you want to delete this report?")
+                        .setMessage("Are you sure you want to delete this activity?")
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
