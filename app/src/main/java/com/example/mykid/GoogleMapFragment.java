@@ -5,6 +5,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;;
 import androidx.fragment.app.Fragment;
 
@@ -43,7 +44,8 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     EditText editText;
     Button selectBtn;
     Marker marker;
-    private static final String TAG = "GoogleMap Fragment - ";
+    LatLng mLatLng;
+    Address mLocation;
 
     public GoogleMapFragment() {
         // Required empty public constructor
@@ -53,12 +55,19 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_google_map, container, false);
         editText = view.findViewById(R.id.edit_txt);
         selectBtn=view.findViewById(R.id.selectBtn);
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
 
+        if(savedInstanceState!=null){
+            mLatLng= new LatLng(savedInstanceState.getDouble("lat"),savedInstanceState.getDouble("lng"));
+            if(mLatLng!=null){
+                marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mLocation.getAddressLine(0)));
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
+            }
+
+        }
         //Initialize places
         Places.initialize(getContext(), "AIzaSyBvCp2gr6SrB9TAfZhrAVlLMbpb81fKrNg");
 
@@ -107,27 +116,23 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             }catch(IOException e){
                 e.printStackTrace();
             }
-            Address location = addresses.get(0);
-            Log.d(TAG, "Entered Address location: "+ location);
-            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-            Log.d(TAG, "Entered Address Latlng: "+ latLng);
+            mLocation = addresses.get(0);
+            mLatLng = new LatLng(mLocation.getLatitude(),mLocation.getLongitude());
 
             if(marker!=null){
                 marker.remove();
             }
 
-            marker = map.addMarker(new MarkerOptions().position(latLng).title(location.getAddressLine(0)));
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+            marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mLocation.getAddressLine(0)));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
         }
         else if(resultCode == AutocompleteActivity.RESULT_ERROR){ //0
             //when error
             //Initiaslize status
             Status status = Autocomplete.getStatusFromIntent(data);
-            Log.d(TAG, "Search fail: ");
             //Display toast
             Toast.makeText(getContext(), status.getStatusMessage(), Toast.LENGTH_SHORT).show();
         }
-        Log.d(TAG, "Result Code " + resultCode);
     }
 
     @Override
@@ -163,5 +168,15 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     public void setVisibility() {
         editText.setVisibility(View.GONE);
         selectBtn.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(mLatLng!=null){
+            outState.putDouble("lat",mLatLng.latitude);
+            outState.putDouble("lng",mLatLng.longitude);
+            //outState.putString("latLng",mLatLng.toString());
+        }
     }
 }
