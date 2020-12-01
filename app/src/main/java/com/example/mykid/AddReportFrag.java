@@ -239,6 +239,8 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Report report= new Report(activityName,location,date,time,reporter, uriStr);
                                     reportViewModel.insert(report);
+                                    actNameEditTxt.setText("");
+                                    reporterNameEditTxt.setText("");
                                     getActivity().onBackPressed();
                                 }
                             })

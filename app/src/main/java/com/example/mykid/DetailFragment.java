@@ -53,7 +53,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         time=bundle.getString("time");
         reporter=bundle.getString("reporter");
         reportImage = bundle.getString("image");
-        Log.d("DetailImage: ", ""+reportImage);
 
         activityNameTextView.setText(activityName);
         locationInputTxtView.setText(location);
