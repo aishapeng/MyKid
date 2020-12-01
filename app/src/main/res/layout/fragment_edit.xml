@@ -18,7 +18,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="30dp"
-    android:paddingBottom="30dp"
+    android:paddingBottom="35dp"
     tools:context=".AddReportFrag">
 
     <TextView

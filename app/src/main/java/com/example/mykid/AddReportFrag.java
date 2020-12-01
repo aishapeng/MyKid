@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -45,21 +46,21 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg;
     private EditText actNameEditTxt,reporterNameEditTxt;
-    ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter,result;
+    private Button addDateBtn,addTimeBtn,locationBtn,completeBtn,removeImgBtn;
+    private ImageButton imageBtn, clearLocationBtn;
+    private ImageView imageView;
+
+    private String activityName,location,date,time,reporter,result,uriStr;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
 
     private UUID id;
-    private ImageButton imageBtn, clearLocationBtn;
-    private ImageView imageView;
     private File photoFile;
     private Intent captureImageIntent;
     private static final int REQUEST_PHOTO = 1;
     private Uri uri;
-    String uriStr;
-    Button removeImgBtn;
+    ReportViewModel reportViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +70,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_add_report, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
@@ -81,18 +81,41 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         timeErrorMsg=view.findViewById(R.id.timeErrorMsg);
         reporterErrorMsg=view.findViewById(R.id.reporterErrorMsg);
         reportViewModel= new ViewModelProvider(this).get(ReportViewModel.class);
-        Button addDateBtn = view.findViewById(R.id.dateBtn);
-        Button addTimeBtn = view.findViewById(R.id.timeBtn);
-        Button locationBtn = view.findViewById(R.id.locationBtn);
-        Button completeBtn=view.findViewById(R.id.completeBtn);
+        addDateBtn = view.findViewById(R.id.dateBtn);
+        addTimeBtn = view.findViewById(R.id.timeBtn);
+        locationBtn = view.findViewById(R.id.locationBtn);
+        completeBtn=view.findViewById(R.id.completeBtn);
         removeImgBtn=view.findViewById(R.id.removeImgBtn);
         clearLocationBtn = view.findViewById(R.id.clearLocationBtn);
+        imageView = view.findViewById(R.id.imageView);
+        imageBtn = view.findViewById(R.id.imageBtn);
         removeImgBtn.setOnClickListener(this);
         clearLocationBtn.setOnClickListener(this);
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
+        imageBtn.setOnClickListener(this);
+
+        removeImgBtn.setVisibility(View.GONE);
+
+        if(savedInstanceState != null){
+            date=savedInstanceState.getString("date");
+            time=savedInstanceState.getString("time");
+            result=savedInstanceState.getString("location");
+            if(savedInstanceState.getString("Uri")!=null){
+                uri= Uri.parse(savedInstanceState.getString("Uri"));
+                Picasso.get().load(uri).into(imageView);
+            }
+            dateInputTxtView.setText(date);
+            timeInputTxtView.setText(time);
+            locationInputTxtView.setText(result);
+
+            if(uri!=null){
+                removeImgBtn.setVisibility(View.VISIBLE);
+            }
+        }
+
         getParentFragmentManager().setFragmentResultListener("location", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
@@ -104,9 +127,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        imageView = view.findViewById(R.id.imageView);
-        imageBtn = view.findViewById(R.id.imageBtn);
-
         //create the instance of file object
         photoFile = getPhotoFile();
         PackageManager pm = getContext().getPackageManager();
@@ -116,11 +136,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
         boolean canTakePhoto = photoFile != null &&
                 captureImageIntent.resolveActivity(pm) != null;
-
         imageBtn.setEnabled(canTakePhoto);
-        imageBtn.setOnClickListener(this);
-
-        removeImgBtn.setVisibility(View.GONE);
 
         return view;
     }
@@ -130,7 +146,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
-                newFragment.show(getChildFragmentManager(), "datePickerAddFrag"); //getsupportmanager to show, tag is identifier
+                newFragment.show(getChildFragmentManager(), "datePickerAddFrag");
                 break;
 
             case R.id.timeBtn:
@@ -147,9 +163,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                 break;
 
             case R.id.imageBtn:
-                    uri = FileProvider.getUriForFile(getActivity(),
-                            "com.example.mykid.fileprovider",
-                            photoFile);
+                    uri = FileProvider.getUriForFile(getActivity(), "com.example.mykid.fileprovider", photoFile);
 
                     //start launch the camera service with file path
                     captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -257,14 +271,14 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         String month_string = Integer.toString(month + 1); // bc start from 0
         String day_string = Integer.toString(day);
         String year_string = Integer.toString(year);
-        String date = (day_string + "/" + month_string + "/" + year_string);
+        date = (day_string + "/" + month_string + "/" + year_string);
 
         dateInputTxtView.setText(date);
     }
 
     public void processTimePickerResult(int hourOfDay, int minute) {
-        String timeMessage = (String.format("%02d:%02d",hourOfDay , minute));
-        timeInputTxtView.setText(timeMessage);
+         time = (String.format("%02d:%02d",hourOfDay , minute));
+        timeInputTxtView.setText(time);
     }
 
     //standard code
@@ -272,7 +286,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[] // [] can pass more than one permission at the same time//??
+            ActivityCompat.requestPermissions(getActivity(), new String[]
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         } else {
@@ -288,18 +302,16 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
         }
     }
 
-    //standard code
     @Override
     //request permission, then now chk permission result with this function
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_LOCATION_PERMISSION:
-                // If the permission is granted, get the location,
-                // otherwise, show a Toast
+                // If the permission is granted, get the location, otherwise, show a Toast
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation(); // permit le can get location le
+                    getLocation(); // after permit can get location
                 } else {
                     Toast.makeText(getActivity(),
                             R.string.location_permission_denied,
@@ -311,13 +323,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     @Override
     public void onTaskCompleted(String result) {
-//        if(MainActivity.DUAL_FRAME){
-            ((MainActivity)getActivity()).openMap(result, null, "true"); //open google map
-//        }
-//        else{
-//            ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
-//        }
-
+        ((MainActivity)getActivity()).openMap(result, null, "true"); //open google map
     }
 
     //setup methods to get file name and file location
@@ -347,8 +353,7 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
         if (requestCode == REQUEST_PHOTO) {
             //retrieve back the file from file system
-            uri = FileProvider.getUriForFile(getContext(),
-                    "com.example.mykid.fileprovider", photoFile);
+            uri = FileProvider.getUriForFile(getContext(), "com.example.mykid.fileprovider", photoFile);
 
             getContext().revokeUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             updatePhotoView();
@@ -357,14 +362,24 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     private void updatePhotoView() {
         if (photoFile == null || !photoFile.exists()) {
-            imageBtn.setImageDrawable(null);
+            imageView.setImageDrawable(null);
         }
         else
         {
-            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
-                    getActivity());
+            Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(), getActivity());
             imageView.setImageBitmap(bitmap);
             removeImgBtn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("date",date);
+        outState.putString("time",time);
+        outState.putString("location",result);
+        if(uri!=null){
+            outState.putString("Uri",uri.toString());
         }
     }
 }

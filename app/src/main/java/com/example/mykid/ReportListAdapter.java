@@ -1,7 +1,6 @@
 package com.example.mykid;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +29,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
         this.reportListAll=new ArrayList<>(reportList);
     }
 
-
     @NonNull
     @Override
     public ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,8 +46,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    if(MainActivity.DUAL_FRAME){
-                        AppCompatActivity activity= (AppCompatActivity)view.getContext();
+                    AppCompatActivity activity= (AppCompatActivity)view.getContext();
                     DetailFragment detailFragment= new DetailFragment();
                     Bundle arguments = new Bundle();
                     arguments.putInt("ReportID", current.getReportId());
@@ -60,14 +57,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Re
                     arguments.putString("reporter",current.getReporterName());
                     arguments.putString("image", current.getReportImage());
                     detailFragment.setArguments(arguments);
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,detailFragment).addToBackStack(null).commit();
-//                    }
-//                    else{
-//                        Intent intent = new Intent(view.getContext(),SecondActivity.class);
-//                        intent.putExtra("Report",  current);
-//                        intent.putExtra("EXTRA_MESSAGE","detail");
-//                        view.getContext().startActivity(intent);
-//                    }
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,detailFragment,"DetailFrag").addToBackStack(null).commit();
                 }
             });
         }

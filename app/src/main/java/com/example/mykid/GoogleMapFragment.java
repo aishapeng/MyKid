@@ -164,6 +164,4 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
         editText.setVisibility(View.GONE);
         selectBtn.setVisibility(View.GONE);
     }
-
-
 }

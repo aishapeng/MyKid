@@ -1,6 +1,5 @@
 package com.example.mykid;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,12 +15,9 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-
 
 public class MainActivity extends AppCompatActivity  {
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-    //public static boolean DUAL_FRAME=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +29,6 @@ public class MainActivity extends AppCompatActivity  {
 
         final AddReportFrag addReportFrag= new AddReportFrag();
 
-//        FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
-//        DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
-
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
         transaction.replace(R.id.fragment_main,recyclerViewFragment).commit();
@@ -44,18 +37,10 @@ public class MainActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                if (DUAL_FRAME){
-                    FragmentManager manager=getSupportFragmentManager();
-                    FragmentTransaction transaction=manager.beginTransaction();
-                    transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
-                    transaction.addToBackStack(null);
-//                }
-//                else{
-//                    Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
-//                    intent.putExtra("EXTRA_MESSAGE","add");
-//                    startActivity(intent);
-              // }
+                FragmentManager manager=getSupportFragmentManager();
+                FragmentTransaction transaction=manager.beginTransaction();
+                transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
+                transaction.addToBackStack(null);
             }
         });
     }

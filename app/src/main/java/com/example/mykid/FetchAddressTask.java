@@ -37,7 +37,6 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
 
         try {
             addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),
-                    // In this sample, get just a single address
                     1);
         }
         catch (IOException ioException) {
@@ -66,8 +65,7 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
             Address address = addresses.get(0);
             ArrayList<String> addressParts = new ArrayList<>();
 
-            // Fetch the address lines using getAddressLine,
-            // join them, and send them to the thread
+            // Fetch the address lines using getAddressLine, join them, and send them to the thread
             for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) { //read address line by line, start from line 1.. line 2...
                 addressParts.add(address.getAddressLine(i));
             }

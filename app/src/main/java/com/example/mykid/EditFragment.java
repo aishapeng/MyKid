@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -46,23 +47,22 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
     private TextView dateInputTxtView,timeInputTxtView,locationInputTxtView,actErrorMsg,dateErrorMsg,timeErrorMsg,reporterErrorMsg,imageTxtView;
     private EditText actNameEditTxt,reporterNameEditTxt;
-    ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter, selectedLocation;
-    private int reportID;
-    private String newActivityName,newLocation,newDate,newTime,newReporter,reportImage;
     private ImageView imageView;
+    private Button addDateBtn,addTimeBtn,locationBtn,completeBtn,removeImgBtn;
+    private ImageButton imageBtn, clearLocationBtn;
+
+    private String activityName,location,date,time,reporter, selectedLocation,newActivityName,newLocation,newDate,newTime,newReporter,reportImage,uriStr;
+    private int reportID;
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
 
     private UUID id;
-    private ImageButton imageBtn, clearLocationBtn;
     private File photoFile;
     private Intent captureImageIntent;
     private static final int REQUEST_PHOTO = 1;
     private Uri uri;
-    String uriStr;
-    Button removeImgBtn;
+    ReportViewModel reportViewModel;
 
     public EditFragment() {
         // Required empty public constructor
@@ -77,7 +77,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_edit, container, false);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
         timeInputTxtView = view.findViewById(R.id.timeInputTxtView);
@@ -89,15 +88,15 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         dateErrorMsg=view.findViewById(R.id.dateErrorMsg);
         timeErrorMsg=view.findViewById(R.id.timeErrorMsg);
         reporterErrorMsg=view.findViewById(R.id.reporterErrorMsg);
-        reportViewModel= new ViewModelProvider(this).get(ReportViewModel.class);
-        Button addDateBtn = view.findViewById(R.id.dateBtn);
-        Button addTimeBtn = view.findViewById(R.id.timeBtn);
-        Button locationBtn = view.findViewById(R.id.locationBtn);
-        Button completeBtn=view.findViewById(R.id.completeBtn);
+        addDateBtn = view.findViewById(R.id.dateBtn);
+        addTimeBtn = view.findViewById(R.id.timeBtn);
+        locationBtn = view.findViewById(R.id.locationBtn);
+        completeBtn=view.findViewById(R.id.completeBtn);
         imageBtn = view.findViewById(R.id.imageBtn);
         removeImgBtn=view.findViewById(R.id.removeImgBtn);
         imageView = view.findViewById(R.id.imageView);
         clearLocationBtn = view.findViewById(R.id.clearLocationBtn);
+        reportViewModel= new ViewModelProvider(this).get(ReportViewModel.class);
 
         Bundle bundle = this.getArguments();
         reportID = bundle.getInt("ReportID");
@@ -114,12 +113,30 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         timeInputTxtView.setText(time);
         reporterNameEditTxt.setText(reporter);
 
+        if(savedInstanceState != null){
+            date=savedInstanceState.getString("date");
+            time=savedInstanceState.getString("time");
+            location=savedInstanceState.getString("location");
+            if(savedInstanceState.getString("Uri")!=null){
+                uri= Uri.parse(savedInstanceState.getString("Uri"));
+                Picasso.get().load(uri).into(imageView);
+            }
+            dateInputTxtView.setText(date);
+            timeInputTxtView.setText(time);
+            locationInputTxtView.setText(location);
+
+            if(uri!=null){
+                removeImgBtn.setVisibility(View.VISIBLE);
+            }
+        }
+
         addDateBtn.setOnClickListener(this);
         addTimeBtn.setOnClickListener(this);
         locationBtn.setOnClickListener(this);
         completeBtn.setOnClickListener(this);
         removeImgBtn.setOnClickListener(this);
         clearLocationBtn.setOnClickListener(this);
+        imageBtn.setOnClickListener(this);
 
         // Initialize the FusedLocationClient.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -127,10 +144,8 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         getParentFragmentManager().setFragmentResultListener("location", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                // We use a String here, but any type that can be put in a Bundle is supported
                 selectedLocation = bundle.getString("location");
                 locationInputTxtView.setText(selectedLocation);
-                // Do something with the result
             }
         });
 
@@ -141,11 +156,9 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         //create the camera services
         captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        boolean canTakePhoto = photoFile != null &&
-                captureImageIntent.resolveActivity(pm) != null;
+        boolean canTakePhoto = photoFile != null && captureImageIntent.resolveActivity(pm) != null;
 
         imageBtn.setEnabled(canTakePhoto);
-        imageBtn.setOnClickListener(this);
 
         if(reportImage == null) {
             removeImgBtn.setVisibility(View.GONE);
@@ -163,7 +176,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         switch (view.getId()){
             case R.id.dateBtn:
                 newFragment = new DatePickerFragment();
-                newFragment.show(getChildFragmentManager(), "datePickerEditFrag"); //getsupportmanager to show, tag is identifier
+                newFragment.show(getChildFragmentManager(), "datePickerEditFrag");
                 break;
 
             case R.id.timeBtn:
@@ -175,12 +188,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if (location == null){
                     getLocation(); //get user current location
                 }else{
-//                    if(MainActivity.DUAL_FRAME){
                         ((MainActivity)getActivity()).openMap(null, location, "true");
-//                    }
-//                    else {
-//                        ((SecondActivity)getActivity()).openMap(null, location, "true");
-//                    }
                 }
                 break;
 
@@ -197,7 +205,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 //start launch the camera service with file path
                 captureImageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-                //We have to settle the permission problem
+                //permission
                 //Check the return value from captureImageIntent
 
                 List<ResolveInfo> cameraActivities =
@@ -218,7 +226,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
                 break;
-
 
             case R.id.completeBtn:
                 newActivityName=actNameEditTxt.getText().toString();
@@ -291,11 +298,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReportImage(uriStr);
                                     reportViewModel.update(report);
 
-//                                    if(MainActivity.DUAL_FRAME){
-//                                        Intent intent = new Intent (getActivity(), MainActivity.class);
-//                                        startActivity (intent);
-                                   // }
-                                    getActivity().onBackPressed();
+                                    getParentFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                                 }
                             })
                             .setNegativeButton("Cancel",null)
@@ -323,13 +326,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         timeInputTxtView.setText(timeMessage);
     }
 
-
-    //standard code
     public void getLocation() { //check for the ACCESS_FINE_LOCATION permission.
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[] // [] can pass more than one permission at the same time//??
+            ActivityCompat.requestPermissions(getActivity(), new String[]
                             {Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         } else {
@@ -345,15 +346,13 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         }
     }
 
-    //standard code
     @Override
     //request permission, then now chk permission result with this function
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_LOCATION_PERMISSION:
-                // If the permission is granted, get the location,
-                // otherwise, show a Toast
+                // If the permission is granted, get the location,otherwise, show a Toast
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getLocation(); // permit le can get location le
@@ -408,13 +407,24 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
     private void updatePhotoView() {
         if (photoFile == null || !photoFile.exists())
-            imageBtn.setImageDrawable(null);
+            imageView.setImageDrawable(null);
         else
         {
             Bitmap bitmap = PictureUtils.getScaledBitmap(photoFile.getPath(),
                     getActivity());
             imageView.setImageBitmap(bitmap);
             removeImgBtn.setVisibility(View.VISIBLE);
+        }
+    }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("date",date);
+        outState.putString("time",time);
+        outState.putString("location",location);
+        if(uri!=null){
+            outState.putString("Uri",uri.toString());
         }
     }
 }

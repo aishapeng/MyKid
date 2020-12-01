@@ -5,11 +5,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +20,17 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     private TextView activityNameTextView,locationInputTxtView,dateInputTxtView,timeInputTxtView,reporterNameTextView,imageTxtView;
     private Button locationBtn,editBtn,deleteBtn;
-    private ReportViewModel reportViewModel;
-    private String activityName,location,date,time,reporter,reportImage;
     private ImageView imageView;
+
+    private String activityName,location,date,time,reporter,reportImage;
     private int reportID;
+    private ReportViewModel reportViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view  = inflater.inflate(R.layout.fragment_detail, container, false);
-
         activityNameTextView= view.findViewById(R.id.activityNameTextView);
         locationInputTxtView= view.findViewById(R.id.locationInputTxtView);
         dateInputTxtView = view.findViewById(R.id.dateInputTxtView);
@@ -82,13 +79,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.locationBtn:
-//                if(MainActivity.DUAL_FRAME){
                     ((MainActivity)getActivity()).openMap(null, location, "false");
-//                }
-//                else {
-//                    ((SecondActivity)getActivity()).openMap(null, location, "false");
-//                }
                 break;
+
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                 builder.setTitle("Delete?")
@@ -112,6 +105,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                         .setNegativeButton("Cancel",null)
                         .show();
                 break;
+
             case R.id.editBtn:
                 EditFragment editFragment = new EditFragment();
                 Bundle arguments = new Bundle();
@@ -124,13 +118,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("image",reportImage);
                 editFragment.setArguments(arguments);
 
-//                if(MainActivity.DUAL_FRAME){
                     getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).addToBackStack(null).commit();
-//                }
-//                else {
-//                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
-//                }
                 break;
+
             default:
                 break;
         }

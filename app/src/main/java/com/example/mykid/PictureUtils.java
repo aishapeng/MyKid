@@ -28,8 +28,7 @@ public class PictureUtils {
             float heightScale = srcHeight / destHeight;
             float widthScale = srcWidth / destWidth;
 
-            inSampleSize = Math.round(heightScale > widthScale ? heightScale :
-                    widthScale);
+            inSampleSize = Math.round(heightScale > widthScale ? heightScale : widthScale);
         }
 
         options = new BitmapFactory.Options();
