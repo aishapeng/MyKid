@@ -189,9 +189,11 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putDouble("lat",mLatLng.latitude);
-        outState.putDouble("lng",mLatLng.longitude);
-        outState.putString("mAddress", editText.getText().toString());
+        if(mLatLng!=null){
+            outState.putDouble("lat",mLatLng.latitude);
+            outState.putDouble("lng",mLatLng.longitude);
+            outState.putString("mAddress", editText.getText().toString());
+        }
 
     }
 }
