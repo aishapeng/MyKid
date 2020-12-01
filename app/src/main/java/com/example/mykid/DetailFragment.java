@@ -83,12 +83,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.locationBtn:
-                if(MainActivity.DUAL_FRAME){
+//                if(MainActivity.DUAL_FRAME){
                     ((MainActivity)getActivity()).openMap(null, location, "false");
-                }
-                else {
-                    ((SecondActivity)getActivity()).openMap(null, location, "false");
-                }
+//                }
+//                else {
+//                    ((SecondActivity)getActivity()).openMap(null, location, "false");
+//                }
                 break;
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
@@ -107,7 +107,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                                 report.setReporterName(reporter);
                                 reportViewModel.delete(report);
                                 getParentFragmentManager().popBackStack();
-                                getActivity().onBackPressed();
+
                             }
                         })
                         .setNegativeButton("Cancel",null)
@@ -125,12 +125,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
                 arguments.putString("image",reportImage);
                 editFragment.setArguments(arguments);
 
-                if(MainActivity.DUAL_FRAME){
-                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).commit();
-                }
-                else {
-                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
-                }
+//                if(MainActivity.DUAL_FRAME){
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_mainSec,editFragment).addToBackStack(null).commit();
+//                }
+//                else {
+//                    getParentFragmentManager().beginTransaction().replace(R.id.fragment_sec,editFragment).commit();
+//                }
                 break;
             default:
                 break;

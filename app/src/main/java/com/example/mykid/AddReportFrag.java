@@ -239,8 +239,6 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Report report= new Report(activityName,location,date,time,reporter, uriStr);
                                     reportViewModel.insert(report);
-                                    Intent intent = new Intent (getActivity(), MainActivity.class);
-                                    startActivity (intent);
                                     getActivity().onBackPressed();
                                 }
                             })
@@ -311,12 +309,12 @@ public class AddReportFrag extends Fragment implements FetchAddressTask.OnTaskCo
 
     @Override
     public void onTaskCompleted(String result) {
-        if(MainActivity.DUAL_FRAME){
+//        if(MainActivity.DUAL_FRAME){
             ((MainActivity)getActivity()).openMap(result, null, "true"); //open google map
-        }
-        else{
-            ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
-        }
+//        }
+//        else{
+//            ((SecondActivity)getActivity()).openMap(result, null, "true"); //open google map
+//        }
 
     }
 

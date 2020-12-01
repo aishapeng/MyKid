@@ -21,7 +21,7 @@ import android.widget.FrameLayout;
 
 public class MainActivity extends AppCompatActivity  {
     RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-    public static boolean DUAL_FRAME=false;
+    //public static boolean DUAL_FRAME=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         final AddReportFrag addReportFrag= new AddReportFrag();
-        DetailFragment detailFragment = new DetailFragment();
-        FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
-        DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
+
+//        FrameLayout frameSec= findViewById(R.id.fragment_mainSec);
+//        DUAL_FRAME= frameSec!=null&&frameSec.getVisibility()==View.VISIBLE;
 
         FragmentManager manager=getSupportFragmentManager();
         FragmentTransaction transaction=manager.beginTransaction();
@@ -44,16 +44,17 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                if (DUAL_FRAME){
+//                if (DUAL_FRAME){
                     FragmentManager manager=getSupportFragmentManager();
                     FragmentTransaction transaction=manager.beginTransaction();
                     transaction.replace(R.id.fragment_mainSec,addReportFrag).commit();
-                }
-                else{
-                    Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
-                    intent.putExtra("EXTRA_MESSAGE","add");
-                    startActivity(intent);
-               }
+                    transaction.addToBackStack(null);
+//                }
+//                else{
+//                    Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+//                    intent.putExtra("EXTRA_MESSAGE","add");
+//                    startActivity(intent);
+              // }
             }
         });
     }

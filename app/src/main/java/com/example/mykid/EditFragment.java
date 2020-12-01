@@ -175,12 +175,12 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if (location == null){
                     getLocation(); //get user current location
                 }else{
-                    if(MainActivity.DUAL_FRAME){
+//                    if(MainActivity.DUAL_FRAME){
                         ((MainActivity)getActivity()).openMap(null, location, "true");
-                    }
-                    else {
-                        ((SecondActivity)getActivity()).openMap(null, location, "true");
-                    }
+//                    }
+//                    else {
+//                        ((SecondActivity)getActivity()).openMap(null, location, "true");
+//                    }
                 }
                 break;
 
@@ -291,13 +291,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                                     report.setReportImage(uriStr);
                                     reportViewModel.update(report);
 
-                                    if(MainActivity.DUAL_FRAME){
-                                        Intent intent = new Intent (getActivity(), MainActivity.class);
-                                        startActivity (intent);
-                                    }
+//                                    if(MainActivity.DUAL_FRAME){
+//                                        Intent intent = new Intent (getActivity(), MainActivity.class);
+//                                        startActivity (intent);
+                                   // }
                                     getActivity().onBackPressed();
-
-
                                 }
                             })
                             .setNegativeButton("Cancel",null)
@@ -370,7 +368,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
     @Override
     public void onTaskCompleted(String result) {
-        ((SecondActivity)getActivity()).openMap(result, null,"true"); //open google map
+        ((MainActivity)getActivity()).openMap(result, null,"true"); //open google map
     }
 
     //setup methods to get file name and file location
