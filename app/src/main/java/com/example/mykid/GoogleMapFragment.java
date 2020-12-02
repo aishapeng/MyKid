@@ -66,9 +66,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             editable = savedInstanceState.getString("editable");
             mAddress = savedInstanceState.getString("mAddress");
             mLatLng= new LatLng(savedInstanceState.getDouble("lat"),savedInstanceState.getDouble("lng"));
-            Log.d("Edittable:", "O, "+ editable);
-            Log.d("Edittable:", "O, "+ mAddress);
-            Log.d("Edittable:", "O, "+ mLatLng);
 
             if(map==null){
                 mapFragment.getMapAsync(this);
@@ -81,7 +78,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
                             map.clear();
                             marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mAddress));
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
-                            Log.d("got run here?", "GOT");
                         }
                 }
             }, 300);
@@ -139,8 +135,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
 
             if(marker!=null){
                 map.clear();
-
-                Log.d("NO?", "NOOOOOOOOOOOO");
             }
             marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mLocation.getAddressLine(0)));
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,10));
@@ -160,8 +154,6 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        Log.d("MAPREADY:", ""+map);
-
         List<Address> addresses;
         Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
         Bundle bundle = getArguments();
@@ -198,15 +190,11 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
         outState.putString("editable", editable);
-        Log.d("editableSAVESTATE: ", "OO, "+editable);
-
         if(editable!= "false" && mLatLng!=null && editText.getText().toString()!=null){
             outState.putDouble("lat",mLatLng.latitude);
             outState.putDouble("lng",mLatLng.longitude);
             outState.putString("mAddress", mAddress);
         }
-
     }
 }

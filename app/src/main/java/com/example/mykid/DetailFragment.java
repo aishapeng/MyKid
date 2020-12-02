@@ -85,7 +85,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             case R.id.deleteBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                 builder.setTitle("Delete?")
-                        .setMessage("Are you sure you want to delete this activity?")
+                        .setMessage("Are you sure you want to delete this report?")
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
