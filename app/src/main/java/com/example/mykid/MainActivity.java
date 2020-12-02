@@ -1,5 +1,7 @@
 package com.example.mykid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,9 +57,21 @@ public class MainActivity extends AppCompatActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        final ReportViewModel reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
         if (id == R.id.action_DeleteAll) {
-            ReportViewModel reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
-            reportViewModel.deleteAll();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.AlertDialogCustom);
+            builder.setTitle("Delete All Report?")
+                    .setMessage("Are you sure you want to delete all report?")
+                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            reportViewModel.deleteAll();
+                        }
+                    })
+                    .setNegativeButton("Cancel",null)
+                    .show();
+
             return true;
         }
 

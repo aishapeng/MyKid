@@ -420,9 +420,9 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("date",date);
-        outState.putString("time",time);
-        outState.putString("location",location);
+        outState.putString("date",dateInputTxtView.getText().toString());
+        outState.putString("time",timeInputTxtView.getText().toString());
+        outState.putString("location",locationInputTxtView.getText().toString());
         if(uri!=null){
             outState.putString("Uri",uri.toString());
         }
