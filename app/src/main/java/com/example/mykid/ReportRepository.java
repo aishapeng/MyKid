@@ -72,8 +72,7 @@ public class ReportRepository {
 
         @Override
         protected Void doInBackground(Report... reports) {
-            asyncTaskDao.update(reports[0].getReportName(),reports[0].getReportLocation(),reports[0].getReportDate(),reports[0].getReportTime()
-                    ,reports[0].getReporterName(),reports[0].getReportImage(),reports[0].getReportId());
+            asyncTaskDao.update(reports[0]);
             return null;
         }
     }

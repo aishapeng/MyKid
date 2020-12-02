@@ -5,6 +5,8 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
+
 import java.util.List;
 
 @Dao
@@ -15,9 +17,8 @@ public interface ReportDao {
     @Delete
     void delete(Report report);
 
-    @Query("UPDATE Report SET reportName = :reportName, reportLocation = :reportLocation,reportDate = :reportDate, reportTime = :reportTime, reporterName = :reporterName , reportImage = :reportImage " +
-            "WHERE reportId = :reportId")
-    void update(String reportName, String reportLocation, String reportDate, String reportTime, String reporterName, String reportImage, int reportId);
+    @Update
+    void update(Report report);
 
     @Query("DELETE FROM Report")
     void deleteAll();
