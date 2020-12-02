@@ -112,23 +112,11 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         dateInputTxtView.setText(date);
         timeInputTxtView.setText(time);
         reporterNameEditTxt.setText(reporter);
-
-        //create the instance of file object
-        photoFile = getPhotoFile();
-        PackageManager pm = getContext().getPackageManager();
-
-        //create the camera services
-        captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        boolean canTakePhoto = photoFile != null && captureImageIntent.resolveActivity(pm) != null;
-
-        imageBtn.setEnabled(canTakePhoto);
-
+        Log.d("URIDK: ", ""+uri);
         if(reportImage == null) {
             removeImgBtn.setVisibility(View.GONE);
         }else{
-            Picasso.get().load(reportImage).into(imageView);
-            uri = Uri.parse(reportImage);
+            Picasso.get().load(Uri.parse(reportImage)).into(imageView);
         }
 
         if(savedInstanceState != null){
@@ -138,17 +126,15 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
             if(savedInstanceState.getString("Uri")!=null){
                 uri= Uri.parse(savedInstanceState.getString("Uri"));
                 Picasso.get().load(uri).into(imageView);
-                removeImgBtn.setVisibility(View.VISIBLE);
             }
-            else{
-                imageView.setImageBitmap(null);
-                uri=null;
-                removeImgBtn.setVisibility(View.GONE);
-            }
-
+            Log.d("getUriSaved: ", ""+uri);
             dateInputTxtView.setText(date);
             timeInputTxtView.setText(time);
             locationInputTxtView.setText(location);
+
+            if(uri!=null){
+                removeImgBtn.setVisibility(View.VISIBLE);
+            }
         }
 
         addDateBtn.setOnClickListener(this);
@@ -170,7 +156,16 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
             }
         });
 
+        //create the instance of file object
+        photoFile = getPhotoFile();
+        PackageManager pm = getContext().getPackageManager();
 
+        //create the camera services
+        captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        boolean canTakePhoto = photoFile != null && captureImageIntent.resolveActivity(pm) != null;
+
+        imageBtn.setEnabled(canTakePhoto);
 
         return view;
     }
@@ -199,6 +194,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
 
             case R.id.clearLocationBtn:
                 locationInputTxtView.setText("");
+                Log.d("ClrBtnClick: ", "Clicked");
                 break;
 
             case R.id.imageBtn:
@@ -229,6 +225,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 imageView.setImageBitmap(null);
                 uri=null;
                 removeImgBtn.setVisibility(View.GONE);
+                Log.d("URI: ", ""+uri);
                 break;
 
             case R.id.completeBtn:
@@ -276,7 +273,7 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                 if(!newActivityName.isEmpty() && !newDate.isEmpty() &&!newTime.isEmpty() && !newReporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
-                            .setMessage("Are you sure you want to edit an report with these details?\n" +
+                            .setMessage("Are you sure you want to edit an activity with these details?\n" +
                                     "\n" +
                                     "Activity Name : " + newActivityName + "\n" +
                                     "\n" +
@@ -427,8 +424,10 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
         outState.putString("date",dateInputTxtView.getText().toString());
         outState.putString("time",timeInputTxtView.getText().toString());
         outState.putString("location",locationInputTxtView.getText().toString());
-        if(uri!=null){
-            outState.putString("Uri",uri.toString());
+        Log.d("URISAVEDSTATE: ", ""+uri);
+        if(uri!=null) {
+            outState.putString("Uri", uri.toString());
+            Log.d("URI??????: ", ""+uri);
         }
     }
 }
