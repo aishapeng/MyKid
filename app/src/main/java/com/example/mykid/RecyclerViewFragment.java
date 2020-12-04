@@ -101,6 +101,7 @@ public class RecyclerViewFragment extends Fragment {
                                 adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                             }
                         })
+                        .setCancelable(false)
                         .show();
             }
 

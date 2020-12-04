@@ -269,7 +269,6 @@ public class EditFragment extends Fragment implements FetchAddressTask.OnTaskCom
                     uriStr=uri.toString();
                     attached = "Attached";
                 }
-                Log.d("removeImage: uristr ", ""+ uriStr);
                 if(!newActivityName.isEmpty() && !newDate.isEmpty() &&!newTime.isEmpty() && !newReporter.isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.AlertDialogCustom);
                     builder.setTitle("Confirmation")
