@@ -191,7 +191,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("editable", editable);
-        if(editable!= "false" && mLatLng!=null && editText.getText().toString()!=null){
+        if(!editable.equals("false") && mLatLng!=null){
             outState.putDouble("lat",mLatLng.latitude);
             outState.putDouble("lng",mLatLng.longitude);
             outState.putString("mAddress", mAddress);
