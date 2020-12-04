@@ -73,7 +73,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(map!=null && editable!="false" && editText.getText().toString().length()!=0 && savedInstanceState.getDouble("lat")!=0.0d){
+                    if(map!=null  && savedInstanceState.getDouble("lat")!=0.0d){
                             editText.setText(mAddress);
                             map.clear();
                             marker = map.addMarker(new MarkerOptions().position(mLatLng).title(mAddress));
@@ -191,7 +191,7 @@ public class GoogleMapFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("editable", editable);
-        if(editable!= "false" && mLatLng!=null && editText.getText().toString()!=null){
+        if(!editable.equals("false")  && mLatLng!=null){
             outState.putDouble("lat",mLatLng.latitude);
             outState.putDouble("lng",mLatLng.longitude);
             outState.putString("mAddress", mAddress);
